@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
 
 	if err := exec.CommandContext(ctx, "sleep", "5").Run(); err != nil {
 		log.Fatal(err)
