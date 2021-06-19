@@ -41,3 +41,10 @@ func mustPut(c *clientv3.Client, ctx context.Context, key, val string, opts ...c
 	}
 	return putResp
 }
+
+// $ go run get_value_in_directories.go
+// /etc/X11/xorg.conf.d/00-keyboard.conf : ok
+// /etc/dkms/framework.conf : ok
+// /etc/fonts/conf.d/10-hinting-slight.conf : ok
+// /etc/fonts/fonts.conf : ok
+// /etc/tlp.conf : ok
