@@ -40,12 +40,17 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(putResp.Header)
-	getResp, err := cli.Get(ctx, "love")
+	_, err = cli.Put(context.TODO(), "lo", "xiao")
+	if err != nil {
+		log.Fatal(err)
+	}
+	getResp, err := cli.Get(ctx, "l", clientv3.WithPrefix())
 	if err != nil {
 		log.Fatal(err)
 	}
 	// https://github.com/etcd-io/etcd/blob/main/tests/integration/clientv3/examples/example_kv_test.go
 	for _, kv := range getResp.Kvs {
+		// https://pkg.go.dev/go.etcd.io/etcd/api/v3@v3.5.0/mvccpb#KeyValue
 		fmt.Printf("%s : %s\n", kv.Key, kv.Value)
 	}
 
