@@ -35,10 +35,11 @@ func main() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	_, err = cli.Put(ctx, "love", "xiaoying")
+	putResp, err := cli.Put(ctx, "love", "xiaoying")
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(putResp.Header)
 	getResp, err := cli.Get(ctx, "love")
 	if err != nil {
 		log.Fatal(err)
@@ -52,3 +53,16 @@ func main() {
 	// To enable detailed load balancer logging,
 	// set the ETCD_CLIENT_DEBUG environment variable. E.g. "ETCD_CLIENT_DEBUG=1".
 }
+
+// Note revision number increases by 1 every time :
+// $ go run getStart.go
+// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:8 raft_term:2
+// love : xiaoying
+// $
+// $ go run getStart.go
+// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:9 raft_term:2
+// love : xiaoying
+// $
+// $ go run getStart.go
+// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:10 raft_term:2
+// love : xiaoying
