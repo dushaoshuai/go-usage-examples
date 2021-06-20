@@ -53,7 +53,7 @@ func main() {
 
 func watchLease(c *clientv3.Client, key string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	ticker := time.Tick(1 * time.Second)
+	ticker := time.NewTicker(1 * time.Second)
 	for {
 		getResp, err := c.Get(context.TODO(), key)
 		if err != nil {
@@ -64,6 +64,7 @@ func watchLease(c *clientv3.Client, key string, wg *sync.WaitGroup) {
 			break
 		}
 		fmt.Printf("%s : %s, %v\n", key, getResp.Kvs[0].Value, time.Now())
-		<-ticker
+		<-ticker.C
 	}
+	ticker.Stop()
 }
