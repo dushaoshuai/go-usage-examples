@@ -57,3 +57,10 @@ func main() {
 	// now it's time to end this program
 	close(done)
 }
+
+// $ go run Lease_With_KeepAlive.go
+// 2021/06/20 09:35:09 ttl for key foo: 5
+// 2021/06/20 09:35:11 ttl for key foo: 5
+// 2021/06/20 09:35:13 ttl for key foo: 5
+// 2021/06/20 09:35:15 ttl for key foo: 5
+// 2021/06/20 09:35:17 ttl for key foo: 5
