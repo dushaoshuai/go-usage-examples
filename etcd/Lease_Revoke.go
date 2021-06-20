@@ -41,3 +41,6 @@ func main() {
 	}
 	fmt.Println("number of keys:", len(getResp.Kvs))
 }
+
+// $ go run Lease_Revoke.go
+// number of keys: 0
