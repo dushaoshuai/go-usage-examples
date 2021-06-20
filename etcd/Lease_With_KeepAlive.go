@@ -20,7 +20,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	grantResp, err := cli.Grant(context.TODO(), 5)
+	grantResp, err := cli.Grant(context.TODO(), 10)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,6 +40,9 @@ func main() {
 	// watch keepAlive status
 	done := make(chan struct{})
 	go func() {
+		// The returned "LeaseKeepAliveResponse" channel closes if underlying keep
+		// alive stream is interrupted in some way the client cannot handle itself;
+		// given context "ctx" is canceled or timed out.
 		for keepAliveResp := range chanKeepAliveResp {
 			log.Printf("ttl for key %s: %v", key, keepAliveResp.TTL)
 
@@ -53,14 +56,16 @@ func main() {
 	}()
 
 	// sleep 10 seconds to simulate program running
-	time.Sleep(10 * time.Second)
+	time.Sleep(20 * time.Second)
 	// now it's time to end this program
 	close(done)
 }
 
+// How does keepAlive determine the interval between two renewals ?
 // $ go run Lease_With_KeepAlive.go
-// 2021/06/20 09:35:09 ttl for key foo: 5
-// 2021/06/20 09:35:11 ttl for key foo: 5
-// 2021/06/20 09:35:13 ttl for key foo: 5
-// 2021/06/20 09:35:15 ttl for key foo: 5
-// 2021/06/20 09:35:17 ttl for key foo: 5
+// 2021/06/20 10:00:40 ttl for key foo: 10
+// 2021/06/20 10:00:43 ttl for key foo: 10
+// 2021/06/20 10:00:47 ttl for key foo: 10
+// 2021/06/20 10:00:50 ttl for key foo: 10
+// 2021/06/20 10:00:54 ttl for key foo: 10
+// 2021/06/20 10:00:57 ttl for key foo: 10
