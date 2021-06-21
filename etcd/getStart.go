@@ -33,18 +33,19 @@ func main() {
 	// If the client is not closed, the connection will have leaky goroutines.
 	// To specify client request timeout, pass context.WithTimeout to APIs:
 
+	// put
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	putResp, err := cli.Put(ctx, "love", "xiaoying")
+	_, err = cli.Put(ctx, "love", "xiaoying")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(putResp.Header)
 	_, err = cli.Put(context.TODO(), "lo", "xiao")
 	if err != nil {
 		log.Fatal(err)
 	}
-	getResp, err := cli.Get(ctx, "l", clientv3.WithPrefix())
+	// get
+	getResp, err := cli.Get(ctx, "lo", clientv3.WithPrefix())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -59,15 +60,14 @@ func main() {
 	// set the ETCD_CLIENT_DEBUG environment variable. E.g. "ETCD_CLIENT_DEBUG=1".
 }
 
-// Note revision number increases by 1 every time :
-// $ go run getStart.go
-// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:8 raft_term:2
+//$ go run getStart.go
+// lo : xiao
 // love : xiaoying
 // $
 // $ go run getStart.go
-// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:9 raft_term:2
+// lo : xiao
 // love : xiaoying
 // $
 // $ go run getStart.go
-// cluster_id:14841639068965178418 member_id:10276657743932975437 revision:10 raft_term:2
+// lo : xiao
 // love : xiaoying
