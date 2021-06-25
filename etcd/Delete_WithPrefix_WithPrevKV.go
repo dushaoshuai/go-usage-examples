@@ -73,3 +73,4 @@ func mustPut(c *clientv3.Client, ctx context.Context, key, val string, opts ...c
 // deleted /etc/fonts/fonts.conf :
 // deleted /etc/tlp.conf :
 // Done!
+// 2021/06/25 12:55:55 delete keyDoesn'tExists successfully!
