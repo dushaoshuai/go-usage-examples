@@ -43,6 +43,13 @@ func main() {
 		fmt.Printf("deleted %s : %s\n", kv.Key, kv.Value)
 	}
 	fmt.Println("Done!")
+	// deleting k-v that doesn't exists is not an error
+	_, err = cli.Delete(context.TODO(), "keyDoesn'tExists")
+	if err != nil {
+		log.Print(err)
+	} else {
+		log.Print("delete keyDoesn'tExists successfully!")
+	}
 }
 
 func mustPut(c *clientv3.Client, ctx context.Context, key, val string, opts ...clientv3.OpOption) *clientv3.PutResponse {
