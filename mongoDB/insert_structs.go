@@ -40,7 +40,7 @@ func main() {
 	}
 	data := make([]interface{}, len(people))
 	for i := range people {
-		data[i] = people[i]
+		data[i] = &people[i]
 	}
 	res, err := coll.InsertMany(context.Background(), data)
 	if err != nil {
