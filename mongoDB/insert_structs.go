@@ -48,7 +48,7 @@ func main() {
 	}
 	fmt.Printf("the inserted id is %v\n", res.InsertedIDs)
 
-	people = []person{}
+	somePeople := []*person{}
 	cursor, err := coll.Find(
 		context.Background(),
 		bson.D{
@@ -59,8 +59,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err = cursor.All(context.Background(), &people); err != nil {
+	if err = cursor.All(context.Background(), &somePeople); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%#v\n", people)
+	for i := range somePeople {
+		fmt.Printf("%#v\n", *somePeople[i])
+	}
 }
