@@ -15,9 +15,6 @@ import (
 // key/value store
 // default
 
-func init() {
-}
-
 // Usage : go test -v -args viper_test.go --example_config none-default-config-value
 //	1. don't miss "-args viper_test.go" here
 //	2. package pflag implements POSIX/GNU-style flags,
