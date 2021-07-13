@@ -2,7 +2,6 @@ package viper_test
 
 import (
 	"fmt"
-	"log"
 
 	flag "github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -17,10 +16,6 @@ import (
 // default
 
 func init() {
-	viper.SetConfigFile("./exampleConfig.json")
-	if err := viper.ReadInConfig(); err != nil {
-		log.Fatal(err)
-	}
 }
 
 // Usage : go test -v -args viper_test.go --example_config none-default-config-value
