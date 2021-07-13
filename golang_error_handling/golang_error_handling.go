@@ -8,6 +8,8 @@ import (
 )
 
 var skip = 100
+var skipStart = 1
+var exitStatusCode = 1
 
 func LogError(e error) {
 	if e == nil {
@@ -15,7 +17,7 @@ func LogError(e error) {
 	}
 	log.Print(e)
 	// https://github.com/gohouse/e/blob/3cf103d33981f87b78674612d219538c5ea4f624/context.go#L45
-	for i := 1; i < skip; i++ {
+	for i := skipStart; i < skip; i++ {
 		if function, file, line, ok := runtime.Caller(i); ok {
 			fmt.Println(runtime.FuncForPC(function).Name())
 			fmt.Printf("    %s:%d\n", file, line)
@@ -23,5 +25,5 @@ func LogError(e error) {
 			break
 		}
 	}
-	os.Exit(1)
+	os.Exit(exitStatusCode)
 }
