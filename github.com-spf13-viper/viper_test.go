@@ -12,7 +12,7 @@ import (
 // explicit call to Set
 // flag
 // env
-// config
+// config file
 // key/value store
 // default
 
