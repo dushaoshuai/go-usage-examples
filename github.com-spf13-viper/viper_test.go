@@ -3,7 +3,7 @@ package viper_test
 import (
 	"fmt"
 
-	flag "github.com/spf13/pflag"
+	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 )
 
@@ -20,9 +20,9 @@ import (
 //	2. package pflag implements POSIX/GNU-style flags,
 //	   a single dash before an option means something different than a double dash
 func ExampleBindPFlags() {
-	flag.String("example_config", "default-config-value", "an example flag config")
-	flag.Parse()
-	viper.BindPFlags(flag.CommandLine)
+	pflag.String("example_config", "default-config-value", "an example flag config")
+	pflag.Parse()
+	viper.BindPFlags(pflag.CommandLine)
 	fmt.Println(viper.GetString("example_config"))
 	// Output:
 	// none-default-config-value
