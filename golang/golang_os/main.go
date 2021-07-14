@@ -14,4 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(dir)
+
+	// os.ExpandEnv()
+	fmt.Println(os.ExpandEnv("${HOME}"))
 }
