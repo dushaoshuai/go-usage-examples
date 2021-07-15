@@ -34,8 +34,5 @@ func main() {
 		log.Fatal(err)
 	}
 	dir := filepath.Dir(path)
-	if err != nil {
-		log.Fatal(err)
-	}
 	fmt.Println("the path name for the executable that started the current process is : " + dir)
 }
