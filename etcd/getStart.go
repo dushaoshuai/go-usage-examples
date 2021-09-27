@@ -31,7 +31,7 @@ func main() {
 	// And clientv3 uses grpc-go to connect to etcd.
 	// Make sure to close the client after using it.
 	// If the client is not closed, the connection will have leaky goroutines.
-	// To specify client request timeout, pass context.WithTimeout to APIs:
+	// To specify client request timeout, pass context.WithTimeout to APIs.
 
 	// put
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
