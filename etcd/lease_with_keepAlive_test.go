@@ -1,4 +1,4 @@
-package main
+package etcd_test
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
-func main() {
+func ExampleLeaseWithKeepAlive() {
 	cli, err := clientv3.New(clientv3.Config{
 		Endpoints:   []string{"localhost:2379"},
 		DialTimeout: 5 * time.Second,
@@ -18,7 +18,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer cli.Close()
+	defer func() {
+		if err := cli.Close(); err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	grantResp, err := cli.Grant(context.TODO(), 10)
 	if err != nil {
@@ -59,13 +63,5 @@ func main() {
 	time.Sleep(20 * time.Second)
 	// now it's time to end this program
 	close(done)
+	// Output:
 }
-
-// How does keepAlive determine the interval between two renewals ?
-// $ go run Lease_With_KeepAlive.go
-// 2021/06/20 10:00:40 ttl for key foo: 10
-// 2021/06/20 10:00:43 ttl for key foo: 10
-// 2021/06/20 10:00:47 ttl for key foo: 10
-// 2021/06/20 10:00:50 ttl for key foo: 10
-// 2021/06/20 10:00:54 ttl for key foo: 10
-// 2021/06/20 10:00:57 ttl for key foo: 10

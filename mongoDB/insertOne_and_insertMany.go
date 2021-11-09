@@ -36,7 +36,7 @@ func main() {
 	}
 
 	// To insert a document into a collection, first retrieve
-	// a Database and the Collection instance form the Client:
+	// a Database and the Collection instance form the client:
 	coll := cli.Database("test").Collection("inventory")
 	// The Collection instance can then  be used to insert documents:
 	result, err := coll.InsertOne(

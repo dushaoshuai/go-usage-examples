@@ -1,4 +1,4 @@
-package main
+package etcd_test
 
 import (
 	"context"
@@ -50,14 +50,6 @@ func main() {
 	} else {
 		log.Print("delete keyDoesn'tExists successfully!")
 	}
-}
-
-func mustPut(c *clientv3.Client, ctx context.Context, key, val string, opts ...clientv3.OpOption) *clientv3.PutResponse {
-	putResp, err := c.Put(ctx, key, val, opts...)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return putResp
 }
 
 // $ go run Delete_WithPrefix.go

@@ -33,7 +33,7 @@ func main() {
 		log.Print("Successfully connected and pinged.")
 	}
 
-	// instantiate a Database and a Collection from a Client
+	// instantiate a Database and a Collection from a client
 	collection := cli.Database("test").Collection("details")
 
 	// For methods that return a single item, a SingleResult instance is returned:
