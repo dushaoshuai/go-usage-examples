@@ -5,18 +5,19 @@
 // More code examples about error handling can be found at :
 // https://pkg.go.dev/go.etcd.io/etcd/client/v3#section-documentation
 
-package main
+package etcd_test
 
 import (
 	"context"
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"log"
 	"time"
 
-	clientv3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/client/v3"
 )
 
-func main() {
+func ExampleGetStart() {
 	// Clients are safe for concurrent use by multiple goroutines.
 	cli, err := clientv3.New(clientv3.Config{
 		Endpoints:   []string{"localhost:2379"},
@@ -25,27 +26,35 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer cli.Close()
+	defer func() {
+		if err := cli.Close(); err != nil {
+			logrus.Error(err)
+		}
+	}()
 
-	// etcd v3 uses gRPC for remote procedure calls.
-	// And clientv3 uses grpc-go to connect to etcd.
+	// etcd v3 uses [gRPC](https://www.grpc.io/ "gRPC") for remote procedure calls.
+	// And clientv3 uses [grpc-go](https://github.com/grpc/grpc-go "grpc-go") to connect to etcd.
 	// Make sure to close the client after using it.
 	// If the client is not closed, the connection will have leaky goroutines.
 	// To specify client request timeout, pass context.WithTimeout to APIs.
 
+	// The grpc load balancer is registered statically and is shared across etcd clients.
+	// To enable detailed load balancer logging,
+	// set the ETCD_CLIENT_DEBUG environment variable. E.g. "ETCD_CLIENT_DEBUG=1".
+
 	// put
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	_, err = cli.Put(ctx, "love", "xiaoying")
+	_, err = cli.Put(ctx, "key1", "value1")
 	if err != nil {
 		log.Fatal(err)
 	}
-	_, err = cli.Put(context.TODO(), "lo", "xiao")
+	_, err = cli.Put(context.TODO(), "key2", "value2")
 	if err != nil {
 		log.Fatal(err)
 	}
 	// get
-	getResp, err := cli.Get(ctx, "lo", clientv3.WithPrefix())
+	getResp, err := cli.Get(ctx, "key", clientv3.WithPrefix())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,20 +63,7 @@ func main() {
 		// https://pkg.go.dev/go.etcd.io/etcd/api/v3@v3.5.0/mvccpb#KeyValue
 		fmt.Printf("%s : %s\n", kv.Key, kv.Value)
 	}
-
-	// The grpc load balancer is registered statically and is shared across etcd clients.
-	// To enable detailed load balancer logging,
-	// set the ETCD_CLIENT_DEBUG environment variable. E.g. "ETCD_CLIENT_DEBUG=1".
+	// Output:
+	// key1 : value1
+	// key2 : value2
 }
-
-//$ go run getStart.go
-// lo : xiao
-// love : xiaoying
-// $
-// $ go run getStart.go
-// lo : xiao
-// love : xiaoying
-// $
-// $ go run getStart.go
-// lo : xiao
-// love : xiaoying

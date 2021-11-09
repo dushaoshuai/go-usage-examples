@@ -34,7 +34,7 @@ func main() {
 		log.Print("a MongoDB server has been connected !!!")
 	}
 
-	// instantiate a Database and a Collection form the Client:
+	// instantiate a Database and a Collection form the client:
 	collection := cli.Database("test").Collection("details")
 
 	// several query methods return a cursor, which can be used like this:
