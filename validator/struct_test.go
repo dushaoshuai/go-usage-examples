@@ -1,3 +1,5 @@
+// validator_test 用来测试 validator 对嵌套结构体的校验
+// 注意：`func (v *Validate) Struct(s interface{}) error` 会自动校验嵌套的结构体
 package validator_test
 
 import (
@@ -10,25 +12,7 @@ var (
 	validate = validator.New()
 )
 
-type person struct {
-	mustHave
-	Money int64
-}
-
-type mustHave struct {
-	Name string `validate:"required"`
-	Age  uint64 `validate:"required"`
-}
-
-func ExampleValidateStruct() {
-	person := person{
-		mustHave: mustHave{
-			Name: "",
-			Age:  0,
-		},
-		Money: 0,
-	}
-	err := validate.Struct(person)
+func printError(err error) {
 	// https://raw.githubusercontent.com/go-playground/validator/master/_examples/struct-level/main.go
 	if err != nil {
 		if _, ok := err.(*validator.InvalidValidationError); ok {
@@ -39,7 +23,51 @@ func ExampleValidateStruct() {
 			fmt.Println(err)
 		}
 	}
+}
+
+type person struct {
+	mustHave          // (*validator.Validate).Struct() 函数会自动校验嵌套的结构体
+	M        mustHave // 暴露的字段会校验
+	m        mustHave // 不暴露的字段不校验
+}
+
+type mustHave struct {
+	Name string `validate:"required"`
+	Age  uint64 `validate:"required"`
+}
+
+func Example_validate_struct_1() {
+	printError(validate.Struct(&person{}))
 	// Output:
 	// Key: 'person.mustHave.Name' Error:Field validation for 'Name' failed on the 'required' tag
 	// Key: 'person.mustHave.Age' Error:Field validation for 'Age' failed on the 'required' tag
+	// Key: 'person.M.Name' Error:Field validation for 'Name' failed on the 'required' tag
+	// Key: 'person.M.Age' Error:Field validation for 'Age' failed on the 'required' tag
+}
+
+type Foo struct {
+	A string
+	B int64
+}
+
+type bar struct {
+	Foo `validate:"structonly,required"`
+	F   Foo `validate:"structonly,required"`
+}
+
+func Example_validate_struct_2() {
+	printError(validate.Struct(&bar{
+		Foo: Foo{
+			A: "",
+			B: 0,
+		},
+	}))
+	// Output:
+	// structonly 校验了什么呢？难道是要自定义校验函数？
+}
+
+func Example_validate_struct_3() {
+	printError(validate.Struct(&bar{}))
+	// Output:
+	// structonly 校验了什么呢？
 }
