@@ -71,3 +71,21 @@ func Example_validate_struct_3() {
 	// Output:
 	// structonly 校验了什么呢？
 }
+
+type req struct {
+	F1 struct {
+		F1 struct {
+			F1 int    `json:"f_1" validate:"required"`
+			F2 string `json:"f_2" validate:"required"`
+		}
+	}
+	F2 string `json:"f_2" validate:"required"`
+}
+
+func Example_validate_struct_4() {
+	printError(validate.Struct(&req{}))
+	// Output:
+	// Key: 'req.F1.F1.F1' Error:Field validation for 'F1' failed on the 'required' tag
+	// Key: 'req.F1.F1.F2' Error:Field validation for 'F2' failed on the 'required' tag
+	// Key: 'req.F2' Error:Field validation for 'F2' failed on the 'required' tag
+}
