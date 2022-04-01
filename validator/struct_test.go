@@ -4,6 +4,7 @@ package validator_test
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -32,8 +33,9 @@ type person struct {
 }
 
 type mustHave struct {
-	Name string `validate:"required"`
-	Age  uint64 `validate:"required"`
+	Name     string    `validate:"required"`
+	Age      uint64    `validate:"required"`
+	Birthday time.Time `validate:"required"` // 时间也可以校验
 }
 
 func Example_validate_struct_1() {
@@ -41,8 +43,10 @@ func Example_validate_struct_1() {
 	// Output:
 	// Key: 'person.mustHave.Name' Error:Field validation for 'Name' failed on the 'required' tag
 	// Key: 'person.mustHave.Age' Error:Field validation for 'Age' failed on the 'required' tag
+	// Key: 'person.mustHave.Birthday' Error:Field validation for 'Birthday' failed on the 'required' tag
 	// Key: 'person.M.Name' Error:Field validation for 'Name' failed on the 'required' tag
 	// Key: 'person.M.Age' Error:Field validation for 'Age' failed on the 'required' tag
+	// Key: 'person.M.Birthday' Error:Field validation for 'Birthday' failed on the 'required' tag
 }
 
 type Foo struct {
@@ -88,4 +92,57 @@ func Example_validate_struct_4() {
 	// Key: 'req.F1.F1.F1' Error:Field validation for 'F1' failed on the 'required' tag
 	// Key: 'req.F1.F1.F2' Error:Field validation for 'F2' failed on the 'required' tag
 	// Key: 'req.F2' Error:Field validation for 'F2' failed on the 'required' tag
+}
+
+type cat struct {
+	Name string `json:"name" validate:"required"`
+	Age  int64  `json:"age" validate:"gte=0"`
+}
+
+type cats struct {
+	A uint64
+	C []cat `json:"c" validate:"required_if=A 1,dive"` // 如果 C 是空切片，不会 dive
+}
+
+func Example_dive_into_slice() {
+	cs1 := cats{
+		A: 0,
+		C: []cat{
+			{"二狗", -56},
+			{"", 0},
+		}}
+	cs2 := cats{
+		A: 0,
+		C: nil,
+	}
+	printError(validate.Struct(cs1))
+	printError(validate.Struct(cs2))
+	// Output:
+}
+
+type required_if_And_oneof struct {
+	A uint64
+	B string `validate:"required_if=A 10,oneof=Golang Java C Lua"` // required_if 不成立，oneof 仍然会检查
+}
+
+func Example_required_if_And_oneof() {
+	printError(validate.Struct(required_if_And_oneof{
+		A: 0,
+		B: "Perl",
+	}))
+	// Output:
+	// Key: 'required_if_And_oneof.B' Error:Field validation for 'B' failed on the 'oneof' tag
+}
+
+func Example_required() {
+	type coo struct {
+		C int
+	}
+	type foo struct {
+		A []coo `validate:"required"` // 对切片进行校验，还是 `validate:"required,gte=1"` 比较好，
+	} // 因为 required 校验的是切片不是 nil，切片的长度仍可能是 0
+	printError(validate.Struct(foo{
+		A: []coo{}, //
+	}))
+	// Output:
 }
