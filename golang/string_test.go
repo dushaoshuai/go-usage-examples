@@ -31,3 +31,17 @@ func Example_len_index_substring_string() {
 	// uint8
 	// Hello, gophers! Hello, 世��
 }
+
+// 字符串的几种表示方法
+func Example_string_representation() {
+	// 一个汉字 3 字节
+	a := "世界"
+	b := "\xe4\xb8\x96\xe7\x95\x8c"
+	c := "0xe40xb80x960xe70x950x8c" // 这样不行
+	d := "\u4e16\u754c"
+	e := "\U00004e16\U0000754c"
+	fmt.Println(a, b, c, d, e)
+
+	// Output:
+	// 世界 世界 0xe40xb80x960xe70x950x8c 世界 世界
+}
