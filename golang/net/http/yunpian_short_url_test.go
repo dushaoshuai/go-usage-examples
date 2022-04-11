@@ -66,10 +66,13 @@ func Example_yunpian_short_url() {
 		panic(err)
 	}
 
-	var shortURLResp shortURLResp
-	err = json.Unmarshal(respBody, &shortURLResp)
+	var urlResp shortURLResp
+	err = json.Unmarshal(respBody, &urlResp)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%#v\n", shortURLResp)
+	fmt.Printf("%#v\n", urlResp)
+
+	// Output:
+	// some output
 }
