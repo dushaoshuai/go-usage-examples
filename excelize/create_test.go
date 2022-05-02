@@ -1,23 +1,34 @@
 package excelize_test
 
-import "github.com/xuri/excelize/v2"
+import (
+	"time"
+
+	"github.com/xuri/excelize/v2"
+)
 
 func Example_create_document() {
+	f := excelize.NewFile()
 
-	file := excelize.NewFile()
+	// create a new worksheet
+	sheet2Name := "Sheet2"
+	sheet2Index := f.NewSheet(sheet2Name)
 
-	sheetName := "xiaoying"
-	sheet2 := file.NewSheet(sheetName)
+	// set value of a cell
+	err := f.SetCellValue(sheet2Name, "C1", time.Now())
+	if err != nil {
+		panic(err)
+	}
+	err = f.SetCellValue(sheet2Name, "F1", 43.5654)
+	if err != nil {
+		panic(err)
+	}
 
-	_ = file.SetCellValue(sheetName, "E11", "xiaoying")
-	_ = file.SetCellValue(sheetName, "F11", "ying")
+	// set the active worksheet of the workbook
+	f.SetActiveSheet(sheet2Index)
 
-	_ = file.SetCellValue(sheetName, "E12", "shao")
-	_ = file.SetCellValue(sheetName, "F12", "shuai")
-
-	file.SetActiveSheet(sheet2)
-
-	if err := file.SaveAs("xiaoyingHeShaoshuai.xlsx"); err != nil {
+	// save the spreadsheet by the given path
+	err = f.SaveAs("create_document.xlsx")
+	if err != nil {
 		panic(err)
 	}
 
