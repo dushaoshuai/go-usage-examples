@@ -1,7 +1,7 @@
 package main
 
 import (
-	helloworld "api-examples/grpc/helloworld/proto"
+	"api-examples/grpc/helloworld/proto"
 	"context"
 	"flag"
 	"fmt"
@@ -14,12 +14,12 @@ import (
 var port = flag.Int("port", 50051, "the server port")
 
 type server struct {
-	helloworld.UnimplementedGreeterServer
+	proto.UnimplementedGreeterServer
 }
 
-func (s *server) SayHello(ctx context.Context, in *helloworld.HelloReq) (*helloworld.HelloResp, error) {
+func (s *server) SayHello(ctx context.Context, in *proto.HelloReq) (*proto.HelloResp, error) {
 	log.Printf("Received: %v", in.GetName())
-	return &helloworld.HelloResp{Message: "Hello " + in.GetName()}, nil
+	return &proto.HelloResp{Message: "Hello " + in.GetName()}, nil
 }
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 	s := grpc.NewServer()
-	helloworld.RegisterGreeterServer(s, &server{})
+	proto.RegisterGreeterServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		panic(err)

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package helloworld;
 
+// 这个 import path 只有路径的最后一部分有用
 option go_package = "github.com/dushaoshuai/api-examples/grpc/helloworld/proto";
 
 service Greeter {

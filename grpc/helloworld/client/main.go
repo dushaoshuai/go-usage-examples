@@ -1,7 +1,7 @@
 package main
 
 import (
-	helloworld "api-examples/grpc/helloworld/proto"
+	"api-examples/grpc/helloworld/proto"
 	"context"
 	"flag"
 	"log"
@@ -27,12 +27,12 @@ func main() {
 		panic(err)
 	}
 	defer conn.Close()
-	c := helloworld.NewGreeterClient(conn)
+	c := proto.NewGreeterClient(conn)
 
 	// contact the server and print out its response
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &helloworld.HelloReq{Name: *name})
+	r, err := c.SayHello(ctx, &proto.HelloReq{Name: *name})
 	if err != nil {
 		panic(err)
 	}
