@@ -13,20 +13,19 @@ func ExampleCode() {
 		fmt.Println("该用户已邀请")
 	}
 
-	s, ok := status.FromError(err)
-	if ok {
-		fmt.Println(s.Code())
-		fmt.Println(s.Err())
-		fmt.Println(s.String())
-		fmt.Println(s.Message())
-		fmt.Println(s.Details())
+	if s, ok := status.FromError(err); ok {
+		fmt.Println("Code() ==> ", s.Code())
+		fmt.Println("Err() ==> ", s.Err())
+		fmt.Println("String() ==> ", s.String())
+		fmt.Println("Message() ==> ", s.Message())
+		fmt.Println("Details() ==> ", s.Details())
 	}
 
 	// Output:
 	// 该用户已邀请
-	// AlreadyExists
-	// rpc error: code = AlreadyExists desc = 该博主已招募
-	// rpc error: code = AlreadyExists desc = 该博主已招募
-	// 该博主已招募
-	// []
+	// Code() ==>  AlreadyExists
+	// Err() ==>  rpc error: code = AlreadyExists desc = 该博主已招募
+	// String() ==>  rpc error: code = AlreadyExists desc = 该博主已招募
+	// Message() ==>  该博主已招募
+	// Details() ==>  []
 }
