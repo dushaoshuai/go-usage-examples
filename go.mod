@@ -21,6 +21,7 @@ require (
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
 	golang.org/x/text v0.3.7
 	google.golang.org/grpc v1.40.0
+	google.golang.org/protobuf v1.27.1
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/gorm v1.23.4
 )
@@ -86,7 +87,6 @@ require (
 	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
 	golang.org/x/tools v0.1.8 // indirect
 	google.golang.org/genproto v0.0.0-20210828152312-66f60bf46e71 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
