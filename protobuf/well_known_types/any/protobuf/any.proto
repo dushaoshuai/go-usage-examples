@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package test.any;
+
+import "google/protobuf/any.proto";
+
+option go_package = "github.com/dushaoshuai/api-examples/protobuf/well_known_types/any/protobuf";
+
+message Foo {
+  google.protobuf.Any test_any = 1;
+}
