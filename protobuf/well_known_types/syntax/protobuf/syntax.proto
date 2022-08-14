@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package test.syntax;
+
+import "google/protobuf/type.proto";
+
+option go_package = "github.com/dushaoshuai/api-examples/protobuf/well-known-types/syntax/protobuf";
+
+message Foo {
+    google.protobuf.Syntax test_syntax = 1;
+}
