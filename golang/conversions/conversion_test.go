@@ -56,3 +56,21 @@ func Example_integer_to_string() {
 	// Output:
 	// string('a') ==> "a"
 }
+
+// Converting a slice of bytes to a string type yields a string
+// whose successive bytes are the elements of the slice.
+func Example_convert_a_slice_of_bytes_to_a_string_type() {
+	fmt.Printf(
+		"string([]byte{34, 45, 67, 78, 100, 125, 255}) => %s\n",
+		string([]byte{34, 45, 67, 78, 100, 125, 255}),
+	)
+
+	fmt.Printf(
+		"string([]byte{'\\xf0', '\\x9f', '\\x8c', '\\x8d'}) => %s\n",
+		string([]byte{'\xf0', '\x9f', '\x8c', '\x8d'}),
+	)
+
+	// Output:
+	// string([]byte{34, 45, 67, 78, 100, 125, 255}) => "-CNd}�
+	// string([]byte{'\xf0', '\x9f', '\x8c', '\x8d'}) => 🌍
+}
