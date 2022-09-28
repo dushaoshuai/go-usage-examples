@@ -2,7 +2,7 @@ Type Parameters 资源
 
 * [Generic Programming](https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=98171)
 * [Why Generics?](https://go.dev/blog/why-generics)
-* [Type Parameters Proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
+* [Type Parameters Proposal](https://go.googlesource.com/proposal/+/HEAD/design/43651-type-parameters.md)
 * [Go 1.18 Release Notes](https://go.dev/doc/go1.18)
 * [Tutorial: Getting started with generics](https://go.dev/doc/tutorial/generics)
 * [Interface types](https://go.dev/ref/spec#Interface_types)
