@@ -7,7 +7,9 @@ import (
 )
 
 func ExamplePhoneNumberType() {
-	fmt.Println(getNumberType("18829352048")) // 填移动号码
+	// 填移动号码
+	fmt.Println(getNumberType("xxxxxxxx"))
+	// 填座机号码
 	fmt.Println(getNumberType("02081167888"))
 
 	// Output:
