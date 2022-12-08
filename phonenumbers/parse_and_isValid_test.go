@@ -6,7 +6,7 @@ import (
 	"github.com/nyaruka/phonenumbers"
 )
 
-func ExampleIsValidNumber() {
+func ExampleParseWithDefaultRegion() {
 	numbers := []string{
 		"+8617823456789",
 		"17823456789",
@@ -37,4 +37,20 @@ func ExampleIsValidNumber() {
 	// +862067799192 86 CN true
 	// +12067799192 1 US true
 	// 2067799192 86 CN true
+}
+
+func ExampleParseWithoutDefaultRegion() {
+	numbers := []string{
+		"17823456789",
+		"2067799192",
+	}
+
+	for _, number := range numbers {
+		_, err := phonenumbers.Parse(number, "")
+		fmt.Println(number, err)
+	}
+
+	// Output:
+	// 17823456789 invalid country code
+	// 2067799192 invalid country code
 }
