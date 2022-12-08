@@ -1,4 +1,4 @@
-package phonenumbers
+package phonenumbers_test
 
 import (
 	"fmt"
