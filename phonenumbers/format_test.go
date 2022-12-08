@@ -7,7 +7,7 @@ import (
 )
 
 func ExampleFormat() {
-	phoneNumber, err := phonenumbers.Parse("18829352048", "CN")
+	phoneNumber, err := phonenumbers.Parse("17629352048", "CN")
 	if err != nil {
 		panic(err)
 	}
@@ -26,8 +26,8 @@ func ExampleFormat() {
 	}
 
 	// Output:
-	// +8618829352048
-	// +86 188 2935 2048
-	// 188 2935 2048
-	// tel:+86-188-2935-2048
+	// +8617629352048
+	// +86 176 2935 2048
+	// 176 2935 2048
+	// tel:+86-176-2935-2048
 }
