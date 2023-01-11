@@ -65,8 +65,8 @@ type Any any
 
 type structC struct {
 	anonymousA
-	any // 接口类型的匿名字段不会被当作匿名字段，字段的类型就是它的字段名，
-	Any // 可以看到 any 字段没有被 marshal，而 Any 字段被 marshal 了
+	any // 接口类型的匿名字段不会被当作匿名字段，字段的类型就是它的字段名，any 的类型是 any，name 是 any，小写，因此没有 marshal，
+	Any // Any 的类型是 Any，name 是 Any，大写，因此被 marshal.
 }
 
 func ExampleMarshal_anonymous_struct_fields_of_interface_type() {
@@ -173,4 +173,69 @@ func ExampleMarshal_anonymous_struct_fields_with_inner_exported_fields_conflict_
 
 	// Output:
 	// {"A":78,"B":"E"}
+}
+
+type structG struct {
+	anonymousA     // anonymousA 的两个字段 A 和 B 被最外层的 A 和 B 遮盖了，
+	A          int // 因此没有被 marshal
+	B          string
+}
+
+func ExampleMarshal_visibility_rules_for_struct_fields() {
+	marshal(structG{
+		anonymousA: anonymousA{
+			A: 33,
+			B: "Perl",
+		},
+		A: 45,
+		B: "Go",
+	})
+
+	// Output:
+	// {"A":45,"B":"Go"}
+}
+
+type anonymousF struct {
+	A int    `json:"A"`
+	B string `json:"B"`
+}
+
+type structH struct {
+	anonymousF        // anonymousF 的两个字段 A 和 B 被最外层的 A 和 B 遮盖了
+	A          int    `json:"A"`
+	B          string `json:"B"`
+}
+
+func ExampleMarshal_visibility_rules_for_struct_fields_with_json_tags() {
+	marshal(structH{
+		anonymousF: anonymousF{
+			A: 67,
+			B: "Perl",
+		},
+		A: 55,
+		B: "Go",
+	})
+
+	// Output:
+	// {"A":55,"B":"Go"}
+}
+
+type structJ struct {
+	anonymousF     // anonymousF 的两个字段 A 和 B 被最外层的 A 和 B 遮盖了，
+	A          int // 即使它们有 json tag 也没用。
+	B          string
+}
+
+func ExampleMarshal_visibility_rules_for_struct_fields_with_json_tags_2() {
+	marshal(structJ{
+		anonymousF: anonymousF{
+			A: 13,
+			B: "Go",
+		},
+		A: 55,
+		B: "Python",
+	})
+
+	// Output:
+	// {"A":55,"B":"Python"}
 }
