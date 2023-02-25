@@ -1,6 +1,9 @@
 package gorm_and_json
 
 import (
+	"context"
+	"time"
+
 	"api-examples/gorm_learn"
 )
 
@@ -9,7 +12,10 @@ import (
 //                           是         不是
 
 func Example_gorm_and_json_NULL_null() {
-	db := gorm_learn.DefaultGormDB()
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	db := gorm_learn.DefaultGormDB(ctx)
 
 	var testData jsonTest
 	err := db.Model(&jsonTest{}).
