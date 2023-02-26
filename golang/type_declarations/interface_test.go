@@ -2,11 +2,15 @@ package type_declarations_test
 
 import "fmt"
 
+// A defined type may have methods associated with it.
+// It does not inherit any methods bound to the given type,
+// but the method set of an interface type or of elements of a composite type remains unchanged.
+
 type echoer interface {
 	echo()
 }
 
-// cmder 继承了 echoer 的 method set
+// cmder 和 echoer 的 method set 相同
 type cmder echoer
 
 type echo func()
