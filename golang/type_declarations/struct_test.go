@@ -2,6 +2,10 @@ package type_declarations_test
 
 import "fmt"
 
+// A defined type may have methods associated with it.
+// It does not inherit any methods bound to the given type,
+// but the method set of an interface type or of elements of a composite type remains unchanged.
+
 type aoo struct{}
 
 func (a aoo) name() {
@@ -12,7 +16,6 @@ type bar struct {
 	aoo
 }
 
-// foo 继承了 bar 的嵌入结构体 aoo 的方法
 type foo bar
 
 func Example_struct_struct() {
