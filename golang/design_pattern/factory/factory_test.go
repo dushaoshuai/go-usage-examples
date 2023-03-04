@@ -3,7 +3,7 @@ package factory
 import (
 	"fmt"
 
-	"api-examples/golang/design_pattern/factory/interface_factory"
+	"github.com/dushaoshuai/go-usage-examples/golang/design_pattern/factory/interface_factory"
 )
 
 func Example_interface_factory() {

@@ -1,6 +1,6 @@
-module api-examples
+module github.com/dushaoshuai/go-usage-examples
 
-go 1.18
+go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.7.7
@@ -21,7 +21,7 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.1
 	go.mongodb.org/mongo-driver v1.7.4
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
-	golang.org/x/text v0.3.7
+	golang.org/x/text v0.7.0
 	google.golang.org/grpc v1.40.0
 	google.golang.org/protobuf v1.28.0
 	gorm.io/driver/mysql v1.3.3
@@ -84,10 +84,10 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.17.0 // indirect
 	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f // indirect
-	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
-	golang.org/x/tools v0.1.8 // indirect
+	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/genproto v0.0.0-20210828152312-66f60bf46e71 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
