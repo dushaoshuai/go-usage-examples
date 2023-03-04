@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"api-examples/gorm_learn"
+	"github.com/dushaoshuai/go-usage-examples/gorm_learn"
 )
 
 // 测试目的：
