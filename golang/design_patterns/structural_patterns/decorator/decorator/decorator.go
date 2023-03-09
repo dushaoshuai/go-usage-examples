@@ -7,22 +7,14 @@ type Component interface {
 
 type ConcreteComponentA struct{}
 
-func NewConcreteComponentA() Component {
-	return &ConcreteComponentA{}
-}
-
+func NewConcreteComponentA() Component    { return &ConcreteComponentA{} }
 func (c *ConcreteComponentA) OperationA() {}
-
 func (c *ConcreteComponentA) OperationB() {}
 
 type ConcreteComponentB struct{}
 
-func NewConcreteComponentB() Component {
-	return &ConcreteComponentB{}
-}
-
+func NewConcreteComponentB() Component    { return &ConcreteComponentB{} }
 func (c *ConcreteComponentB) OperationA() {}
-
 func (c *ConcreteComponentB) OperationB() {}
 
 type DecoratorA struct {
