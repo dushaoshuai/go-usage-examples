@@ -1,25 +1,25 @@
-package oncevery_test
+package times_test
 
 import (
 	"fmt"
 	"sync"
 	"time"
 
-	"github.com/dushaoshuai/go-usage-examples/golang/sync/onceEvery"
+	"github.com/dushaoshuai/go-usage-examples/golang/sync/times"
 )
 
 var (
-	onceEvery = oncevery.NewOnceEvery(3 * time.Second)
-	t         time.Time
+	Times = times.NewTimes(3 * time.Second)
+	t     time.Time
 )
 
-func ExampleOnceEvery() {
+func ExampleTimes() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			onceEvery.Do(func() {
+			Times.Do(func() {
 				t = time.Now()
 			})
 			fmt.Println(t)
@@ -31,7 +31,7 @@ func ExampleOnceEvery() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			onceEvery.Do(func() {
+			Times.Do(func() {
 				t = time.Now()
 			})
 			fmt.Println(t)
@@ -42,11 +42,11 @@ func ExampleOnceEvery() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			onceEvery.Do(func() {
+			Times.Do(func() {
 				t = time.Now()
 			})
 			fmt.Println(t)
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 		}
 	}()
 	time.Sleep(time.Second)
@@ -54,7 +54,7 @@ func ExampleOnceEvery() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 30; i++ {
-			onceEvery.Do(func() {
+			Times.Do(func() {
 				t = time.Now()
 			})
 			fmt.Println(t)
