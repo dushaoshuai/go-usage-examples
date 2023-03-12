@@ -13,14 +13,15 @@ var (
 	t     time.Time
 )
 
-func ExampleTimes() {
+func ExampleTimes() { // todo test
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			Times.Do(func() {
+			Times.Do(func() error {
 				t = time.Now()
+				return nil
 			})
 			fmt.Println(t)
 			time.Sleep(500 * time.Millisecond)
@@ -31,8 +32,9 @@ func ExampleTimes() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			Times.Do(func() {
+			Times.Do(func() error {
 				t = time.Now()
+				return nil
 			})
 			fmt.Println(t)
 			time.Sleep(500 * time.Millisecond)
@@ -42,8 +44,9 @@ func ExampleTimes() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 20; i++ {
-			Times.Do(func() {
+			Times.Do(func() error {
 				t = time.Now()
+				return nil
 			})
 			fmt.Println(t)
 			time.Sleep(1 * time.Second)
@@ -54,8 +57,9 @@ func ExampleTimes() {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < 30; i++ {
-			Times.Do(func() {
+			Times.Do(func() error {
 				t = time.Now()
+				return nil
 			})
 			fmt.Println(t)
 			time.Sleep(2 * time.Second)
