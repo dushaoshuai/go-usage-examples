@@ -31,7 +31,6 @@ func getChainedHandler(interceptors []Interceptor, curr int, finalHandler Handle
 // 若干 `Interceptor` 和 `Handler` 串成了一条责任链。请求经过 `Interceptor` 的拦截处理，最后由 `Handler` 完成真正的响应。
 // 每个 `Interceptor` 都可以决定是否调用下一个 `Interceptor`，最后一个 `Interceptor` 可以决定是否调用 `Handler`。
 //
-// `chainInterceptors` 将多个 `Interceptor` 组合成一个 `Interceptor`，这是函数式编程-装饰模式的写法。
-// 可以理解为前一个 `Interceptor` 修饰（包裹）后一个 `Interceptor`，变成一个 `Interceptor`。
-// 所有的 `Interceptor` 层层包裹，第一个 `Interceptor` 在最外面，最后一个在最里面，这就是洋葱模型。
+// `chainInterceptors` 将多个 `Interceptor` 组合成一个 `Interceptor`。前一个 `Interceptor` 包裹后一个 `Interceptor`，
+// 所有的 `Interceptor` 层层包裹，第一个 `Interceptor` 在最外面，最后一个在最里面（是洋葱模型？）。
 // 请求到达时，先由外向内进入，再由内向外返回。
