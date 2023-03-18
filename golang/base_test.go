@@ -1,6 +1,8 @@
 package golang_test
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Example_base() {
 	a := 0x_65e5
