@@ -5,10 +5,10 @@ go 1.20
 require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0
-	github.com/go-redis/redis/v8 v8.11.5
 	github.com/nyaruka/phonenumbers v1.1.1
 	github.com/ohler55/ojg v1.14.5
 	github.com/pkg/errors v0.9.1
+	github.com/redis/go-redis/v9 v9.0.2
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/scylladb/go-set v1.0.2
 	github.com/sirupsen/logrus v1.6.0
