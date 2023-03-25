@@ -1,4 +1,4 @@
-package interface_factory
+package factory_method
 
 type Command interface {
 	Name() string
