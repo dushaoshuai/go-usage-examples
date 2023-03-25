@@ -5,18 +5,15 @@ import (
 )
 
 func ExampleCommand() {
-	i1 := command.NewInvoker1(
+	command.NewInvoker1(
 		command.NewCommand1("Go."),
-	)
-	i2 := command.NewInvoker1(
+	).Invoke()
+	command.NewInvoker1(
 		command.NewCommand2("Python."),
-	)
-	i3 := command.NewInvoker1(
+	).Invoke()
+	command.NewInvoker1(
 		command.NewCommand3("C."),
-	)
-	i1.Invoke()
-	i2.Invoke()
-	i3.Invoke()
+	).Invoke()
 
 	command.Invoker2(command.NewCommand2("Go."))
 	command.Invoker2(command.NewCommand1("Python."))
