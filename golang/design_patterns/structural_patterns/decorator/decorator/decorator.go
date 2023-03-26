@@ -5,17 +5,11 @@ type Component interface {
 	OperationB()
 }
 
-type ConcreteComponentA struct{}
+type baseComponent struct{}
 
-func NewConcreteComponentA() Component    { return &ConcreteComponentA{} }
-func (c *ConcreteComponentA) OperationA() {}
-func (c *ConcreteComponentA) OperationB() {}
-
-type ConcreteComponentB struct{}
-
-func NewConcreteComponentB() Component    { return &ConcreteComponentB{} }
-func (c *ConcreteComponentB) OperationA() {}
-func (c *ConcreteComponentB) OperationB() {}
+func NewBaseComponent() Component    { return &baseComponent{} }
+func (c *baseComponent) OperationA() {}
+func (c *baseComponent) OperationB() {}
 
 type DecoratorA struct {
 	Component
