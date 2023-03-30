@@ -9,13 +9,13 @@ import (
 )
 
 func TestMap(t *testing.T) {
-	var xmap xsync.Map[int, int]
+	xmap := xsync.NewMap[int, int]()
 	var wg sync.WaitGroup
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < 10_000_000; i++ {
+		for i := 0; i < 1<<20; i++ {
 			xmap.Delete(rand.Int())
 		}
 	}()
@@ -23,7 +23,7 @@ func TestMap(t *testing.T) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < 10_000_000; i++ {
+		for i := 0; i < 1<<20; i++ {
 			xmap.Add(rand.Int(), rand.Int())
 		}
 	}()
@@ -31,7 +31,7 @@ func TestMap(t *testing.T) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < 10_000_000; i++ {
+		for i := 0; i < 1<<20; i++ {
 			xmap.Load(rand.Int())
 		}
 	}()
@@ -39,7 +39,7 @@ func TestMap(t *testing.T) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < 10_000_000; i++ {
+		for i := 0; i < 1<<20; i++ {
 			xmap.Load2(rand.Int())
 		}
 	}()
