@@ -1,6 +1,6 @@
 package goto_statement_test
 
-import "api-examples/golang/goto_statement"
+import "github.com/dushaoshuai/go-usage-examples/golang/goto_statement"
 
 func ExampleGoto() {
 	goto_statement.Goto()
