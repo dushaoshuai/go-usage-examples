@@ -18,7 +18,7 @@ require (
 	github.com/swaggo/gin-swagger v1.3.3
 	github.com/swaggo/swag v1.8.12
 	github.com/xuri/excelize/v2 v2.6.0
-	go.etcd.io/etcd/client/v3 v3.5.6
+	go.etcd.io/etcd/client/v3 v3.5.7
 	go.mongodb.org/mongo-driver v1.7.4
 	go.uber.org/goleak v1.2.1
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
@@ -85,8 +85,8 @@ require (
 	github.com/xuri/efp v0.0.0-20220407160117-ad0f7a785be8 // indirect
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
-	go.etcd.io/etcd/api/v3 v3.5.6 // indirect
-	go.etcd.io/etcd/client/pkg/v3 v3.5.6 // indirect
+	go.etcd.io/etcd/api/v3 v3.5.7 // indirect
+	go.etcd.io/etcd/client/pkg/v3 v3.5.7 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
