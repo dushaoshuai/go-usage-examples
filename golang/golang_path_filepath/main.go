@@ -1,8 +1,9 @@
 package main
 
 import (
-	"api-examples/golang/golang_path_filepath/routines"
 	"fmt"
+
+	"github.com/dushaoshuai/go-usage-examples/golang/golang_path_filepath/routines"
 )
 
 var paths = []string{
