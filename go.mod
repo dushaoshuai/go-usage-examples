@@ -23,10 +23,11 @@ require (
 	go.uber.org/goleak v1.2.1
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
 	golang.org/x/text v0.8.0
+	google.golang.org/genproto v0.0.0-20230330200707-38013875ee22
 	google.golang.org/grpc v1.54.0
 	google.golang.org/protobuf v1.30.0
 	gorm.io/driver/mysql v1.3.3
-	gorm.io/gorm v1.24.5
+	gorm.io/gorm v1.24.6
 )
 
 require (
@@ -89,7 +90,6 @@ require (
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/tools v0.6.0 // indirect
-	google.golang.org/genproto v0.0.0-20230330200707-38013875ee22 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
