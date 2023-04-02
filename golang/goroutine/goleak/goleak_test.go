@@ -96,3 +96,11 @@ func Test_no_leak(t *testing.T) {
 	// ok      github.com/dushaoshuai/go-usage-examples/golang/goleak  0.002s
 	defer goleak.VerifyNone(t)
 }
+
+func Example_run_out_of_memory() {
+	for {
+		go func() {
+			make(chan string) <- "test run out of memory"
+		}()
+	}
+}
