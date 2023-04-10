@@ -6,7 +6,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.3.0
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/nyaruka/phonenumbers v1.1.6
-	github.com/ohler55/ojg v1.18.3
+	github.com/ohler55/ojg v1.18.4
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.0.2
 	github.com/robfig/cron/v3 v3.0.1
