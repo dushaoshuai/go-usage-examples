@@ -15,7 +15,7 @@ require (
 	github.com/spf13/viper v1.15.0
 	github.com/xuri/excelize/v2 v2.7.0
 	go.etcd.io/etcd/client/v3 v3.5.7
-	go.mongodb.org/mongo-driver v1.11.3
+	go.mongodb.org/mongo-driver v1.11.4
 	go.uber.org/goleak v1.2.1
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
 	golang.org/x/text v0.8.0
