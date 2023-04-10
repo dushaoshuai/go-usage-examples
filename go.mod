@@ -18,7 +18,7 @@ require (
 	go.mongodb.org/mongo-driver v1.11.3
 	go.uber.org/goleak v1.2.1
 	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
-	golang.org/x/text v0.8.0
+	golang.org/x/text v0.9.0
 	google.golang.org/genproto v0.0.0-20230330200707-38013875ee22
 	google.golang.org/grpc v1.54.0
 	google.golang.org/protobuf v1.30.0
