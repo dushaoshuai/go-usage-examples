@@ -2,6 +2,7 @@ package Test_test
 
 import (
 	"fmt"
+	"os"
 	"testing"
 	"time"
 )
@@ -214,6 +215,47 @@ func TestRun(t *testing.T) {
 	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
 }
 
+func TestRun_block(t *testing.T) {
+	var (
+		start = time.Now()
+		d     = 3 * time.Second
+	)
+	t.Run("block_3s", func(t *testing.T) {
+		time.Sleep(d)
+	})
+	if time.Now().Sub(start).Round(time.Second) != d {
+		t.Errorf("Current time should be 3 seconds later than the start time, but it does not.")
+	}
+}
+
+func TestSetenv(t *testing.T) {
+	key := "foo"
+	value := "bar"
+	t.Setenv(key, value)
+	if got := os.Getenv(key); got != value {
+		t.Errorf("os.Getenv(\"foo\") = %v, want %v", got, value)
+	}
+
+	t.Run("getenv", func(t *testing.T) {
+		if got := os.Getenv(key); got != value {
+			t.Errorf("os.Getenv(\"foo\") = %v, want %v", got, value)
+		}
+	})
+
+	newValue := "baz"
+	t.Run("setenv", func(t *testing.T) {
+		// Setenv uses Cleanup to restore the environment variable to its original value after the test.
+		t.Setenv(key, newValue)
+		if got := os.Getenv(key); got != newValue {
+			t.Errorf("os.Getenv(\"foo\") = %v, want %v", got, newValue)
+		}
+	})
+	// After the above subtest - setenv, key's value has been restored to "bar".
+	if got := os.Getenv(key); got != value {
+		t.Errorf("os.Getenv(\"foo\") = %v, want %v", got, value)
+	}
+}
+
 // TODO
-// Setenv
 // TempDir
+// Parallel https://engineering.mercari.com/en/blog/entry/20220408-how_to_use_t_parallel/
