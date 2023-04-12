@@ -144,13 +144,20 @@ func TestFatal(t *testing.T) {
 	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
 }
 
+func helper(t *testing.T, a, b int) {
+	t.Helper()
+	if a != b {
+		t.Errorf("a != b, want a == b")
+	}
+}
+
 func TestHelper(t *testing.T) {
-	t.Helper() // 暂时没看明白这个函数的作用是什么
-	t.Error("t.Helper() called")
+	helper(t, 0, 0)
+	helper(t, 0, 1) // https://stackoverflow.com/questions/39194816/how-to-wrap-golang-test-functions
 
 	// $ go test -test.run TestHelper
 	// --- FAIL: TestHelper (0.00s)
-	//    Test_test.go:147: t.Helper() called
+	//    Test_test.go:156: a != b, want a == b
 	// FAIL
 	// exit status 1
 	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
@@ -228,6 +235,42 @@ func TestRun_block(t *testing.T) {
 	}
 }
 
+func TestParallel(t *testing.T) {
+	for i := 0; i < 3; i++ {
+		t.Run("", func(t *testing.T) {
+			i := i
+			t.Parallel() // https://engineering.mercari.com/en/blog/entry/20220408-how_to_use_t_parallel/
+			if i%2 == 0 {
+				t.Error("parallel test", i)
+			}
+		})
+	}
+	if t.Failed() { // t.Failed() = false
+		t.Errorf("t.Failed() = %v, want %v", t.Failed(), false)
+	}
+
+	// $ go test -test.v -test.run TestParallel
+	// === RUN   TestParallel
+	// === RUN   TestParallel/#00
+	// === PAUSE TestParallel/#00
+	// === RUN   TestParallel/#01
+	// === PAUSE TestParallel/#01
+	// === RUN   TestParallel/#02
+	// === PAUSE TestParallel/#02
+	// === CONT  TestParallel/#00
+	//    Test_test.go:237: parallel test 0
+	// === CONT  TestParallel/#01
+	// === CONT  TestParallel/#02
+	//    Test_test.go:237: parallel test 2
+	// --- FAIL: TestParallel (0.00s)
+	//    --- FAIL: TestParallel/#00 (0.00s)
+	//    --- PASS: TestParallel/#01 (0.00s)
+	//    --- FAIL: TestParallel/#02 (0.00s)
+	// FAIL
+	// exit status 1
+	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
+}
+
 func TestSetenv(t *testing.T) {
 	key := "foo"
 	value := "bar"
@@ -256,6 +299,12 @@ func TestSetenv(t *testing.T) {
 	}
 }
 
-// TODO
-// TempDir
-// Parallel https://engineering.mercari.com/en/blog/entry/20220408-how_to_use_t_parallel/
+func TestTempDir(t *testing.T) {
+	if t.TempDir() == t.TempDir() {
+		t.Errorf("t.TempDir() == t.TempDir(), want t.TempDir() != t.TempDir()")
+	}
+
+	// $ go test -test.run TestTempDir
+	// PASS
+	// ok      github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.001s
+}
