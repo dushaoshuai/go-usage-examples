@@ -47,13 +47,32 @@ func TestCleanup(t *testing.T) {
 		t.Log("three")
 	})
 
+	t.Run("sub-test", func(t *testing.T) {
+		t.Cleanup(func() {
+			t.Log("sub-test")
+		})
+		t.Run("sub-sub-test", func(t *testing.T) {
+			t.Cleanup(func() {
+				t.Log("sub-sub-test")
+			})
+		})
+	})
+
 	// Log doc: For tests, the text will be printed only if the test fails or the -test.v flag is set.
-	// $ go test -test.v -test.run TestCleanup
+	// $ go test -v -run TestCleanup
 	// === RUN   TestCleanup
-	//    Test_test.go:13: three
-	//    Test_test.go:10: two
-	//    Test_test.go:7: one
+	// === RUN   TestCleanup/sub-test
+	// === RUN   TestCleanup/sub-test/sub-sub-test
+	//    Test_test.go:56: sub-sub-test
+	// === NAME  TestCleanup/sub-test
+	//    Test_test.go:52: sub-test
+	// === NAME  TestCleanup
+	//    Test_test.go:47: three
+	//    Test_test.go:44: two
+	//    Test_test.go:41: one
 	// --- PASS: TestCleanup (0.00s)
+	//    --- PASS: TestCleanup/sub-test (0.00s)
+	//        --- PASS: TestCleanup/sub-test/sub-sub-test (0.00s)
 	// PASS
 	// ok      github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
 }
@@ -113,6 +132,37 @@ func TestFailNow(t *testing.T) {
 	// FAIL
 	// exit status 1
 	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.003s
+}
+
+func TestFailNowInParallel(t *testing.T) {
+	for i := 0; i < 3; i++ {
+		t.Run("", func(t *testing.T) {
+			i := i
+			t.Parallel()
+			if i%2 == 0 {
+				t.FailNow()
+			}
+		})
+	}
+
+	// $ go test -v -run TestFailNowInParallel
+	// === RUN   TestFailNowInParallel
+	// === RUN   TestFailNowInParallel/#00
+	// === PAUSE TestFailNowInParallel/#00
+	// === RUN   TestFailNowInParallel/#01
+	// === PAUSE TestFailNowInParallel/#01
+	// === RUN   TestFailNowInParallel/#02
+	// === PAUSE TestFailNowInParallel/#02
+	// === CONT  TestFailNowInParallel/#00
+	// === CONT  TestFailNowInParallel/#02
+	// === CONT  TestFailNowInParallel/#01
+	// --- FAIL: TestFailNowInParallel (0.00s)
+	//    --- FAIL: TestFailNowInParallel/#00 (0.00s)
+	//    --- FAIL: TestFailNowInParallel/#02 (0.00s)
+	//    --- PASS: TestFailNowInParallel/#01 (0.00s)
+	// FAIL
+	// exit status 1
+	// FAIL    github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.002s
 }
 
 func TestFailed(t *testing.T) {
