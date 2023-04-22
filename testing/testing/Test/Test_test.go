@@ -358,3 +358,13 @@ func TestTempDir(t *testing.T) {
 	// PASS
 	// ok      github.com/dushaoshuai/go-usage-examples/testing/testing/Test   0.001s
 }
+
+func TestPanic(t *testing.T) {
+	panic("panic in testing")
+
+	// $ go test -run TestPanic
+	// --- FAIL: TestPanic (0.00s)
+	// panic: panic in testing [recovered]
+	//        panic: panic in testing
+	// ...
+}
