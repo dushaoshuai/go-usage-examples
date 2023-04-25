@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/deckarep/golang-set/v2 v2.3.0
 	github.com/go-playground/validator/v10 v10.12.0
+	github.com/golang/mock v1.4.4
 	github.com/nyaruka/phonenumbers v1.1.6
 	github.com/ohler55/ojg v1.18.4
 	github.com/pkg/errors v0.9.1

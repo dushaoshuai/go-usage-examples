@@ -6,6 +6,7 @@ import (
 	"github.com/golang/mock/gomock"
 
 	user "github.com/dushaoshuai/go-usage-examples/testing/mock/gomock/sample"
+	"github.com/dushaoshuai/go-usage-examples/testing/mock/gomock/sample/imp1"
 )
 
 func TestGrabPointer(t *testing.T) {
@@ -18,6 +19,21 @@ func TestGrabPointer(t *testing.T) {
 	if i != 7 {
 		t.Errorf("want 7, got %d", i)
 	}
+}
+
+func TestEmbeddedInterface(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockEmbed := NewMockEmbed(ctrl)
+	mockEmbed.EXPECT().RegularMethod()
+	mockEmbed.EXPECT().EmbeddedMethod()
+	mockEmbed.EXPECT().ForeignEmbeddedMethod()
+
+	mockEmbed.RegularMethod()
+	mockEmbed.EmbeddedMethod()
+	var emb imp1.ForeignEmbedded = mockEmbed // also does interface check
+	emb.ForeignEmbeddedMethod()
 }
 
 func TestExpectTrueNil(t *testing.T) {
