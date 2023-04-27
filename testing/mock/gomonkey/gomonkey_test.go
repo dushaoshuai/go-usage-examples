@@ -17,8 +17,8 @@ func TestApplyFunc(t *testing.T) {
 	defer patches.Reset()
 
 	for range goloop.Repeat(10) {
-		if !time.Now().Equal(now) {
-			t.Errorf("time.Now() should equal now, but it didn't")
+		if n := time.Now(); !n.Equal(now) {
+			t.Errorf("time.Now() should equal now, got %v", n)
 		}
 	}
 }
@@ -29,8 +29,8 @@ func TestApplyFuncReturn(t *testing.T) {
 	defer patches.Reset()
 
 	for range goloop.Repeat(10) {
-		if !time.Now().Equal(now) {
-			t.Errorf("time.Now() should equal now, but it didn't")
+		if n := time.Now(); !n.Equal(now) {
+			t.Errorf("time.Now() should equal now, got %v", n)
 		}
 	}
 }
@@ -44,8 +44,8 @@ func TestApplyFuncSeq(t *testing.T) {
 	defer patches.Reset()
 
 	for range goloop.Repeat(3) {
-		if !time.Now().Equal(now) {
-			t.Errorf("time.Now() should equal now, but it didn't")
+		if n := time.Now(); !n.Equal(now) {
+			t.Errorf("time.Now() should equal now, got %v", n)
 		}
 	}
 }
