@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/deckarep/golang-set/v2 v2.3.0
 	github.com/go-playground/validator/v10 v10.12.0
+	github.com/golang/mock v1.6.0
 	github.com/nyaruka/phonenumbers v1.1.6
 	github.com/ohler55/ojg v1.18.4
 	github.com/pkg/errors v0.9.1
@@ -27,10 +28,12 @@ require (
 )
 
 require (
+	github.com/agiledragon/gomonkey/v2 v2.9.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/dushaoshuai/goloop v0.0.0-20230422133651-67437c76b9e5 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
