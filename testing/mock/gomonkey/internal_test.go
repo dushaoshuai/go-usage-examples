@@ -17,3 +17,17 @@ var (
 	privateVar = 10
 	PublicVar  = 20
 )
+
+type fooErr string
+
+func (e fooErr) Error() string {
+	return string(e)
+}
+
+func (e fooErr) String(prefix string) string {
+	return prefix + "/error: " + string(e)
+}
+
+func (e fooErr) ok() bool {
+	return string(e) == ""
+}

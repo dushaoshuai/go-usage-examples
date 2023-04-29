@@ -6,6 +6,8 @@ import (
 
 	"github.com/agiledragon/gomonkey/v2"
 	"github.com/dushaoshuai/goloop"
+
+	"github.com/dushaoshuai/go-usage-examples/testing/mock/gomonkey/third_party"
 )
 
 func TestApplyFunc(t *testing.T) {
@@ -146,5 +148,68 @@ func TestApplyGlobalVar(t *testing.T) {
 	}
 	if PublicVar != 20 {
 		t.Fatalf("reseted PublicVar should equal %d, got %d", 20, PublicVar)
+	}
+}
+
+func TestApplyMethod(t *testing.T) {
+	var (
+		e          fooErr
+		errContent = "example error"
+	)
+	patches := gomonkey.NewPatches()
+	patches.ApplyMethod(e, "Error", func(_ fooErr) string {
+		return errContent
+	})
+	patches.ApplyMethod(e, "String", func(_ fooErr, _ string) string {
+		return errContent
+	})
+	defer patches.Reset()
+
+	if got := e.Error(); got != errContent {
+		t.Errorf("patched fooErr.Error() = %v, want %v", got, errContent)
+	}
+	if got := e.String("p"); got != errContent {
+		t.Errorf("patched fooErr.String() = %v, want %v", got, errContent)
+	}
+}
+
+func TestApplyMethodFunc(t *testing.T) {
+	var (
+		e          fooErr
+		errContent = "example error"
+	)
+	patches := gomonkey.NewPatches()
+	patches.ApplyMethodFunc(e, "Error", func() string { // no need to pass receiver if compared with ApplyMethod
+		return errContent
+	})
+	patches.ApplyMethodFunc(e, "String", func(_ string) string {
+		return errContent
+	})
+	defer patches.Reset()
+
+	if got := e.Error(); got != errContent {
+		t.Errorf("patched fooErr.Error() = %v, want %v", got, errContent)
+	}
+	if got := e.String("p"); got != errContent {
+		t.Errorf("patched fooErr.String() = %v, want %v", got, errContent)
+	}
+}
+
+func TestApplyPrivateMethod(t *testing.T) {
+	var e third_party.FooErr
+	// Note: use this function on private methods in third party packages.
+	// Do not use it on private methods in current package, that is, gomonkey and gomonkey_test,
+	// otherwise, it will panic:
+	// $ go test -gcflags=all=-l
+	// --- FAIL: TestApplyPrivateMethod (0.00s)
+	// panic: retrieve method by name failed [recovered]
+	//        panic: retrieve method by name failed
+	patches := gomonkey.ApplyPrivateMethod(e, "ok", func(_ third_party.FooErr) bool {
+		return true
+	})
+	defer patches.Reset()
+
+	if got := e.Ok(); got != true {
+		t.Errorf("patched third_party.fooErr.ok() = %v, want %v", got, true)
 	}
 }
