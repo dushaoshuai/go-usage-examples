@@ -1,4 +1,4 @@
-package golang_test
+package interface_test
 
 type bar interface {
 	Add(x int) int
