@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/agiledragon/gomonkey/v2 v2.9.0
 	github.com/deckarep/golang-set/v2 v2.3.0
-	github.com/dushaoshuai/goloop v0.0.0-20230422133651-67437c76b9e5
+	github.com/dushaoshuai/goloop v0.1.0
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/golang/mock v1.6.0
 	github.com/nyaruka/phonenumbers v1.1.6
@@ -20,7 +20,7 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.8
 	go.mongodb.org/mongo-driver v1.11.4
 	go.uber.org/goleak v1.2.1
-	golang.org/x/exp v0.0.0-20220324144552-032f0433de08
+	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	golang.org/x/text v0.9.0
 	google.golang.org/genproto v0.0.0-20230330200707-38013875ee22
 	google.golang.org/grpc v1.54.0
