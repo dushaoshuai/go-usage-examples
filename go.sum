@@ -65,8 +65,8 @@ github.com/deckarep/golang-set/v2 v2.3.0 h1:qs18EKUfHm2X9fA50Mr/M5hccg2tNnVqsiBI
 github.com/deckarep/golang-set/v2 v2.3.0/go.mod h1:VAky9rY/yGXJOLEDv3OMci+7wtDpOF4IN+y82NBOac4=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f h1:lO4WD4F/rVNCu3HqELle0jiPLLBs70cWOduZpkS1E78=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f/go.mod h1:cuUVRXasLTGF7a8hSLbxyZXjz+1KgoB3wDUb6vlszIc=
-github.com/dushaoshuai/goloop v0.1.1 h1:Uac53LHcL6kJCam73VpSx2IKWP27f780mS3C+oS5rl0=
-github.com/dushaoshuai/goloop v0.1.1/go.mod h1:8XTJXNVfFKeJgR+zoSwgFHZ7DkiSjBt7xxwsHKLxXdc=
+github.com/dushaoshuai/goloop v0.1.2 h1:YXNHHKNeXkzT8VxMXWro3/bOL9jLsM8V1XD8218iw48=
+github.com/dushaoshuai/goloop v0.1.2/go.mod h1:8XTJXNVfFKeJgR+zoSwgFHZ7DkiSjBt7xxwsHKLxXdc=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
