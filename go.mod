@@ -23,7 +23,7 @@ require (
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	golang.org/x/text v0.9.0
 	google.golang.org/genproto v0.0.0-20230330200707-38013875ee22
-	google.golang.org/grpc v1.54.0
+	google.golang.org/grpc v1.55.0
 	google.golang.org/protobuf v1.30.0
 	gorm.io/driver/mysql v1.5.0
 	gorm.io/gorm v1.25.0
