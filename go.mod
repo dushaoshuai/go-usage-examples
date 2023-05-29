@@ -11,7 +11,7 @@ require (
 	github.com/nyaruka/phonenumbers v1.1.7
 	github.com/ohler55/ojg v1.18.5
 	github.com/pkg/errors v0.9.1
-	github.com/redis/go-redis/v9 v9.0.4
+	github.com/redis/go-redis/v9 v9.0.5
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sirupsen/logrus v1.9.2
 	github.com/spf13/pflag v1.0.5
