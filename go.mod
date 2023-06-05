@@ -6,7 +6,7 @@ require (
 	github.com/agiledragon/gomonkey/v2 v2.10.1
 	github.com/deckarep/golang-set/v2 v2.3.0
 	github.com/dushaoshuai/goloop v0.1.2
-	github.com/go-playground/validator/v10 v10.14.0
+	github.com/go-playground/validator/v10 v10.14.1
 	github.com/golang/mock v1.6.0
 	github.com/nyaruka/phonenumbers v1.1.7
 	github.com/ohler55/ojg v1.18.7
