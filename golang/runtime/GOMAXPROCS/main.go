@@ -78,3 +78,79 @@ func main() {
 // 因此可以观察到，
 // 打印 1 时 goroutine 数量增多，
 // 打印 0 时 goroutine 数量减少。
+
+// $ GOMAXPROCS=2 go run main.go
+// runtime.GOMAXPROCS(): 2
+// 1
+// runtime.NumGoroutine(): 2
+// 1
+// runtime.NumGoroutine(): 3
+// 1
+// runtime.NumGoroutine(): 4
+// 0
+// runtime.NumGoroutine(): 5
+// 1
+// runtime.NumGoroutine(): 4
+// 0
+// 0
+// 1
+// runtime.NumGoroutine(): 5
+// runtime.NumGoroutine(): 5
+// 0
+// runtime.NumGoroutine(): 5
+// 1
+// runtime.NumGoroutine(): 4
+// 1
+// runtime.NumGoroutine(): 5
+// 1
+// runtime.NumGoroutine(): 6
+// 1
+// runtime.NumGoroutine(): 7
+// 1
+// runtime.NumGoroutine(): 8
+// 1
+// runtime.NumGoroutine(): 9
+// 1
+// runtime.NumGoroutine(): 10
+// 1
+// runtime.NumGoroutine(): 11
+// 1
+// runtime.NumGoroutine(): 12
+// 1
+// runtime.NumGoroutine(): 13
+// 1
+// runtime.NumGoroutine(): 14
+// 0
+// runtime.NumGoroutine(): 14
+// 0
+// runtime.NumGoroutine(): 13
+// 0
+// runtime.NumGoroutine(): 12
+// runtime.NumGoroutine(): 5
+// 1
+// 0
+// 0
+// runtime.NumGoroutine(): 11
+// 0
+// 0
+// 0
+// runtime.NumGoroutine(): 10
+// runtime.NumGoroutine(): 11
+// 1
+// runtime.NumGoroutine(): 10
+// 0
+// 0
+// runtime.NumGoroutine(): 10
+// 0
+// runtime.NumGoroutine(): 10
+// 0
+// runtime.NumGoroutine(): 9
+// 1
+// runtime.NumGoroutine(): 8
+
+// 在上面的这段输出结果中，
+// 因为 Go 程序可以使用两个逻辑 CPU，
+// 同一时刻最多有两个线程在执行 goroutine,
+// 同一时刻最多有两个 goroutine 在运行。
+// 因此 0 和 1 的输出是交叉的、随机的，
+// goroutine 的数量变化也没有什么规律。
