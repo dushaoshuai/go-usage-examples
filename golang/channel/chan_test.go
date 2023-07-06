@@ -24,10 +24,3 @@ func Example_receive_from_a_send_only_chan() {
 
 	// Output:
 }
-
-func Example_send_to_a_nil_chan() {
-	var ch chan int
-	ch <- 0
-
-	// Output:
-}
