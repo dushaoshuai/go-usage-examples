@@ -1,0 +1,1 @@
+package close_chan_when_there_are_senders
