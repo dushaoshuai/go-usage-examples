@@ -14,10 +14,3 @@ func ExampleGOMAXPROCS() {
 	// 16
 	// 16
 }
-
-func Example_change_GOMAXPROCS() {
-
-	// Output:
-	// The output is indeterminate.
-	//
-}
