@@ -28,6 +28,13 @@ _: // a labeled statement
 	return a
 }
 
+// struct field
+type struc struct {
+	_ int
+	_ string
+	A bool
+}
+
 func Example_ignore_right_hand_side_values_in_an_assignment() {
 	f := func() (int, int) { return 6, 7 }
 
@@ -78,3 +85,14 @@ func (i *ImpleIface) b() {}
 // interface checks
 // guarantee *ImpleIface satisfies Iface
 var _ Iface = (*ImpleIface)(nil)
+
+// bounds check hint to compiler
+func Example_bounds_check_hint_to_compiler() {
+	var p [4]int
+
+	// bounds check at compile time
+	_ = p[2] // eliminate runtime bounds checks
+	p[0] = 0
+	p[1] = 1
+	p[2] = 2
+}
