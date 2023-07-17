@@ -10,6 +10,10 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
+func defaultCtx() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), 5*time.Second)
+}
+
 func mustNew(ctx context.Context) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     net.JoinHostPort("127.0.0.1", "6379"),
@@ -27,7 +31,7 @@ func mustNew(ctx context.Context) *redis.Client {
 }
 
 func Example_quick_start() {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := defaultCtx()
 	defer cancel()
 
 	rdb := mustNew(ctx)
