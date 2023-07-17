@@ -3,14 +3,14 @@ package redis_test
 import (
 	"context"
 	"fmt"
+	"log"
 	"net"
+	"time"
 
 	"github.com/redis/go-redis/v9"
 )
 
-func Example_quick_start() {
-	ctx := context.Background()
-
+func mustNew(ctx context.Context) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     net.JoinHostPort("127.0.0.1", "6379"),
 		Password: "", // no password set
@@ -21,9 +21,18 @@ func Example_quick_start() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(pong)
+	log.Println(pong)
 
-	err = rdb.Set(ctx, "key", "value", 0).Err()
+	return rdb
+}
+
+func Example_quick_start() {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	rdb := mustNew(ctx)
+
+	err := rdb.Set(ctx, "key", "value", 0).Err()
 	if err != nil {
 		panic(err)
 	}
@@ -44,7 +53,6 @@ func Example_quick_start() {
 	}
 
 	// Output:
-	// PONG
 	// key value
 	// key2 does not exist
 }
