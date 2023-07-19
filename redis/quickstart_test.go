@@ -14,11 +14,11 @@ func defaultCtx() (context.Context, context.CancelFunc) {
 	return context.WithTimeout(context.Background(), 5*time.Second)
 }
 
-func mustNew(ctx context.Context) *redis.Client {
+func mustNewDB(ctx context.Context, DB int) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     net.JoinHostPort("127.0.0.1", "6379"),
 		Password: "", // no password set
-		DB:       0,  // use default DB
+		DB:       DB,
 	})
 
 	pong, err := rdb.Ping(ctx).Result()
@@ -28,6 +28,10 @@ func mustNew(ctx context.Context) *redis.Client {
 	log.Println(pong)
 
 	return rdb
+}
+
+func mustNew(ctx context.Context) *redis.Client {
+	return mustNewDB(ctx, 0)
 }
 
 func Example_quick_start() {
