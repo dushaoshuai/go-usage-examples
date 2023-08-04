@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package foo;
+
+option go_package = "github.com/dushaoshuai/go-usage-examples/protobuf/proto";
+
+message foo {
+    optional uint64 optional_field = 1;
+}
