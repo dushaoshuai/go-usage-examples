@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SRC_DIR=./protobuf
+SRC_DIR=.
 DST_DIR=$SRC_DIR
 
 protoc --proto_path=$SRC_DIR \
