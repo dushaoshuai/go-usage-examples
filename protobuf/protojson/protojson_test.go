@@ -9,7 +9,7 @@ import (
 
 	protobuf "google.golang.org/protobuf/proto"
 
-	"api-examples/protobuf/protojson/proto"
+	"github.com/dushaoshuai/go-usage-examples/protobuf/protojson/proto"
 )
 
 func Example_protojson_Marshal_and_Unmarshal() {
