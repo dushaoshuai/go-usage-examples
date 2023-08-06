@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package cancel;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/dushaoshuai/api-examples/grpc/cancellation/proto";
+
+service Cancel {
+  rpc IWillCancel(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
