@@ -3,26 +3,44 @@ package redis_test
 import (
 	"context"
 	"fmt"
+	"log"
+	"net"
+	"time"
 
 	"github.com/redis/go-redis/v9"
 )
 
-func Example_quick_start() {
-	ctx := context.Background()
+func defaultCtx() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), 5*time.Second)
+}
 
+func mustNewDB(ctx context.Context, DB int) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     net.JoinHostPort("127.0.0.1", "6379"),
 		Password: "", // no password set
-		DB:       0,  // use default DB
+		DB:       DB,
 	})
 
 	pong, err := rdb.Ping(ctx).Result()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(pong)
+	log.Println(pong)
 
-	err = rdb.Set(ctx, "key", "value", 0).Err()
+	return rdb
+}
+
+func mustNew(ctx context.Context) *redis.Client {
+	return mustNewDB(ctx, 0)
+}
+
+func Example_quick_start() {
+	ctx, cancel := defaultCtx()
+	defer cancel()
+
+	rdb := mustNew(ctx)
+
+	err := rdb.Set(ctx, "key", "value", 0).Err()
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +61,6 @@ func Example_quick_start() {
 	}
 
 	// Output:
-	// PONG
 	// key value
 	// key2 does not exist
 }
