@@ -8,7 +8,7 @@ require (
 	github.com/dushaoshuai/goloop v0.1.2
 	github.com/go-playground/validator/v10 v10.15.1
 	github.com/golang/mock v1.6.0
-	github.com/nyaruka/phonenumbers v1.1.7
+	github.com/nyaruka/phonenumbers v1.1.8
 	github.com/ohler55/ojg v1.19.2
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.1.0
