@@ -1,26 +1,15 @@
 package channel_test
 
-// It is an error if ch is a receive-only channel.
-func Example_close_a_receive_only_chan() {
-	var ch <-chan int = make(chan int)
-	// invalid operation: cannot close receive-only channel ch (variable of type <-chan int)
+import "fmt"
+
+func Example_ok() {
+	ch := make(chan int, 1)
+	ch <- 100
 	close(ch)
 
-	// Output:
-}
-
-func Example_send_to_a_receive_only_chan() {
-	var ch <-chan int = make(chan int)
-	// invalid operation: cannot send to receive-only channel ch (variable of type <-chan int)
-	ch <- 8
+	x, ok := <-ch
+	fmt.Println(x, ok)
 
 	// Output:
-}
-
-func Example_receive_from_a_send_only_chan() {
-	var ch chan<- int = make(chan int)
-	// invalid operation: cannot receive from send-only channel ch (variable of type chan<- int)
-	<-ch
-
-	// Output:
+	// 100 true
 }
