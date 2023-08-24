@@ -22,6 +22,8 @@ func main() {
 	// closure
 	incrm := returnClosure()
 	incrm()
+
+	returnIface()
 }
 
 // 返回局部变量指针
@@ -50,12 +52,18 @@ func returnClosure() func() int {
 	}
 }
 
+func returnIface() any {
+	x := 10
+	return x
+}
+
 // $ go build -gcflags '-m -l' escape.go
 // # command-line-arguments
-// ./escape.go:29:2: moved to heap: a
-// ./escape.go:41:17: leaking param: f
-// ./escape.go:46:2: moved to heap: m
-// ./escape.go:47:9: func literal escapes to heap
+// ./escape.go:31:2: moved to heap: a
+// ./escape.go:43:17: leaking param: f
+// ./escape.go:48:2: moved to heap: m
+// ./escape.go:49:9: func literal escapes to heap
+// ./escape.go:57:9: x escapes to heap
 // ./escape.go:12:13: name escapes to heap
 // ./escape.go:15:15: make([]int, 1024 * 1024) escapes to heap
 // ./escape.go:19:15: make([]int, l) escapes to heap
