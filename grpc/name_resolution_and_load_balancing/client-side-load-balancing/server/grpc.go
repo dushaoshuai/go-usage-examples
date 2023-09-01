@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/dushaoshuai/go-usage-examples/grpc/name_resolution_and_load_balancing/k8s_headless_Service_and_DNS_name_resolution/common"
+	"github.com/dushaoshuai/go-usage-examples/grpc/name_resolution_and_load_balancing/client-side-load-balancing/common"
 	"github.com/dushaoshuai/go-usage-examples/grpc/sayhello"
 )
 

@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	sayhelloClient sayhello.HelloClient
+	DNSDiscoveryClient sayhello.HelloClient
 )
 
 func init() {
@@ -21,11 +21,11 @@ func init() {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithDefaultServiceConfig(`{"loadBalancingConfig": [{"round_robin":{}}]}`),
 	}
-	conn, err := grpc.Dial("dns:///say-hello", dialOpts...)
+	conn, err := grpc.Dial("dns:///headless-say-hello-svc.default", dialOpts...)
 	if err != nil {
 		panic(err)
 	}
-	sayhelloClient = sayhello.NewHelloClient(conn)
+	DNSDiscoveryClient = sayhello.NewHelloClient(conn)
 }
 
 type sayHelloResp struct {
@@ -34,12 +34,12 @@ type sayHelloResp struct {
 	Error  string
 }
 
-func sayHello(name string) sayHelloResp {
+func DNSDiscoverySayHello(name string) sayHelloResp {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	var header metadata.MD
-	resp, err := sayhelloClient.SayHello(ctx, &sayhello.HelloReq{Name: name}, grpc.Header(&header))
+	resp, err := DNSDiscoveryClient.SayHello(ctx, &sayhello.HelloReq{Name: name}, grpc.Header(&header))
 	return sayHelloResp{
 		Msg:    resp.GetMessage(),
 		Server: localmetadata.GetServerIP(header),
