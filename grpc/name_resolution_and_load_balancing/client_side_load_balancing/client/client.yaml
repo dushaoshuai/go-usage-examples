@@ -31,6 +31,7 @@ metadata:
   name: grpc-client-side-lb-client
   namespace: default
 spec:
+  type: NodePort
   selector:
     app: grpc-client-side-lb-client
   ports:
