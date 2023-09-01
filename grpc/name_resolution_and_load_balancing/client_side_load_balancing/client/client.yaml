@@ -4,6 +4,7 @@ metadata:
   name: grpc-client-side-lb-client
   labels:
     app: grpc-client-side-lb-client
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -17,5 +18,18 @@ spec:
       containers:
         - name: grpc-client-side-lb-client
           image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-client
-          ports:
-            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-client-side-lb-client
+  namespace: default
+spec:
+  selector:
+    app: grpc-client-side-lb-client
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
