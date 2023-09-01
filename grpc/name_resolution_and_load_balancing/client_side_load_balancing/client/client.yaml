@@ -18,6 +18,8 @@ spec:
       containers:
         - name: grpc-client-side-lb-client
           image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-client
+      imagePullSecrets:
+        - name: acr-zhangjiakou
 
 ---
 
