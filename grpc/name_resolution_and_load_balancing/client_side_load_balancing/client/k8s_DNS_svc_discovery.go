@@ -21,7 +21,7 @@ func init() {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithDefaultServiceConfig(`{"loadBalancingConfig": [{"round_robin":{}}]}`),
 	}
-	conn, err := grpc.Dial("dns:///headless-say-hello-svc.default", dialOpts...)
+	conn, err := grpc.Dial("dns:///grpc-client-side-lb-headless-svc.default", dialOpts...)
 	if err != nil {
 		panic(err)
 	}
