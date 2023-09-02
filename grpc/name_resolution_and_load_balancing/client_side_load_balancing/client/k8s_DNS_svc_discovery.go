@@ -46,6 +46,11 @@ func DNSDiscoverySayHello(name string) sayHelloResp {
 	return sayHelloResp{
 		Msg:    resp.GetMessage(),
 		Server: localmetadata.GetServerIP(header),
-		Error:  err.Error(),
+		Error: func() string {
+			if err != nil {
+				return err.Error()
+			}
+			return "nil"
+		}(),
 	}
 }
