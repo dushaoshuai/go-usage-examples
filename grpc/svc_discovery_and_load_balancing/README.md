@@ -35,3 +35,8 @@ https://github.com/grpc/grpc-go/issues/3170#issuecomment-552517779
 * [K8S容器编排之Headless浅谈](https://zhuanlan.zhihu.com/p/54153164)
 * [grpc-go/examples/features/name_resolving/](https://github.com/grpc/grpc-go/tree/master/examples/features/name_resolving)
 
+
+* [grpc Guides](https://grpc.io/docs/guides/)
+* [grpc Blog](https://grpc.io/blog/)
+* [grpc-go/examples](https://github.com/grpc/grpc-go/tree/master/examples)
+* [grpc-go/Documentation](https://github.com/grpc/grpc-go/tree/master/Documentation)
