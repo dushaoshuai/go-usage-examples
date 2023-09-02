@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc/metadata"
 
 	localmetadata "github.com/dushaoshuai/go-usage-examples/grpc/metadata"
-	"github.com/dushaoshuai/go-usage-examples/grpc/name_resolution_and_load_balancing/client_side_load_balancing/common"
 	"github.com/dushaoshuai/go-usage-examples/grpc/sayhello"
+	"github.com/dushaoshuai/go-usage-examples/grpc/svc_discovery_and_load_balancing/client_side_load_balancing/common"
 )
 
 var (
