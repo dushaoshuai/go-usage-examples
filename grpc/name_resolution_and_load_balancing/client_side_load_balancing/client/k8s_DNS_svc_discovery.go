@@ -32,26 +32,14 @@ func init() {
 	DNSDiscoveryClient = sayhello.NewHelloClient(conn)
 }
 
-type sayHelloResp struct {
-	Msg    string
-	Server string // server IP
-	Error  string
-}
-
-func DNSDiscoverySayHello(name string) sayHelloResp {
+func DNSDiscoverySayHello() string {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	var header metadata.MD
-	resp, err := DNSDiscoveryClient.SayHello(ctx, &sayhello.HelloReq{Name: name}, grpc.Header(&header))
-	return sayHelloResp{
-		Msg:    resp.GetMessage(),
-		Server: localmetadata.GetServerIP(header),
-		Error: func() string {
-			if err != nil {
-				return err.Error()
-			}
-			return "nil"
-		}(),
+	_, err := DNSDiscoveryClient.SayHello(ctx, &sayhello.HelloReq{}, grpc.Header(&header))
+	if err != nil {
+		return err.Error()
 	}
+	return "hello response from " + localmetadata.GetServerIP(header) + "\n"
 }

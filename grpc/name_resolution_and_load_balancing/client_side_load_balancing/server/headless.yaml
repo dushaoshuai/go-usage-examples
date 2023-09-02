@@ -19,7 +19,7 @@ spec:
         - name: grpc-client-side-lb-headless-svc
           command:
             - /shaouai/bin/server_bin
-          image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-server:git.bf1a79e82318e651e796642f9ceea22d6dbd8787
+          image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-server:git.2d70c7d68e29031b7c6a47d965dc752d82c87edf
       imagePullSecrets:
         - name: acr-zhangjiakou
 
@@ -33,4 +33,5 @@ metadata:
 spec:
   selector:
     app: grpc-client-side-lb-headless-svc
+  type: ClusterIP
   clusterIP: None

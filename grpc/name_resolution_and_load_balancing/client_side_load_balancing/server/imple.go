@@ -13,7 +13,5 @@ type helloServer struct {
 
 func (helloServer) SayHello(ctx context.Context, in *sayhello.HelloReq) (*sayhello.HelloResp, error) {
 	localmetadata.SendServerIP(ctx)
-	return &sayhello.HelloResp{
-		Message: "hello " + in.GetName(),
-	}, nil
+	return &sayhello.HelloResp{}, nil
 }
