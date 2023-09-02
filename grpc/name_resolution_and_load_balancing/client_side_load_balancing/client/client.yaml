@@ -19,7 +19,7 @@ spec:
         - name: grpc-client-side-lb-client
           command:
             - /shaouai/bin/client_bin
-          image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-client:git.6b424853db43034b0729a3dcc30d24ed4544ee39
+          image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-client:git.2ce0feee86da51493835910347dd314130e20646
       imagePullSecrets:
         - name: acr-zhangjiakou
 
