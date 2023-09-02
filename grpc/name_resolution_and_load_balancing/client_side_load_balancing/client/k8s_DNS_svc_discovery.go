@@ -21,6 +21,7 @@ var (
 func init() {
 	dialOpts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithDisableServiceConfig(),
 		grpc.WithDefaultServiceConfig(`{"loadBalancingConfig": [{"round_robin":{}}]}`),
 	}
 	target := fmt.Sprintf("%s:///%s:%d", "dns", "grpc-client-side-lb-headless-svc", common.SayHelloSvcPort)
