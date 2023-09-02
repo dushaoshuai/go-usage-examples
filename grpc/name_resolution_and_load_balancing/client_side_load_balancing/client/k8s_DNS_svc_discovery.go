@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"google.golang.org/grpc"
@@ -9,6 +10,7 @@ import (
 	"google.golang.org/grpc/metadata"
 
 	localmetadata "github.com/dushaoshuai/go-usage-examples/grpc/metadata"
+	"github.com/dushaoshuai/go-usage-examples/grpc/name_resolution_and_load_balancing/client_side_load_balancing/common"
 	"github.com/dushaoshuai/go-usage-examples/grpc/sayhello"
 )
 
@@ -21,7 +23,8 @@ func init() {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithDefaultServiceConfig(`{"loadBalancingConfig": [{"round_robin":{}}]}`),
 	}
-	conn, err := grpc.Dial("dns:///grpc-client-side-lb-headless-svc.default", dialOpts...)
+	target := fmt.Sprintf("%s:///%s:%d", "dns", "grpc-client-side-lb-headless-svc", common.SayHelloSvcPort)
+	conn, err := grpc.Dial(target, dialOpts...)
 	if err != nil {
 		panic(err)
 	}
