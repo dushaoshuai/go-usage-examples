@@ -45,7 +45,7 @@ gRPC 域名解析和服务发现有关。gRPC 提供了若干种名字解析机�
 
 将 Service 的 `.spec.clusterIP` 设置为 `None`, 定义 Cluster + Headless Service。对 Headless Service 的 DNS 解析会返回 Service 所代理的 Pod 的 IP 地址的集合。这样，gRPC 客户端可以和所有的 Pod 建立连接。
 
-grpc-go 的 DNS 解析机制为：
+grpc-go 的 [DNS 解析机制](https://github.com/grpc/grpc-go/blob/8eb4ac4c1514c190ee0b5d01a91c63218dac93c0/internal/resolver/dns/dns_resolver.go#L214C34-L214C34)为：
 
 * 两次解析之间最少间隔 30 秒
 * 有连接关闭或失败时才触发解析
@@ -55,7 +55,7 @@ grpc-go 的 DNS 解析机制为：
 2. 服务端扩容时，无法触发客户端的解析，客户端无法感知 Pod 新副本的存在
 3. Service 要定义成 Headless Service，造成一定的使用限制
 
-针对第二个问题的[解决方案](https://github.com/grpc/grpc-go/issues/3170#issuecomment-552517779)是，设置连接的最大存活时间为 1 分钟，连接关闭时，触发客户端进行 DNS 解析。但是这里还是有问题，因为比较难确定一个比较合适的连接最大存活时间。
+针对第二个问题的[解决方案](https://github.com/grpc/grpc-go/issues/3170#issuecomment-552517779)是，设置连接的最大存活时间（如 1 分钟），连接关闭时，触发客户端进行 DNS 解析。但是这里还是有问题，因为比较难确定一个比较合适的连接最大存活时间。
 
 ## k8s API 服务发现
 
