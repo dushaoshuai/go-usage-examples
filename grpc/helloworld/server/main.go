@@ -1,12 +1,13 @@
 package main
 
 import (
-	"api-examples/grpc/helloworld/proto"
 	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net"
+
+	"github.com/dushaoshuai/go-usage-examples/grpc/helloworld/proto"
 
 	"google.golang.org/grpc"
 )

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-client-side-lb-client
+  labels:
+    app: grpc-client-side-lb-client
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-client-side-lb-client
+  template:
+    metadata:
+      labels:
+        app: grpc-client-side-lb-client
+    spec:
+      containers:
+        - name: grpc-client-side-lb-client
+          command:
+            - /shaouai/bin/client_bin
+          image: registry-vpc.cn-zhangjiakou.aliyuncs.com/shaouai/grpc-client-side-lb-client:git.59df2c1bcad4c8fee47b9df1733d4aadd2395181
+      imagePullSecrets:
+        - name: acr-zhangjiakou
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-client-side-lb-client
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: grpc-client-side-lb-client
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
