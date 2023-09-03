@@ -31,27 +31,39 @@ gRPC 域名解析和服务发现有关。gRPC 提供了若干种名字解析机�
 
 自定义解析器的机制详见[这里](https://grpc.io/docs/guides/custom-name-resolution/#life-of-a-target-string)。使用 [grpc-go](https://pkg.go.dev/google.golang.org/grpc) 时，需要使用 [resolver](https://pkg.go.dev/google.golang.org/grpc@v1.57.0/resolver) 包：
 
-1. 使用 resolver.Register() 函数注册一个自定义的 resolver.Builder 
-2. resolver.Builder 的 Build() 方法返回一个自定义的 resolver.Resolver
-3. resolver.Resolver watch 目标服务的更新，包括地址更新和 service config 更新
+1. 使用 `resolver.Register()` 函数注册一个自定义的 `resolver.Builder`
+2. `resolver.Builder` 的 `Build()` 方法返回一个自定义的 `resolver.Resolver`
+3. `resolver.Resolver` watch 目标服务的更新，包括地址更新和 `service config` 更新
 
 # 客户端负载均衡
 
 ## DNS 服务发现
 
 * 客户端负载均衡
-* k8s Headless Service
+* k8s Cluster + [Headless](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) Service
 * DNS 解析器
 
-https://github.com/grpc/grpc-go/issues/3170#issuecomment-552517779
+将 Service 的 `.spec.clusterIP` 设置为 `None`, 定义 Cluster + Headless Service。对 Headless Service 的 DNS 解析会返回 Service 所代理的 Pod 的 IP 地址的集合。这样，gRPC 客户端可以和所有的 Pod 建立连接。
+
+grpc-go 的 DNS 解析机制为：
+
+* 两次解析之间最少间隔 30 秒
+* 有连接关闭或失败时才触发解析
+
+这样带来的问题是：
+1. 两次解析之间的时间间隔较大
+2. 服务端扩容时，无法触发客户端的解析，客户端无法感知 Pod 新副本的存在
+3. Service 要定义成 Headless Service，造成一定的使用限制
+
+针对第二个问题的[解决方案](https://github.com/grpc/grpc-go/issues/3170#issuecomment-552517779)是，设置连接的最大存活时间为 1 分钟，连接关闭时，触发客户端进行 DNS 解析。但是这里还是有问题，因为比较难确定一个比较合适的连接最大存活时间。
 
 ## k8s API 服务发现
 
-// TODO.
+TBD
 
 # Proxy 负载均衡（也叫服务端负载均衡）
 
-// TODO.
+TBD
 
 # 参见
 
