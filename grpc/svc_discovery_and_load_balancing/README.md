@@ -1,6 +1,14 @@
-k8s 服务发现和 gRPC 负载均衡
+k8s 服务发现、gRPC 域名解析、gRPC 负载均衡
 
-# gRPC 负载均衡的问题
+# gRPC 负载均衡问题
+
+gRPC 基于 HTTP/2。
+
+对比 HTTP/2 和 HTTP/1.1，两者都使用 TCP 长连接。因为 HTTP/2 有多路复用的特性，使用 HTTP/2 只需要建立一个 TCP 连接。而使用 HTTP/1.1 时，需要建立多个 TCP 连接才能进行并发请求。
+
+HTTP/2 使用 TCP 长连接和多路复用的特性，导致使用 ClusterIP 类型的 k8s Service 时，gRPC 客户端通过 Service 的负载均衡（Round Robin）和 Sericve 所代理的某个 Pod 建立长连接，失去了负载均衡的作用。
+
+为了解决这个问题，gRPC 客户端需要和所有的 Pod 都建立连接，在这些连接间进行请求级别的负载均衡。
 
 # 客户端负载均衡
 
