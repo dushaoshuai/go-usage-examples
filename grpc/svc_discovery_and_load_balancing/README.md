@@ -10,6 +10,31 @@ HTTP/2 使用 TCP 长连接和多路复用的特性，导致使用 ClusterIP 类
 
 为了解决这个问题，gRPC 客户端需要和所有的 Pod 都建立连接，在这些连接间进行请求级别的负载均衡。
 
+# gRPC 域名解析
+
+gRPC 域名解析和服务发现有关。gRPC 提供了若干种名字解析机制[^1][^2]：
+
+[^1]: https://grpc.io/docs/guides/custom-name-resolution/#:~:text=various%20other%20name%20resolution%20mechanisms
+[^2]: https://github.com/grpc/grpc/blob/master/doc/naming.md
+
+* DNS（默认）：service/name 或者 dns:///service/name
+* Unix Domain Socket：uds:///run/containerd/containerd.sock
+* xDS：xds:///wallet.grpcwallet.io
+* IPv4：ipv4:198.51.100.123:50051
+* [自定义解析器](https://grpc.io/docs/guides/custom-name-resolution/#custom-name-resolvers)
+
+解析无 scheme 的服务名（如 my-service）时，grpc 客户端默认使用 DNS，否则，根据 scheme 选择对应的域名解析器。
+
+用户可以自定义解析器，例如，scheme 为 `my-resolver` 的解析器，可以解析以 `my-resolver:` 开头的服务名，如 `my-resolver:///my-service`。使用自定义解析器可以基于 watch 持续更新服务端信息。
+
+# gRPC 自定义域名解析器
+
+自定义解析器的机制详见[这里](https://grpc.io/docs/guides/custom-name-resolution/#life-of-a-target-string)。使用 [grpc-go](https://pkg.go.dev/google.golang.org/grpc) 时，需要使用 [resolver](https://pkg.go.dev/google.golang.org/grpc@v1.57.0/resolver) 包：
+
+1. 使用 resolver.Register() 函数注册一个自定义的 resolver.Builder 
+2. resolver.Builder 的 Build() 方法返回一个自定义的 resolver.Resolver
+3. resolver.Resolver watch 目标服务的更新，包括地址更新和 service config 更新
+
 # 客户端负载均衡
 
 ## DNS 服务发现
