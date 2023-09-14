@@ -21,13 +21,14 @@ hash 中存储的 field-value 对定义为：
 
 使用 `HMGET` 进行查询。
 
+通过消息队列，使用 `HSET` 有序添加/更新 k-v 对。
+
 ## 支持[某商品购买过]筛选
 
-每个商品对应一个 redis hash, redis key 为 xxx:product:{{product_id}}，其中 {{product_id}} 为商品 ID。
+每个商品对应一个 redis set, redis key 为 xxx:product:{{product_id}}，其中 {{product_id}} 为商品 ID。
 
-hash 中存储的 field-value 对定义为：
+set 中存储的 member 为用户 ID.
 
-* field：用户 ID
-* value: 空字符串
+使用 `SMISMEMBER` 进行查询。
 
-使用 `HMGET` 进行查询。
+使用 `SADD` 添加/更新，不用保证顺序性。
