@@ -7,7 +7,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.3.1
 	github.com/dushaoshuai/goloop v0.1.2
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-playground/validator/v10 v10.15.4
+	github.com/go-playground/validator/v10 v10.15.5
 	github.com/golang/mock v1.6.0
 	github.com/nyaruka/phonenumbers v1.1.8
 	github.com/ohler55/ojg v1.19.3
