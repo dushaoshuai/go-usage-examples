@@ -22,7 +22,7 @@ require (
 	go.mongodb.org/mongo-driver v1.12.1
 	go.uber.org/goleak v1.2.1
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
-	golang.org/x/sync v0.3.0
+	golang.org/x/sync v0.4.0
 	golang.org/x/text v0.13.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d
 	google.golang.org/grpc v1.58.2
