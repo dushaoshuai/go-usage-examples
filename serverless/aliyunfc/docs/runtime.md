@@ -4,7 +4,7 @@
 
 运行时即函数执行环境，提供管理、运行函数的安全、隔离的环境。函数计算调用函数时，会分配一个执行环境。
 
-每个运行时都会基于一个 Linux 发行版本制作，目前支持 Debian 9（Stretch）和 Debian 10（Buster）。
+每个运行时都会基于一个 Linux 发行版本制作，目前支持 Debian 9 和 Debian 10。
 
 函数计算提供了内置运行时、自定义运行时（Custom Runtime）和自定义容器运行时（Custom Container），以满足不同需求：
 
