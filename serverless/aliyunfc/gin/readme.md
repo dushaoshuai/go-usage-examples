@@ -29,3 +29,5 @@
 
 [Serverless Devs](https://docs.serverless-devs.com/serverless-devs/readme)
 [fc](https://docs.serverless-devs.com/fc/readme)
+
+批量处理事件时，如果某个事件出错，怎么办？
