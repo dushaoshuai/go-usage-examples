@@ -19,6 +19,12 @@
 
 TBD
 
+# 定制运行时环境
+
+## 时区定制
+
+默认是 UTC 时间，也就是 0 时区，设置环境变量 TZ 的值为 Asia/Shanghai 后，时区被修改为东 8 区，即北京时间。
+
 # 参见
 
 * [函数运行时选型](https://help.aliyun.com/zh/fc/product-overview/function-runtime-selection)
