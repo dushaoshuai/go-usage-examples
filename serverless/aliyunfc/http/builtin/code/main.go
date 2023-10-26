@@ -2,28 +2,32 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/aliyun/fc-runtime-go-sdk/fc"
 )
 
 func HandleHttpRequest(_ context.Context, w http.ResponseWriter, req *http.Request) error {
-	t := time.Now().Format(time.DateTime)
-	t += "\n"
+	resp := []string{
+		time.Now().Format(time.DateTime),
+		"Request Method: " + req.Method,
+	}
+	w.Write([]byte(strings.Join(resp, "\n")))
+	w.Write([]byte{'\n'})
 
 	body, err := io.ReadAll(req.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Header().Add("Content-Type", "text/plain")
-		w.Write([]byte(t + err.Error()))
+		w.Write([]byte(err.Error()))
 		return nil
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Add("Content-Type", "text/plain")
-	w.Write([]byte(t + fmt.Sprintf("Hi，%s!\n", body)))
+	w.Write(body)
 	return nil
 }
 

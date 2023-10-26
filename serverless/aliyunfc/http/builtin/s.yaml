@@ -6,7 +6,7 @@ services: # 应用所包含的服务，可以包含多个
   http-handler-builtin-runtime-example-service: # 服务/模块名称
     component: devsapp/fc # 组件名称，这里使用阿里云函数计算（FC）组件
     actions: # 自定义执行逻辑
-      pre-deploy: # 在deploy之前运行
+      pre-deploy: # 在 deploy 之前运行，把 main.go 编译为可执行的二进制文件
         - run: go mod tidy
           path: ./code
         - run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main main.go
