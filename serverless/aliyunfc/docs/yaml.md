@@ -1,0 +1,2 @@
+codeUri: # 代码位置
+位于此位置的文件会被拷贝到容器的 /code 目录下（如果基础镜像是 custom.debian10）
