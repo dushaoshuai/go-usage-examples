@@ -5,40 +5,40 @@ Kafka 触发器
 消息队列 Kafka ----> 事件总线 EventBridge 事件流 ----> 函数计算
 
 ```yaml
-      triggers: # 触发器配置
-        - name: example-Kafka-trigger # 触发器名称
-          type: eventbridge # 触发器类型
-          qualifier: LATEST # 触发器函数的版本或者别名，默认 LATEST
-          config: # 触发器配置
-            triggerEnable: true # 触发器禁用开关
-            asyncInvocationType: false # 触发器调用函数的方式。目前支持同步调用以及异步调用。
-            eventSourceConfig: # 事件源配置
-              eventSourceType: Kafka # 触发器事件源类型
-              eventSourceParameters: # 自定义事件源参数
-                sourceKafkaParameters: # 事件源为消息队列 Kafka 时的自定义参数配置
-                  RegionId: cn-shanghai # 消息队列 Kafka 版的实例所属地域
-                  InstanceId: "xxx" # 消息队列 Kafka 版的实例 ID，需要提前创建
-                  Topic: "xxx" # 消息队列 Kafka 版的 Topic 名称，需要提前创建
-                  ConsumerGroup: "xxx" # 消息队列 Kafka 版的资源组 ID，需要提前创建
-                  OffsetReset: "earliest" # 消息的消费位点，可选值有 lastest 和 earliest，分别表示最新位点以及最早位点
-                  Network: "Default" # 所用网络类型，可选值有 PublicNetwork 以及 Default，前者需选择另外的专有网络VPC、交换机和安全组，后者表示默认使用部署Kafka实例时选择的VPC ID和vSwitch ID。
-            eventRuleFilterPattern: "{}" # 事件模式，JSON 格式
-            eventSinkConfig: # 事件目标配置
-              deliveryOption: # 事件投递参数
-                mode: event-streaming # 事件投递模型，与 runOptions 中的 mode 参数含义相同，但是优先级更低
-                eventSchema: CloudEvents # 指定函数入口参数，有两种取值。CloudEvents: 以通用格式描述事件数据的规范，RawData: 只投递 CloudEvents 中 $data 引用的数据。
-                concurrency: 20 # Kafka 投递到函数计算的并发最大值，即函数实例的最大数量
-            runOptions: # 触发器运行时参数
-              mode: event-streaming # 事件投递模型，可选值有 event-driven 以及 event-streaming。事件源为 Kafka 时，只支持 event-streaming 模式。runOptions 中参数只有在 mode 为 event-streaming 时才有效。
-              maximumTasks: 1 # 并发消费者数量，只有在指定 Kafka 事源时该参数有效
-              errorsTolerance: 'ALL' # 容错策略，即发生错误时是否选择容错。ALL:允许容错；NONE:禁止容错。
-              retryStrategy: # 事件推送失败时的重试策略相关参数
-                PushRetryStrategy: 'BACKOFF_RETRY' # 事件推送失败时的重试策略。BACKOFF_RETRY: 退避重试策略。EXPONENTIAL_DECAY_RETRY: 指数衰减重试。
-              deadLetterQueue: # 死信队列配置，若配置了该配置，超过重试策略后的事件将被放入该队列中
-                Arn: acs:mns:cn-qingdao:123:/queues/queueName
-              batchWindow: # 调用函数时的批处理参数
-                CountBasedWindow: 1 # 一次调用函数发送的最大批量消息条数，当积压的消息数量到达设定值时才会发送请求，取值范围为 [1, 10000]。
-                TimeBasedWindow: 0 # 调用函数的间隔时间，系统每到间隔时间点会将消息聚合后发给函数计算，取值范围为 [0,15]，单位秒。0 秒表示无等待时间，直接投递。
+triggers: # 触发器配置
+  - name: example-Kafka-trigger # 触发器名称
+    type: eventbridge # 触发器类型
+    qualifier: LATEST # 触发器函数的版本或者别名，默认 LATEST
+    config: # 触发器配置
+      triggerEnable: true # 触发器禁用开关
+      asyncInvocationType: false # 触发器调用函数的方式。目前支持同步调用以及异步调用。
+      eventSourceConfig: # 事件源配置
+        eventSourceType: Kafka # 触发器事件源类型
+        eventSourceParameters: # 自定义事件源参数
+          sourceKafkaParameters: # 事件源为消息队列 Kafka 时的自定义参数配置
+            RegionId: cn-shanghai # 消息队列 Kafka 版的实例所属地域
+            InstanceId: "xxx" # 消息队列 Kafka 版的实例 ID，需要提前创建
+            Topic: "xxx" # 消息队列 Kafka 版的 Topic 名称，需要提前创建
+            ConsumerGroup: "xxx" # 消息队列 Kafka 版的资源组 ID，需要提前创建
+            OffsetReset: "earliest" # 消息的消费位点，可选值有 lastest 和 earliest，分别表示最新位点以及最早位点
+            Network: "Default" # 所用网络类型，可选值有 PublicNetwork 以及 Default，前者需选择另外的专有网络VPC、交换机和安全组，后者表示默认使用部署Kafka实例时选择的VPC ID和vSwitch ID。
+      eventRuleFilterPattern: "{}" # 事件模式，JSON 格式
+      eventSinkConfig: # 事件目标配置
+        deliveryOption: # 事件投递参数
+          mode: event-streaming # 事件投递模型，与 runOptions 中的 mode 参数含义相同，但是优先级更低
+          eventSchema: CloudEvents # 指定函数入口参数，有两种取值。CloudEvents: 以通用格式描述事件数据的规范，RawData: 只投递 CloudEvents 中 $data 引用的数据。
+          concurrency: 20 # Kafka 投递到函数计算的并发最大值，即函数实例的最大数量
+      runOptions: # 触发器运行时参数
+        mode: event-streaming # 事件投递模型，可选值有 event-driven 以及 event-streaming。事件源为 Kafka 时，只支持 event-streaming 模式。runOptions 中参数只有在 mode 为 event-streaming 时才有效。
+        maximumTasks: 1 # 并发消费者数量，只有在指定 Kafka 事源时该参数有效
+        errorsTolerance: 'ALL' # 容错策略，即发生错误时是否选择容错。ALL:允许容错；NONE:禁止容错。
+        retryStrategy: # 事件推送失败时的重试策略相关参数
+          PushRetryStrategy: 'BACKOFF_RETRY' # 事件推送失败时的重试策略。BACKOFF_RETRY: 退避重试策略。EXPONENTIAL_DECAY_RETRY: 指数衰减重试。
+        deadLetterQueue: # 死信队列配置，若配置了该配置，超过重试策略后的事件将被放入该队列中
+          Arn: acs:mns:cn-qingdao:123:/queues/queueName
+        batchWindow: # 调用函数时的批处理参数
+          CountBasedWindow: 1 # 一次调用函数发送的最大批量消息条数，当积压的消息数量到达设定值时才会发送请求，取值范围为 [1, 10000]。
+          TimeBasedWindow: 0 # 调用函数的间隔时间，系统每到间隔时间点会将消息聚合后发给函数计算，取值范围为 [0,15]，单位秒。0 秒表示无等待时间，直接投递。
 ```
 
 * 关于可配置的参数，见 [triggers 字段](https://docs.serverless-devs.com/fc/yaml/triggers)
