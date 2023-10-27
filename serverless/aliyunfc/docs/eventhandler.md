@@ -6,8 +6,6 @@
 
 本文关注 Event Handler。编程语言使用 Go。
 
-## 代码开发
-
 # Event Handler
 
 ## 内置运行时
@@ -110,6 +108,9 @@ func main() {
 	fc.Start(HandleRequest)
 }
 ```
+
+* handler 要遵循一定的签名，关于有效的签名，见 [Event Handler 签名](https://help.aliyun.com/zh/fc/event-handlers-6#section-jto-5ty-sh3)。
+* 这里的 handler `HandleRequest` 的签名是 `func (context.Context, InputType) (OutputType, error)`。其中 `InputType` 和 `OutputType` 必须与 encoding/json 标准库兼容。函数计算会使用 `json.Unmarshal` 方法对传入的 `InputType` 进行反序列化，使用 `json.Marshal` 方法对返回的 `OutputType` 进行序列化。
 
 ### 本地调试
 
