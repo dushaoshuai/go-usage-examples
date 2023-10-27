@@ -57,7 +57,7 @@ services: # 应用所包含的服务，可以包含多个
       function: # 函数配置
         name: http-handler-builtin-runtime-example-function # function 名称
         description: "http handler builtin runtime example function" # function 的简短描述
-        codeUri: ./code # 代码位置
+        codeUri: ./code # 代码位置，目录下的内容是最终的交付物
         handler: main # function 执行的入口，具体格式和语言相关
         memorySize: 128 # function 的内存规格
         runtime: go1 # 运行时
@@ -87,6 +87,8 @@ services: # 应用所包含的服务，可以包含多个
         - domainName: auto # 域名，如果是 auto 取值，系统则会默认分配域名
           protocol: HTTP # 协议，取值：HTTP, HTTP,HTTPS
 ```
+
+需要注意的是，`codeUri` 目录中的内容是最终的交付物，函数计算最终会把此目录下的内容拷贝到容器 `/code` 目录下。使用 Go 语言时的交付物是一个二进制可执行文件，因此我们要确保这个二进制文件出现在 `codeUri` 指定的目录中，而且文件名是 `handler` 所指定的值。这里通过 `pre-deploy` 指定部署之前的 actions，在部署之前进行编译。
 
 main.go 内容如下:
 
@@ -131,42 +133,158 @@ func main() {
 
 ### 本地调试
 
-可以使用 `s local start` 命令把 HTTP 函数部署在本地，方便调试。但是此命令并不会执行 pre-deploy 中的 action，把 Go
-程序编译为二进制可执行文件。
+可以使用 `s local start` 命令把 HTTP 函数部署在本地，方便调试。但是此命令并不会执行 pre-deploy 中的 actions。
 
-因为使用 Go 语言时的交付物是一个二进制可执行文件，因此要先编译。我尝试了执行 `s build` 命令，发现其也不会执行 pre-deploy 中的
-action，似乎 Go 语言并不在 `s build` 命令的考虑中。这里只能自己编译。
+我尝试了 `s build` 命令，发现其也不会执行 pre-deploy，可能 Go 语言并不在 `s build` 命令的考虑中。这里只能自己编译（省略部分输出结果，用 ... 代替）：
 
 ```shell
 $ GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o code/main code/main.go
 $ s local start
-✔ devsapp_fc-local-invoke.zip file decompression completed
-[2023-10-26 23:18:36] [INFO] [FC-LOCAL-INVOKE] - Using trigger for start: 
-name: httptrigger
-type: http
-qualifier: LATEST
-config:
-  authType: anonymous
-  disableURLInternet: false
-  methods:
-    - GET
-    - POST
-
-The local command for go1 runtime is in public test. If you have any questions, welcome to join DingTalk Group: 33947367
+...
 [2023-10-26 23:18:36] [INFO] [FC-LOCAL-INVOKE] - CustomDomain auto of http-handler-builtin-runtime-example-service/http-handler-builtin-runtime-example-function was registered
-        url: http://localhost:7648/
+        url: http://localhost:7342/
         methods: GET,POST
         authType: anonymous
-
-Tips for next step
-======================
-* Deploy Resources: s deploy
-http-handler-builtin-runtime-example-service: 
-  status: succeed
-function compute app listening on port 7648!
+...
+function compute app listening on port 7342!
 ```
 
-使用 `curl` 对命令进行调试：
+使用 `curl` 命令进行本地请求：
+
+```shell
+$  curl http://localhost:7342/              
+2023-10-27 09:31:05
+Request Method: GET
+$
+$ curl -X POST -d 'test POST body' http://localhost:7342/ 
+2023-10-27 09:32:25
+Request Method: POST
+test POST body
+```
+
+第一次请求时，可能需要拉取 go1 运行时的镜像并且创建容器，速度可能会慢点。
+
+### 部署
+
+本地调试好后，可以将函数部署到线上了。
+
+这里介绍使用 `s` 命令进行部署。因为涉及到本地和远端通信，要先用 `s config` 命令[配置密钥](https://docs.serverless-devs.com/serverless-devs/command/config)。
+
+使用 `s deploy --use-local -y` 命令部署（省略部分输出结果，用 ... 代替）：
+
+```shell
+$ s deploy --use-local -y   
+[2023-10-27 09:46:38] [INFO] [S-CORE] - Start the pre-action
+[2023-10-27 09:46:38] [INFO] [S-CORE] - Action: go mod tidy
+[2023-10-27 09:46:39] [INFO] [S-CORE] - Action: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main main.go
+[2023-10-27 09:46:39] [INFO] [S-CORE] - End the pre-action
+...
+Tips for next step
+======================
+* Display information of the deployed resource: s info
+* Invoke remote function: s invoke
+...
+  url: 
+    system_url:          https://http-hafunction-http-ha-service-syfmwcasfs.cn-zhangjiakou.fcapp.run
+    system_intranet_url: https://http-hafunction-http-ha-service-syfmwcasfs.cn-zhangjiakou-vpc.fcapp.run
+    custom_domain: 
+      - 
+        domain: http://http-handler-builtin-runtime-example-function.http-handler-builtin-runtime-example-service.1810657881264284.cn-zhangjiakou.fc.devsapp.net
+```
+
+部署后，输出了云函数的公网 url（system_url）和自定义域名 url（custom_domain）；我们也可以使用 `s info` 命令查看云函数信息；也可以在阿里云控制台查看。
+
+### 远程调用
+
+因为这是一个 HTTP handler，我们可以用各种方式发起 HTTP 请求，但这里还是介绍下用 `s invoke` 命令进行远程调用。
+
+首先使用 `s cli fc-event http` 命令生成调用参数的模版：
+
+```shell
+$ s cli fc-event http
+      👓 Parameter Template Path: event-template/http-parameter.json
+      You could user fc component invoke method and specify the event.
+      E.g: [s projectName invoke --event-file  event-template/http-parameter.json]
+$ cat event-template/http-parameter.json 
+{
+  "path": "string",
+  "method": "POST",
+  "headers": {
+    "key": "value"
+  },
+  "queries": {
+    "key": "value"
+  },
+  "body": "body"
+}                     
+```
+
+把模版修改成这样：
+
+```shell
+$ cat event-template/http-parameter.json 
+{
+  "path": "/",
+  "method": "POST",
+  "headers": {
+    "key": "value"
+  },
+  "queries": {
+    "key": "value"
+  },
+  "body": "invoke body"
+}
+```
+
+发起远程调用：
+
+```shell
+$ s invoke -f event-template/http-parameter.json
+Reading event file content:
+{
+  "path": "/",
+  "method": "POST",
+  "headers": {
+    "key": "value"
+  },
+  "queries": {
+    "key": "value"
+  },
+  "body": "invoke body"
+}
+
+Request url: https://http-hafunction-http-ha-service-syfmwcasfs.cn-zhangjiakou.fcapp.run/
+
+FC Invoke instanceId: c-653b1c76-267e16d848714db98c75
+
+FC Invoke Result:
+2023-10-27 10:12:15
+Request Method: POST
+invoke body
+
+End of method: invoke
+```
+
+### 登录实例
+
+可以在阿里云控制台登录实例，也可以在本地登陆。如果现在没有实例，可以发起一个请求，让函数计算创建一个实例。
+
+```shell
+$ s instance list                               
+http-handler-builtin-runtime-example-service: 
+  http-handler-builtin-runtime-example-function: 
+    instances: 
+      - 
+        instanceId: c-653b221b-67d7232869314a88a7f9
+        versionId:  0
+$ s instance exec  c-653b221b-67d7232869314a88a7f9 -it /bin/bash
+root@sr-653ae858-9b5d81f96fda4b2bbebf:/# ls
+bin   code  etc   lib    media  opt   root  sbin  sys  usr
+boot  dev   home  lib64  mnt    proc  run   srv   tmp  var
+root@sr-653ae858-9b5d81f96fda4b2bbebf:/# cd code/
+root@sr-653ae858-9b5d81f96fda4b2bbebf:/code# ls
+main  main.go
+```
 
 ## 自定义运行时
 

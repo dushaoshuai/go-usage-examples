@@ -27,7 +27,7 @@ services: # 应用所包含的服务，可以包含多个
       function: # 函数配置
         name: http-handler-builtin-runtime-example-function # function 名称
         description: "http handler builtin runtime example function" # function 的简短描述
-        codeUri: ./code # 代码位置
+        codeUri: ./code # 代码位置，目录下的内容是最终的交付物
         handler: main # function 执行的入口，具体格式和语言相关
         memorySize: 128 # function 的内存规格
         runtime: go1 # 运行时
