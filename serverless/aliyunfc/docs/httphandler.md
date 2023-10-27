@@ -294,8 +294,6 @@ main  main.go
 
 使用运行时 custom.debian10 部署 gin 框架。
 
-### 示例项目
-
 目录结构：
 
 ```shell
