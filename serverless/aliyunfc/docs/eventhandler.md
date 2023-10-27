@@ -153,6 +153,8 @@ End of method: invoke
 
 第一次请求时，可能需要拉取 go1 运行时的镜像并且创建容器，速度可能会慢点。
 
+关于本地调试，详见 [Local 命令](https://docs.serverless-devs.com/fc/command/local)。
+
 ### 部署
 
 本地调试好后，可以将函数部署到线上了。

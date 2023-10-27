@@ -166,6 +166,8 @@ test POST body
 
 第一次请求时，可能需要拉取 go1 运行时的镜像并且创建容器，速度可能会慢点。
 
+关于本地调试，详见 [Local 命令](https://docs.serverless-devs.com/fc/command/local)。
+
 ### 部署
 
 本地调试好后，可以将函数部署到线上了。
@@ -290,7 +292,128 @@ main  main.go
 
 ## 自定义运行时
 
-TBD
+使用运行时 custom.debian10 部署 gin 框架。
+
+### 示例项目
+
+目录结构：
+
+```shell
+tree .            
+.
+├── code
+│   ├── go.mod
+│   ├── go.sum
+│   └── main.go
+└── s.yaml
+
+2 directories, 4 files
+```
+
+s.yaml：
+
+```yaml
+edition: 1.0.0 # 命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: gin-http-handler-custom-runtime-example # 项目/应用名称
+access: default # 密钥别名
+
+vars: # 全局变量
+  region: 'cn-zhangjiakou'
+  service:
+    name: gin-http-handler-custom-runtime-example-service # service 名称
+    description: "gin http handler custom runtime example service" # Service 的简短描述
+    internetAccess: false # 设为 true 让 function 可以访问公网
+    tracingConfig: Disable # 链路追踪，可取值：Enable、Disable
+    # role: acs:ram::xxx:role/aliyunfcdefaultrole # 授予函数计算所需权限的RAM role
+    logConfig: null # log配置，function产生的log会写入这里配置的logstore
+    vpcConfig: null # VPC配置, 配置后function可以访问指定VPC
+    nasConfig: null # NAS配置, 配置后function可以访问指定NAS
+    ossMountConfig: null # OSS挂载配置, 配置后function可以访问指定OSS bucket
+    vpcBinding: null # 仅允许指定 VPC 调用函数
+
+services: # 应用所包含的服务，可以包含多个
+  gin-http-handler-custom-runtime-example: # 服务/模块名称
+    component: devsapp/fc # 组件名称，这里使用阿里云函数计算（FC）组件
+    actions: # 自定义执行逻辑
+      pre-deploy: # 在 deploy 之前运行，把 main.go 编译为可执行的二进制文件
+        - run: go mod tidy
+          path: ./code
+        - run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o target/main main.go
+          path: ./code
+    props: # 组件的属性值
+      region: ${vars.region} # 地域
+      service: ${vars.service} # 服务配置
+      function: # 函数配置
+        name: gin-http-handler-custom-runtime-example-function # function 名称
+        description: "gin http handler custom runtime example function" # function 的简短描述
+        codeUri: ./code/target # 代码位置，目录下的内容是最终的交付物
+        handler: main # function 执行的入口，具体格式和语言相关，这里使用 custom runtime，这个参数填不填都行
+        memorySize: 128 # function 的内存规格
+        runtime: custom.debian10 # 运行时
+        timeout: 10 # function 运行的超时时间
+        caPort: 8080 # CustomContainer/Runtime 指定端口
+        cpu: 0.05 # 函数的 CPU 规格，单位为 vCPU，为 0.05 vCPU 的倍数
+        diskSize: 512 # 函数的磁盘规格，单位为 MB，可选值为 512 MB 或 10240 MB
+        instanceConcurrency: 100 # 单实例多并发，一个函数实例可以并发处理这么多请求
+        instanceSoftConcurrency: 7 # 扩容并发度。扩容并发度用于优雅扩容，
+                                   # 当实例上并发数超过扩容并发度时，会触发实例扩容。
+                                   # 例如，您的实例启动较慢，可以通过设置合适的扩容并发度提前启动实例。
+                                   # 注意：扩容并发度的值不能大于实例并发度，最小值为1。
+                                   # 线上存在此配置，但是yaml中没有配置，则默认为和 instanceConcurrency 值一致。
+        instanceType: e1 # 函数实例类型，可选值为：e1（弹性实例）、c1（性能实例）、fc.gpu.tesla.1（GPU T4实例）、fc.gpu.ampere.1（GPU A10实例）。
+        environmentVariables: # 环境变量
+          TZ: "Asia/Shanghai" # 设置时区为东 8 区
+        customRuntimeConfig: # 自定义运行时启动配置
+          command: # 启动指令
+            - '/code/main'
+          args: null # 启动参数
+      triggers: # 触发器配置
+        - name: httptrigger # 触发器名称
+          type: http # 触发器类型
+          qualifier: LATEST # 触发器函数的版本或者别名，默认 LATEST
+          config: # 触发器配置
+            authType: anonymous # 鉴权类型，可选值：anonymous、function
+            disableURLInternet: false # 是否禁用公网访问 URL，默认为 false
+            methods: # HTTP 触发器支持的访问方法，可选值：GET、POST、PUT、DELETE、PATCH、HEAD、OPTIONS
+              - GET
+              - POST
+      customDomains: # 自定义域名
+        - domainName: auto # 域名，如果是 auto 取值，系统则会默认分配域名
+          protocol: HTTP # 协议，取值：HTTP, HTTP,HTTPS
+          routeConfigs: # 路由
+            - path: /* # 路径
+```
+
+* 关于全局变量 `vars` 的使用，见[变量赋值](https://docs.serverless-devs.com/serverless-devs/yaml#%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC)
+* 自定义运行时启动方式和内置运行时不同。函数的交付物是一个 HTTP Server。为了让函数计算能够启动这个 HTTP Server，我们需要在函数配置中设置启动命令（`customRuntimeConfig.command`）和启动参数（`customRuntimeConfig.args`），函数计算把启动命令和启动参数拼接成完整的启动命令。启动后的 HTTP Server 会接管来自函数计算的所有请求。函数配置中的监听端口（`caPort`）和 HTTP Server 的监听端口必须一致。
+
+main.go：
+
+```go
+package main
+
+import (
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "hello world",
+		})
+	})
+	// listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.Run()
+}
+```
+
+本地调试、部署、本地调用云函数、登录实例等同内置运行时。
 
 ## 自定义容器运行时
 
