@@ -122,6 +122,10 @@ triggers: # 触发器配置
   * 如果启用死信队列，未被处理或超过重试次数的消息会被投递到死信队列中。
   * 如果未启用死信队列，超过重试次数的消息会被丢弃。
 
+### 重试和容错最佳实践
+
+TBD
+
 # 参见
 
 * [Kafka 触发器](https://help.aliyun.com/zh/fc/apsaramq-for-kafka-trigger)
