@@ -384,6 +384,7 @@ services: # 应用所包含的服务，可以包含多个
 
 * 关于全局变量 `vars` 的使用，见[变量赋值](https://docs.serverless-devs.com/serverless-devs/yaml#%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC)
 * 自定义运行时启动方式和内置运行时不同。函数的交付物是一个 HTTP Server。为了让函数计算能够启动这个 HTTP Server，我们需要在函数配置中设置启动命令（`customRuntimeConfig.command`）和启动参数（`customRuntimeConfig.args`），函数计算把启动命令和启动参数拼接成完整的启动命令。启动后的 HTTP Server 会接管来自函数计算的所有请求。函数配置中的监听端口（`caPort`）和 HTTP Server 的监听端口必须一致。
+* 使用自定义运行时，`handler` 的值无关紧要，不设置也可以
 
 main.go：
 
