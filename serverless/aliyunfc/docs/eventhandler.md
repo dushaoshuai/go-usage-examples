@@ -31,7 +31,7 @@ tree .
 s.yaml 内容如下:
 
 ```yaml
-$ edition: 1.0.0 # 命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+edition: 1.0.0 # 命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
 name: event-handler-builtin-runtime-example # 项目/应用名称
 access: default # 密钥别名
 
