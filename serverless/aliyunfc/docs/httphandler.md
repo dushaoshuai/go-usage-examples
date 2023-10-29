@@ -50,7 +50,7 @@ services: # 应用所包含的服务，可以包含多个
         description: "http handler builtin runtime example service" # Service 的简短描述
         internetAccess: false # 设为 true 让 function 可以访问公网
         tracingConfig: Disable # 链路追踪，可取值：Enable、Disable
-        role: acs:ram::1810657881264284:role/aliyunfcdefaultrole # 授予函数计算所需权限的RAM role
+        role: acs:ram::xx:role/aliyunfcdefaultrole # 授予函数计算所需权限的RAM role
         logConfig: null # log配置，function产生的log会写入这里配置的logstore
         vpcConfig: null # VPC配置, 配置后function可以访问指定VPC
         nasConfig: null # NAS配置, 配置后function可以访问指定NAS
