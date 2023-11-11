@@ -3,8 +3,8 @@ package main
 import (
 	"errors"
 	"flag"
-	"fmt"
 	"io/fs"
+	"log"
 	"os"
 )
 
@@ -17,40 +17,59 @@ func init() {
 	flag.Parse()
 	if *src == "" || *dst == "" {
 		flag.PrintDefaults()
+		os.Exit(1)
 	}
+}
+
+type file struct {
+	srcDir string
+	dstDir string
+	file   string
 }
 
 func main() {
-
+	fileChan := make(chan file, 20)
 	for i := 0; i < 48; i++ {
+		go func() {
+			defer func() {
+				err := recover()
+				if err != nil {
+					log.Println(err)
+				}
+			}()
 
+			for f := range fileChan {
+				err := cpFile(f)
+				if err != nil {
+					log.Println(err)
+				}
+			}
+		}()
 	}
+
+	err := checkDir()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
 }
 
 func checkDir() error {
-	srcDir, err := os.Open(*src)
+	srcEntries, err := os.ReadDir(*src)
 	if err != nil {
 		return err
 	}
-	srcDirInfo, err := srcDir.Stat()
-	if err != nil {
+	_ = srcEntries
+
+	_, err = os.ReadDir(*dst)
+	if err != nil && !errors.Is(err, fs.ErrNotExist) {
 		return err
-	}
-	if !srcDirInfo.IsDir() {
-		return fmt.Errorf("cpdir: src %s is not a directory", srcDirInfo.Name())
 	}
 
-	os.ReadDir()
+	return nil
+}
 
-	dstDirInfo, err := os.Stat(*dst)
-	if err != nil {
-		if errors.Is(err, fs.ErrNotExist) {
-			return nil
-		}
-		return err
-	}
-	if !dstDirInfo.IsDir() {
-		return fmt.Errorf("cpdir: dst %s is not a directory", dstDirInfo.Name())
-	}
+func cpFile(f file) error {
 
 }
