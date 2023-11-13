@@ -3,7 +3,7 @@ module github.com/dushaoshuai/go-usage-examples
 go 1.20
 
 require (
-	github.com/agiledragon/gomonkey/v2 v2.10.1
+	github.com/agiledragon/gomonkey/v2 v2.11.0
 	github.com/deckarep/golang-set/v2 v2.3.1
 	github.com/dushaoshuai/goloop v0.1.2
 	github.com/gin-gonic/gin v1.9.1
