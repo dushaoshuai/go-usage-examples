@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/golang/mock v1.6.0
 	github.com/google/wire v0.5.0
-	github.com/nyaruka/phonenumbers v1.1.8
+	github.com/nyaruka/phonenumbers v1.1.9
 	github.com/ohler55/ojg v1.20.2
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.3.0
