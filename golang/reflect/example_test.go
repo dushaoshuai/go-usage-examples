@@ -10,14 +10,14 @@ import (
 // Reflection goes from interface value to reflection object.
 
 func ExampleTypeOf() {
-	var x float64 = 3.4
+	var x = 3.4
 	fmt.Println("type:", reflect.TypeOf(x), reflect.TypeOf(x).String())
 	// Output:
 	// type: float64 float64
 }
 
 func ExampleValueOf() {
-	var x float64 = 3.4
+	var x = 3.4
 	fmt.Println("value:", reflect.ValueOf(x), reflect.ValueOf(x).String())
 
 	v := reflect.ValueOf(x)
@@ -29,4 +29,15 @@ func ExampleValueOf() {
 	// type: float64
 	// kind is float64: true
 	// value: 3.4
+}
+
+// 函数 myFunc 的类型是 non-defined type
+func myFunc() string { return "hello" }
+
+func Example_func_name() {
+	fmt.Println("type:", reflect.TypeOf(myFunc))
+	fmt.Println("name:", reflect.TypeOf(myFunc).Name())
+	// Output:
+	// type: func() string
+	// name:
 }

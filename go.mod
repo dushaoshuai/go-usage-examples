@@ -1,6 +1,6 @@
 module github.com/dushaoshuai/go-usage-examples
 
-go 1.20
+go 1.21
 
 require (
 	github.com/agiledragon/gomonkey/v2 v2.11.0
