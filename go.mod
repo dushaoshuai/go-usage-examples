@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/golang/mock v1.6.0
 	github.com/google/wire v0.5.0
-	github.com/nyaruka/phonenumbers v1.2.0
+	github.com/nyaruka/phonenumbers v1.3.2
 	github.com/ohler55/ojg v1.20.3
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.3.0
@@ -22,7 +22,7 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.10
 	go.mongodb.org/mongo-driver v1.13.0
 	go.uber.org/goleak v1.3.0
-	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
+	golang.org/x/exp v0.0.0-20231214170342-aacd6d4b4611
 	golang.org/x/sync v0.5.0
 	golang.org/x/text v0.14.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230920204549-e6e6cdab5c13
