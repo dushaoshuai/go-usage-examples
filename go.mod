@@ -18,6 +18,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.17.0
+	github.com/webview/webview_go v0.0.0-20240220051247-56f456ca3a43
 	github.com/xuri/excelize/v2 v2.8.0
 	go.etcd.io/etcd/client/v3 v3.5.10
 	go.mongodb.org/mongo-driver v1.14.0
