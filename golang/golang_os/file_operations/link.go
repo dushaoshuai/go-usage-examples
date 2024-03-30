@@ -1,7 +1,6 @@
 package file_operations
 
 import (
-	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -15,7 +14,7 @@ func LinkAll(dst, src string) error {
 		return err
 	}
 	if !isDir {
-		return fmt.Errorf("helper: not a directory: %v", src)
+		return err
 	}
 
 	isDir, err = IsDir(dst)
@@ -23,7 +22,7 @@ func LinkAll(dst, src string) error {
 		return err
 	}
 	if !isDir {
-		return fmt.Errorf("helper: not a directory: %v", dst)
+		return err
 	}
 
 	err = filepath.WalkDir(src, func(path string, d fs.DirEntry, err error) error {
@@ -56,7 +55,7 @@ func LinkAll(dst, src string) error {
 		return nil
 	})
 	if err != nil {
-		return fmt.Errorf("helper: LinkAll failed: %v", err)
+		return err
 	}
 
 	return nil
