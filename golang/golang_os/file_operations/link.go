@@ -7,15 +7,6 @@ import (
 	"path/filepath"
 )
 
-// IsDir reports whether name is a directory.
-func IsDir(dirName string) (bool, error) {
-	info, err := os.Stat(dirName)
-	if err != nil {
-		return false, err
-	}
-	return info.IsDir(), nil
-}
-
 // LinkAll creates hard links to all targets in src.
 // dst and src must be directories.
 func LinkAll(dst, src string) error {
