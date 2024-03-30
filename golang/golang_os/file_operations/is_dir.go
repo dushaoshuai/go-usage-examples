@@ -4,7 +4,7 @@ import (
 	"os"
 )
 
-// IsDir reports whether name is a directory.
+// IsDir reports whether dirname is a directory.
 func IsDir(dirName string) (bool, error) {
 	info, err := os.Stat(dirName)
 	if err != nil {
