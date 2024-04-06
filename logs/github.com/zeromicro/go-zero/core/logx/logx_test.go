@@ -18,11 +18,29 @@ func Example_use_ctx() {
 		logx.Field("log_key_in_ctx", "log_val_in_ctx"),
 		logx.Field("log_key2_in_ctx", "log_val2_in_ctx"),
 	)
+	ctx = withCallChain(ctx)
 
 	logWithContext(ctx)
 
-	// Output:
-	// {"@timestamp":"2024-04-06T17:30:37.849+08:00","a":1,"b":2,"c":3,"caller":"logx/logx_test.go:31","content":"test logx","duration":"0.0ms","level":"info","library":"logx","log_key2_in_ctx":"log_val2_in_ctx","log_key_in_ctx":"log_val_in_ctx","purpose":"learn and testing"}
+	// Example Output Formatted As JSON Indent:
+	// {
+	//  "@timestamp": "2024-04-06T22:29:20.827+08:00",
+	//  "a": 1,
+	//  "b": 2,
+	//  "c": 3,
+	//  "call_chain": [
+	//    "Example_use_ctx",
+	//    "logWithContext"
+	//  ],
+	//  "caller": "logx/logx_test.go:33",
+	//  "content": "test logx",
+	//  "duration": "0.0ms",
+	//  "level": "info",
+	//  "library": "logx",
+	//  "log_key2_in_ctx": "log_val2_in_ctx",
+	//  "log_key_in_ctx": "log_val_in_ctx",
+	//  "purpose": "learn and testing"
+	// }
 }
 
 func logWithContext(ctx context.Context) {
@@ -36,5 +54,6 @@ func logWithContext(ctx context.Context) {
 		logx.Field("a", 1),
 		logx.Field("b", 2),
 		logx.Field("c", 3),
+		callChainFromContext(ctx),
 	)
 }
