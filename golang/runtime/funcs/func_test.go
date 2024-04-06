@@ -62,3 +62,28 @@ func TestGetCallerName(t *testing.T) {
 		})
 	}
 }
+
+func testF20(skip int) string { return testF21(skip) }
+func testF21(skip int) string { return testF22(skip) }
+func testF22(skip int) string { return testF23(skip) }
+func testF23(skip int) string { return GetCallerNameSkip(skip) }
+
+func TestGetCallerNameSkip(t *testing.T) {
+	tests := []struct {
+		name string
+		skip int
+		want string
+	}{
+		{"skip 0", 0, "testF23"},
+		{"skip 1", 1, "testF22"},
+		{"skip 2", 2, "testF21"},
+		{"skip 3", 3, "testF20"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := testF20(tt.skip); got != tt.want {
+				t.Errorf("GetCallerNameSkip() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

@@ -40,3 +40,24 @@ func GetCallerName() string {
 	}
 	return fullName
 }
+
+// GetCallerNameSkip reports caller name. The argument skip is the number of stack frames
+// to ascend, with 0 identifying the caller of GetCallerNameSkip (the same as GetCallerName).
+func GetCallerNameSkip(skip int) string {
+	pc, _, _, ok := runtime.Caller(skip + 1)
+	if !ok {
+		return ""
+	}
+
+	fn := runtime.FuncForPC(pc)
+	if fn == nil {
+		return ""
+	}
+
+	fullName := fn.Name()
+	subStrings := strings.SplitAfter(fullName, ".")
+	if l := len(subStrings); l >= 1 {
+		return subStrings[l-1]
+	}
+	return fullName
+}
