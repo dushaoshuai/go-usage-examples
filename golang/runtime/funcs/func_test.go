@@ -31,3 +31,34 @@ func TestGetFuncName(t *testing.T) {
 		})
 	}
 }
+
+func testFunc1() string {
+	return GetCallerName()
+}
+
+func testFunc2() string {
+	return GetCallerName()
+}
+
+func TestGetCallerName(t *testing.T) {
+	testFunc3 := func() string {
+		return GetCallerName()
+	}
+
+	tests := []struct {
+		name string
+		fn   func() string
+		want string
+	}{
+		{"f1", testFunc1, "testFunc1"},
+		{"f2", testFunc2, "testFunc2"},
+		{"f3", testFunc3, "func1"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.fn(); got != tt.want {
+				t.Errorf("GetCallerName() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
