@@ -9,7 +9,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/golang/mock v1.6.0
-	github.com/google/wire v0.5.0
+	github.com/google/wire v0.6.0
 	github.com/nyaruka/phonenumbers v1.3.2
 	github.com/ohler55/ojg v1.21.4
 	github.com/pkg/errors v0.9.1
@@ -20,6 +20,7 @@ require (
 	github.com/spf13/viper v1.18.2
 	github.com/webview/webview_go v0.0.0-20240220051247-56f456ca3a43
 	github.com/xuri/excelize/v2 v2.8.0
+	github.com/zeromicro/go-zero v1.6.3
 	go.etcd.io/etcd/client/v3 v3.5.13
 	go.mongodb.org/mongo-driver v1.14.0
 	go.uber.org/goleak v1.3.0
@@ -85,7 +86,6 @@ require (
 	github.com/xuri/efp v0.0.0-20230802181842-ad255f2331ca // indirect
 	github.com/xuri/nfp v0.0.0-20230819163627-dc951e3ffe1a // indirect
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
-	github.com/zeromicro/go-zero v1.6.3 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.13 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.13 // indirect
 	go.opentelemetry.io/otel v1.19.0 // indirect
