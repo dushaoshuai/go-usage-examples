@@ -1,0 +1,3 @@
+* https://go.cyub.vip/go-assembly/
+* https://go.dev/doc/asm
+* https://github.com/cch123/golang-notes/blob/master/assembly.md
