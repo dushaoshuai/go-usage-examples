@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/glebarez/sqlite"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -19,6 +20,14 @@ func DefaultGormDB(ctx context.Context) *gorm.DB {
 		os.Getenv("mysql_db_name"),
 	)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	return db.Debug().WithContext(ctx)
+}
+
+func SQLiteInMemoryDB(ctx context.Context) *gorm.DB {
+	db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
