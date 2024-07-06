@@ -31,7 +31,7 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80
 	google.golang.org/grpc v1.62.1
 	google.golang.org/protobuf v1.33.0
-	gorm.io/driver/mysql v1.5.2
+	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.9
 )
 
