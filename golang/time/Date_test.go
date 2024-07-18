@@ -8,7 +8,7 @@ import (
 )
 
 func ExampleDate() {
-	t1 := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
+	t1 := time.Date(2024, time.January, 1, 0, 0, 0, 0, time.UTC)
 	fmt.Println(t1)
 
 	// The month, day, hour, min, sec, and nsec values may be outside their usual ranges and will be normalized during the conversion.
