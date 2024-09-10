@@ -48,7 +48,7 @@ func main() {
 				AddField("%guest", load.Guest).
 				AddField("%gnice", load.Gnice).
 				AddField("%idle", load.Idle).
-				SetTime(t)
+				SetTime(t) // TODO: time is incorrect
 
 			err = cli.WritePoint(ctx, point)
 			if err != nil {
