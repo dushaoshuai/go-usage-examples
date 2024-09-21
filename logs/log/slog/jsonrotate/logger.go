@@ -10,8 +10,8 @@ var (
 	logLevelVar = new(slog.LevelVar) // Info by default
 )
 
-func setJsonRotateLogger() {
-	logFile := "/tmp/jsonrotatelogger/jsonratote.log"
+func setJsonRotateLogger() (closeUnderlyingWriter func()) {
+	logFile := "./jsonratotelogger.log"
 
 	dailyRotateRule := logx.DefaultRotateRule(logFile, "-", 10, true)
 	logWriter, err := logx.NewLogger(logFile, dailyRotateRule, true)
@@ -25,4 +25,6 @@ func setJsonRotateLogger() {
 		ReplaceAttr: nil,
 	})
 	slog.SetDefault(slog.New(jsonHandler))
+
+	return func() { logWriter.Close() }
 }
