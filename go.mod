@@ -1,8 +1,6 @@
 module github.com/dushaoshuai/go-usage-examples
 
-go 1.22.0
-
-toolchain go1.23.0
+go 1.23.0
 
 require (
 	github.com/agiledragon/gomonkey/v2 v2.11.0
@@ -26,7 +24,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.18.2
 	github.com/webview/webview_go v0.0.0-20240220051247-56f456ca3a43
-	github.com/xhd2015/xgo/runtime v1.0.48
+	github.com/xhd2015/xgo/runtime v1.0.49
 	github.com/xuri/excelize/v2 v2.8.0
 	github.com/zeromicro/go-zero v1.7.2
 	go.etcd.io/etcd/client/v3 v3.5.15
