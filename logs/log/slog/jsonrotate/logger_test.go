@@ -7,11 +7,8 @@ import (
 	"time"
 )
 
-func Test_json_rotate_logger(t *testing.T) {
+func Test_json_logger(t *testing.T) {
 	ctx := context.Background()
-
-	closeUnderlyingWriter := setJsonRotateLogger()
-	defer closeUnderlyingWriter()
 
 	for tim := range time.Tick(time.Second) {
 		slog.LogAttrs(ctx, slog.LevelInfo, "hello",
@@ -19,4 +16,10 @@ func Test_json_rotate_logger(t *testing.T) {
 			slog.Time("tim", tim),
 		)
 	}
+}
+
+func TestMain(m *testing.M) {
+	setJsonRotateLogger()
+
+	m.Run()
 }
