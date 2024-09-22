@@ -27,8 +27,15 @@ func (l copyDataRotateLogger) Close() error {
 }
 
 func (l copyDataRotateLogger) Write(data []byte) (int, error) {
+	// The underlying *logx.RotateLogger instance writes logs asynchronously,
+	// and the *slog.commonHandler reuses buffer instances to improve efficiency.
+	// To ensure that the *logx.RotateLogger does not encounter a mutated buffer
+	// (which could happen due to the asynchronous nature and buffer reuse),
+	// we create a copy of the input data bytes before passing them along.
+	// This step guarantees that each log write operation is handled with an independent buffer copy.
 	dataCopy := make([]byte, len(data))
 	copy(dataCopy, data)
+
 	return l.w.Write(dataCopy)
 }
 
