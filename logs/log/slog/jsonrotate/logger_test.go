@@ -2,15 +2,20 @@ package jsonrotate
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
+	"os"
 	"strconv"
 	"testing"
 )
 
 func TestMain(m *testing.M) {
-	closeUnderlyingWriter := setJsonRotateLogger()
-	defer closeUnderlyingWriter()
+	logger, err := NewJSONRotateLogger("/tmp/JSONRotateLogger/x.log")
+	if err != nil {
+		os.Exit(1)
+	}
+	defer logger.Close()
+
+	slog.SetDefault(logger.Slogger())
 
 	m.Run()
 }
@@ -18,9 +23,7 @@ func TestMain(m *testing.M) {
 func Test_json_logger(t *testing.T) {
 	ctx := context.Background()
 
-	for i := 9; i >= 0; i-- {
-		// time.Sleep(2 * time.Second)
-		fmt.Println(i)
+	for i := range 10 {
 		slog.LogAttrs(ctx, slog.LevelInfo, "hello today",
 			slog.Int("int", i),
 			slog.String("str", strconv.Itoa(i)),
