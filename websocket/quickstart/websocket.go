@@ -25,7 +25,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 			return
 		}
-		if err := conn.WriteMessage(messageType, p); err != nil {
+		// if err := conn.WriteMessage(messageType, p); err != nil {
+		// 	log.Println(err)
+		// 	return
+		// }
+		if err := conn.WriteJSON(map[string]any{"type": messageType, "data": string(p)}); err != nil {
 			log.Println(err)
 			return
 		}
