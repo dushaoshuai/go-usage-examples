@@ -1,6 +1,10 @@
 .idea/
+.vscode/
 
 *.xlsx
 
 # Serverless devs
 .s
+
+# C
+a.out
