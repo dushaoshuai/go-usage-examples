@@ -27,7 +27,7 @@ char *integerBits(size_t const size, void const *const ptr)
         for (j = 7; j >= 0; j--)
         {
             byte = (b[i] >> j) & 1;
-            if (index != 0 || byte != 0)
+            if (index != 0 || byte != 0 || (i == 0 && j == 0 && index == 0))
             {
                 bit_string[index++] = byte + '0';
             }
