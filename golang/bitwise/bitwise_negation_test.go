@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// bitwise negation/complement (^) treat its operands as just bit patterns with
+// bitwise negation/complement (^) treats its operands as just bit patterns with
 // no concept of arithmetic carry or sign.
 func ExampleName_bitwise_negation() {
 	var u8 uint8 = 12
