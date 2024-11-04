@@ -1,4 +1,3 @@
-// Assumes little endian
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -22,6 +21,7 @@ char *integerBits(size_t const size, void const *const ptr)
     memset(bit_string, 0, str_size);
     size_t index = 0;
 
+    // Assumes little endian
     for (i = size - 1; i >= 0; i--)
     {
         for (j = 7; j >= 0; j--)

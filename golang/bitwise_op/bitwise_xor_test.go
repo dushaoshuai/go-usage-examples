@@ -1,4 +1,4 @@
-package bitwise
+package bitwise_op
 
 import (
 	"fmt"
