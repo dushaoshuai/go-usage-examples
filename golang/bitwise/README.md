@@ -18,4 +18,11 @@ Go: ^
 * 0 & 1 = 0
 * 1 & 1 = 1
 
+# Bitwise Or |
+
+* 0 | 0 = 0
+* 0 | 1 = 1
+* 1 | 0 = 1
+* 1 | 1 = 1
+
 ## Bitwise Shift Operators 移位远算符
