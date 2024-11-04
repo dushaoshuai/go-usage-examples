@@ -25,4 +25,11 @@ Go: ^
 * 1 | 0 = 1
 * 1 | 1 = 1
 
+# Bitwise Xor ^
+
+* 0 ^ 0 = 0
+* 0 ^ 1 = 1
+* 1 ^ 0 = 1
+* 1 ^ 1 = 0
+
 ## Bitwise Shift Operators 移位远算符

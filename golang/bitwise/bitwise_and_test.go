@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// bitwise and (&) treats its operands as just bit patterns with
+// bitwise And (&) treats its operands as just bit patterns with
 // no concept of arithmetic carry or sign.
 func ExampleName_bitwise_and() {
 	var u81 uint8 = 12
