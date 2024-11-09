@@ -4,6 +4,7 @@
 
 void mask();
 void turning_bits_on();
+void turning_bits_off();
 
 // $ gcc ./usage.c ./integer_bits.c && ./a.out
 int main(int argc, char const *argv[])
@@ -17,6 +18,11 @@ int main(int argc, char const *argv[])
     // 1111 | 11010011 = 11011111
     // 11111000 | 11010011 = 11111011
     turning_bits_on();
+
+    // 10101111 & ~11010011 = 101100
+    // 1111 & ~11010011 = 1100
+    // 11111000 & ~11010011 = 101000
+    turning_bits_off();
 
     return 0;
 }
@@ -35,8 +41,8 @@ void mask()
     uint8_t v3 = flags3 & mask;
 
     printf("%s & %s = %s\n", integerBits(sizeof(flags1), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v1), &v1));
-    printf("%s & %s = %s\n", integerBits(sizeof(flags2), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
-    printf("%s & %s = %s\n", integerBits(sizeof(flags3), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
+    printf("%s & %s = %s\n", integerBits(sizeof(flags2), &flags2), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
+    printf("%s & %s = %s\n", integerBits(sizeof(flags3), &flags3), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
 }
 
 void turning_bits_on()
@@ -53,7 +59,26 @@ void turning_bits_on()
     uint8_t v3 = flags3 | mask;
 
     printf("%s | %s = %s\n", integerBits(sizeof(flags1), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v1), &v1));
-    printf("%s | %s = %s\n", integerBits(sizeof(flags2), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
-    printf("%s | %s = %s\n", integerBits(sizeof(flags3), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
+    printf("%s | %s = %s\n", integerBits(sizeof(flags2), &flags2), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
+    printf("%s | %s = %s\n", integerBits(sizeof(flags3), &flags3), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
 }
 
+// clearing bits
+// bit clear
+void turning_bits_off()
+{
+    uint8_t mask = 0b11010011;
+
+    uint8_t flags1 = 0b10101111;
+    uint8_t v1 = flags1 & ~mask;
+
+    uint8_t flags2 = 0b1111;
+    uint8_t v2 = flags2 & ~mask;
+
+    uint8_t flags3 = 0b11111000;
+    uint8_t v3 = flags3 & ~mask;
+
+    printf("%s & ~%s = %s\n", integerBits(sizeof(flags1), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v1), &v1));
+    printf("%s & ~%s = %s\n", integerBits(sizeof(flags2), &flags2), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
+    printf("%s & ~%s = %s\n", integerBits(sizeof(flags3), &flags3), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
+}
