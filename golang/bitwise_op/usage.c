@@ -5,6 +5,7 @@
 void mask();
 void turning_bits_on();
 void turning_bits_off();
+void toggling_bits();
 
 // $ gcc ./usage.c ./integer_bits.c && ./a.out
 int main(int argc, char const *argv[])
@@ -23,6 +24,11 @@ int main(int argc, char const *argv[])
     // 1111 & ~11010011 = 1100
     // 11111000 & ~11010011 = 101000
     turning_bits_off();
+
+    // 10101111 ^ 11111111 = 1010000
+    // 1111 ^ 11111111 = 11110000
+    // 11111000 ^ 11111111 = 111
+    toggling_bits();
 
     return 0;
 }
@@ -81,4 +87,22 @@ void turning_bits_off()
     printf("%s & ~%s = %s\n", integerBits(sizeof(flags1), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v1), &v1));
     printf("%s & ~%s = %s\n", integerBits(sizeof(flags2), &flags2), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
     printf("%s & ~%s = %s\n", integerBits(sizeof(flags3), &flags3), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
+}
+
+void toggling_bits()
+{
+    uint8_t mask = 0b11111111;
+
+    uint8_t flags1 = 0b10101111;
+    uint8_t v1 = flags1 ^ mask;
+
+    uint8_t flags2 = 0b1111;
+    uint8_t v2 = flags2 ^ mask;
+
+    uint8_t flags3 = 0b11111000;
+    uint8_t v3 = flags3 ^ mask;
+
+    printf("%s ^ %s = %s\n", integerBits(sizeof(flags1), &flags1), integerBits(sizeof(mask), &mask), integerBits(sizeof(v1), &v1));
+    printf("%s ^ %s = %s\n", integerBits(sizeof(flags2), &flags2), integerBits(sizeof(mask), &mask), integerBits(sizeof(v2), &v2));
+    printf("%s ^ %s = %s\n", integerBits(sizeof(flags3), &flags3), integerBits(sizeof(mask), &mask), integerBits(sizeof(v3), &v3));
 }
