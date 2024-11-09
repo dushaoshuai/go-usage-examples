@@ -67,3 +67,28 @@ func Example_toggling_bits() {
 	// 1111 ^ 11111111 = 11110000
 	// 11111000 ^ 11111111 = 111
 }
+
+func Example_checking_the_value_of_a_bit() {
+	var flags uint8 = 0b_1010_1111
+
+	fmt.Println(integerBits(flags))
+
+	for i := range 8 {
+		if flags&(1<<i) != 0 {
+			fmt.Printf("%d is at position %d\n", 1, i)
+		} else {
+			fmt.Printf("%d is at position %d\n", 0, i)
+		}
+	}
+
+	// Output:
+	// 10101111
+	// 1 is at position 0
+	// 1 is at position 1
+	// 1 is at position 2
+	// 1 is at position 3
+	// 0 is at position 4
+	// 1 is at position 5
+	// 0 is at position 6
+	// 1 is at position 7
+}
