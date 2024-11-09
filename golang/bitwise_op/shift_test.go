@@ -8,10 +8,11 @@ func ExampleName_bitwise_shift_unsigned() {
 	var u81 uint8 = 12
 	var u82 uint8 = 35
 
-	for i := range 8 {
+	for i := range 9 {
 		fmt.Printf("%s >> %d = %s(%d)\n", integerBits(u81), i, integerBits(u81>>i), u81>>i)
 	}
-	for i := range 8 {
+	fmt.Println()
+	for i := range 9 {
 		fmt.Printf("%s << %d = %s(%d)\n", integerBits(u82), i, integerBits(u82<<i), u82<<i)
 	}
 
@@ -24,6 +25,8 @@ func ExampleName_bitwise_shift_unsigned() {
 	// 1100 >> 5 = 0(0)
 	// 1100 >> 6 = 0(0)
 	// 1100 >> 7 = 0(0)
+	// 1100 >> 8 = 0(0)
+	//
 	// 100011 << 0 = 100011(35)
 	// 100011 << 1 = 1000110(70)
 	// 100011 << 2 = 10001100(140)
@@ -32,6 +35,7 @@ func ExampleName_bitwise_shift_unsigned() {
 	// 100011 << 5 = 1100000(96)
 	// 100011 << 6 = 11000000(192)
 	// 100011 << 7 = 10000000(128)
+	// 100011 << 8 = 0(0)
 }
 
 func ExampleName_bitwise_shift_signed() {
