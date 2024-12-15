@@ -1,8 +1,8 @@
-package golang_test
+package for_test
 
 import "fmt"
 
-func Example_loop_i() {
+func Example_loop_reassignment_i() {
 	for i := 0; i < 10; i++ {
 		i = 9
 		fmt.Println(i)
