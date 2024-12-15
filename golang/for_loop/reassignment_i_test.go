@@ -1,4 +1,4 @@
-package for_test
+package for_loop_test
 
 import "fmt"
 
