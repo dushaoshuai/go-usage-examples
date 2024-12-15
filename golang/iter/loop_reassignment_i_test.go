@@ -1,4 +1,4 @@
-package for_loop_test
+package iter_test
 
 import "fmt"
 
