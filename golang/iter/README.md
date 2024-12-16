@@ -4,3 +4,4 @@
 * https://pkg.go.dev/iter
 * https://pkg.go.dev/slices
 * https://pkg.go.dev/maps
+* https://go.dev/doc/go1.23
