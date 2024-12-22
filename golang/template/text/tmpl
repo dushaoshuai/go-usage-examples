@@ -1,0 +1,24 @@
+{{/*
+	A comment; discarded. May contain newlines.
+	Comments do not nest and must start and end at the
+	delimiters, as shown here.
+*/ -}}
+
+{{if .Name -}}
+	Language: {{.Name}}.
+{{- else -}}
+	Language Name is empty.
+{{- end}}
+
+Type System: {{printf "%+v" .TypeSystem}}
+
+{{with .TypeSystem}}
+	{{- ""}}	Static typing: {{.Static}}
+	Dynamic typing: {{.Dynamic}}
+	Strong typing: {{.Strong}}
+	Weak typing: {{.Weak}}
+{{- end}}
+
+{{range $date, $release := .Releases}}
+	{{- ""}}	{{$release}} (released {{$date}})
+{{end}}
