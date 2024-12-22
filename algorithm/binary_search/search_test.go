@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFind(t *testing.T) {
+func TestFindMaxLte(t *testing.T) {
 	str1 := []string{"foo"}
 	str2 := []string{"ab", "ca"}
 	str3 := []string{"mo", "qo", "vo"}
