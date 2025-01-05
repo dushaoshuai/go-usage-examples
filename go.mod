@@ -15,7 +15,7 @@ require (
 	github.com/gorilla/websocket v1.5.3
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
 	github.com/jinzhu/now v1.1.5
-	github.com/nyaruka/phonenumbers v1.3.2
+	github.com/nyaruka/phonenumbers v1.4.4
 	github.com/ohler55/ojg v1.26.0
 	github.com/parquet-go/parquet-go v0.22.0
 	github.com/pkg/errors v0.9.1
