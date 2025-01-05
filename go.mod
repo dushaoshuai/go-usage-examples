@@ -16,7 +16,7 @@ require (
 	github.com/influxdata/influxdb-client-go/v2 v2.14.0
 	github.com/jinzhu/now v1.1.5
 	github.com/nyaruka/phonenumbers v1.3.2
-	github.com/ohler55/ojg v1.20.3
+	github.com/ohler55/ojg v1.26.0
 	github.com/parquet-go/parquet-go v0.22.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.7.0
