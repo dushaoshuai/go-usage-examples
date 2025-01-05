@@ -3,7 +3,7 @@ module github.com/dushaoshuai/go-usage-examples
 go 1.23.4
 
 require (
-	github.com/agiledragon/gomonkey/v2 v2.11.0
+	github.com/agiledragon/gomonkey/v2 v2.12.0
 	github.com/apache/arrow/go/v17 v17.0.0
 	github.com/deckarep/golang-set/v2 v2.6.0
 	github.com/dushaoshuai/goloop v0.1.2
@@ -17,7 +17,7 @@ require (
 	github.com/jinzhu/now v1.1.5
 	github.com/nyaruka/phonenumbers v1.4.4
 	github.com/ohler55/ojg v1.26.0
-	github.com/parquet-go/parquet-go v0.22.0
+	github.com/parquet-go/parquet-go v0.24.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/robfig/cron/v3 v3.0.1
@@ -101,7 +101,6 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
-	github.com/segmentio/encoding v0.4.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
