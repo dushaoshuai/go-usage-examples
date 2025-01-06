@@ -23,7 +23,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/pflag v1.0.5
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 	github.com/webview/webview_go v0.0.0-20240831120633-6173450d4dd6
 	github.com/xhd2015/xgo/runtime v1.0.49
 	github.com/xuri/excelize/v2 v2.8.0
