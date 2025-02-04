@@ -8,6 +8,9 @@ import (
 )
 
 func Test_polyfit(t *testing.T) {
+	ys := []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7}
+	xs := []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350}
+
 	type args struct {
 		xs     []float64
 		ys     []float64
@@ -22,7 +25,7 @@ func Test_polyfit(t *testing.T) {
 			name: "len(xs) != len(ys)",
 			args: args{
 				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				ys:     ys,
 				degree: 2,
 			},
 			wantErr: true,
@@ -30,8 +33,8 @@ func Test_polyfit(t *testing.T) {
 		{
 			name: "degree2",
 			args: args{
-				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				xs:     xs,
+				ys:     ys,
 				degree: 2,
 			},
 			wantErr: false,
@@ -39,8 +42,8 @@ func Test_polyfit(t *testing.T) {
 		{
 			name: "degree3",
 			args: args{
-				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				xs:     xs,
+				ys:     ys,
 				degree: 3,
 			},
 			wantErr: false,
@@ -48,8 +51,8 @@ func Test_polyfit(t *testing.T) {
 		{
 			name: "degree4",
 			args: args{
-				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				xs:     xs,
+				ys:     ys,
 				degree: 4,
 			},
 			wantErr: false,
@@ -57,8 +60,8 @@ func Test_polyfit(t *testing.T) {
 		{
 			name: "degree5",
 			args: args{
-				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				xs:     xs,
+				ys:     ys,
 				degree: 5,
 			},
 			wantErr: false,
@@ -66,9 +69,18 @@ func Test_polyfit(t *testing.T) {
 		{
 			name: "degree6",
 			args: args{
-				xs:     []float64{0, 10, 20, 30, 40, 50, 60, 80, 90, 100, 120, 150, 200, 250, 300, 350},
-				ys:     []float64{0.0, 0, 0, 0.4, 1.0, 2.0, 3.1, 4.3, 7.4, 11.5, 16.3, 24.4, 39.8, 59.3, 80, 100.7},
+				xs:     xs,
+				ys:     ys,
 				degree: 6,
+			},
+			wantErr: false,
+		},
+		{
+			name: "degree7",
+			args: args{
+				xs:     xs,
+				ys:     ys,
+				degree: 7,
 			},
 			wantErr: false,
 		},
@@ -86,10 +98,10 @@ func Test_polyfit(t *testing.T) {
 
 			for i, y := range tt.args.ys {
 				gotY := mathx.EvalPolynomial(coeff, tt.args.xs[i])
-				absY := math.Abs(gotY - y)
-				t.Logf("%s: y: %f, gotY: %f, |y-gotY|: %f", tt.name, y, gotY, absY)
-				if absY > 4 {
-					t.Fatalf("%s: absY too big: %f", tt.name, absY)
+				residual := math.Abs(y - gotY)
+				t.Logf("%s: y: %f, gotY: %f, |residual|: %f", tt.name, y, gotY, residual)
+				if residual > 4 {
+					t.Fatalf("%s: residual too big: %f", tt.name, residual)
 				}
 			}
 		})

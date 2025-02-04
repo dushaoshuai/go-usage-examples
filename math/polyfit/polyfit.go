@@ -31,6 +31,7 @@ func polyfit(xs, ys []float64, degree int) ([]float64, error) {
 	XtY.MulVec(Xt, Y)
 
 	var coeff mat.VecDense
+	// TODO: check error ?
 	_ = coeff.SolveVec(XtX, XtY)
 
 	var result []float64
