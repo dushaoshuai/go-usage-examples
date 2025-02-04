@@ -13,6 +13,7 @@ func polyfit(xs, ys []float64, degree int) ([]float64, error) {
 		return nil, fmt.Errorf("polyfit: len(xs) != len(ys): %d != %d", len(xs), len(ys))
 	}
 
+	// https://en.wikipedia.org/wiki/Least_squares#Linear_least_squares
 	X := mat.NewDense(len(xs), degree+1, nil)
 	for i, x := range xs {
 		for j := range degree + 1 {
