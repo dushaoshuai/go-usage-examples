@@ -30,6 +30,24 @@ func Test_polyfit(t *testing.T) {
 			},
 			wantErr: true,
 		},
+		// {
+		// 	name: "degree0",
+		// 	args: args{
+		// 		xs:     xs,
+		// 		ys:     ys,
+		// 		degree: 0,
+		// 	},
+		// 	wantErr: false,
+		// },
+		// {
+		// 	name: "degree1",
+		// 	args: args{
+		// 		xs:     xs,
+		// 		ys:     ys,
+		// 		degree: 1,
+		// 	},
+		// 	wantErr: false,
+		// },
 		{
 			name: "degree2",
 			args: args{
