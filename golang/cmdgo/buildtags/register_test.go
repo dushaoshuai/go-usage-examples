@@ -2,7 +2,6 @@ package buildtags
 
 import (
 	"reflect"
-	"slices"
 	"testing"
 
 	"github.com/dushaoshuai/go-usage-examples/golang/cmdgo/buildtags/registry"
@@ -22,8 +21,6 @@ func TestAllPkgs(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := registry.AllPkgs()
-			slices.Sort(got)
-
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AllPkgs() = %v, want %v", got, tt.want)
 			}
@@ -45,8 +42,6 @@ func TestAllPkgs_a(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := registry.AllPkgs()
-			slices.Sort(got)
-
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AllPkgs() = %v, want %v", got, tt.want)
 			}
@@ -68,8 +63,6 @@ func TestAllPkgs_b(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := registry.AllPkgs()
-			slices.Sort(got)
-
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AllPkgs() = %v, want %v", got, tt.want)
 			}
@@ -91,8 +84,6 @@ func TestAllPkgs_c(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := registry.AllPkgs()
-			slices.Sort(got)
-
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AllPkgs() = %v, want %v", got, tt.want)
 			}
@@ -114,8 +105,6 @@ func TestAllPkgs_ac(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := registry.AllPkgs()
-			slices.Sort(got)
-
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AllPkgs() = %v, want %v", got, tt.want)
 			}

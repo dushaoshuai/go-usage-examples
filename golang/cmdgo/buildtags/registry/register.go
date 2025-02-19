@@ -19,5 +19,7 @@ func Register(pkg string) {
 }
 
 func AllPkgs() []string {
-	return slices.Collect(maps.Keys(m))
+	pkgs := slices.Collect(maps.Keys(m))
+	slices.Sort(pkgs)
+	return pkgs
 }
