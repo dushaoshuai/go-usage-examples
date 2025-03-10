@@ -31,13 +31,13 @@ require (
 	github.com/xhd2015/xgo/runtime v1.0.49
 	github.com/xuri/excelize/v2 v2.8.0
 	github.com/zeromicro/go-zero v1.7.6
-	go.etcd.io/etcd/client/v3 v3.5.15
+	go.etcd.io/etcd/client/v3 v3.5.19
 	go.mongodb.org/mongo-driver v1.17.1
 	go.uber.org/goleak v1.3.0
 	golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329
 	golang.org/x/image v0.21.0
-	golang.org/x/sync v0.10.0
-	golang.org/x/text v0.21.0
+	golang.org/x/sync v0.11.0
+	golang.org/x/text v0.22.0
 	gonum.org/v1/gonum v0.15.1
 	gonum.org/v1/plot v0.15.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250102185135-69823020774d
@@ -129,8 +129,8 @@ require (
 	github.com/xuri/nfp v0.0.0-20230819163627-dc951e3ffe1a // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
-	go.etcd.io/etcd/api/v3 v3.5.15 // indirect
-	go.etcd.io/etcd/client/pkg/v3 v3.5.15 // indirect
+	go.etcd.io/etcd/api/v3 v3.5.19 // indirect
+	go.etcd.io/etcd/client/pkg/v3 v3.5.19 // indirect
 	go.opentelemetry.io/otel v1.33.0 // indirect
 	go.opentelemetry.io/otel/trace v1.33.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
@@ -138,10 +138,10 @@ require (
 	go.uber.org/multierr v1.9.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/arch v0.13.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/crypto v0.35.0 // indirect
 	golang.org/x/mod v0.22.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/tools v0.28.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20241202173237-19429a94021a // indirect
