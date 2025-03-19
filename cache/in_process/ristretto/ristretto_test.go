@@ -25,7 +25,11 @@ func Test_newCache(t *testing.T) {
 		}
 	}
 
-	cache.Set("one_more", 77, 1)
+	t.Log(cache.Metrics.String())
+
+	if !cache.Set("one_more", 77, 1) {
+		t.Logf("set key failed: %s", "one_more")
+	}
 	cache.Wait()
 
 	for i := range maxCost {
@@ -39,6 +43,5 @@ func Test_newCache(t *testing.T) {
 		t.Logf("key not found in cache: %s", "one_more")
 	}
 
-	// Output:
-	// key not found in cache: 2522
+	t.Log(cache.Metrics.String())
 }
