@@ -4,6 +4,8 @@ package validator_test
 
 import (
 	"fmt"
+	"slices"
+	"testing"
 	"time"
 
 	"github.com/go-playground/validator/v10"
@@ -55,25 +57,58 @@ type Foo struct {
 }
 
 type bar struct {
-	Foo `validate:"structonly,required"`
-	F   Foo `validate:"structonly,required"`
+	Foo `validate:"required"`
+	F   Foo `validate:"required"`
 }
 
-func Example_validate_struct_2() {
-	printError(validate.Struct(&bar{
-		Foo: Foo{
-			A: "",
-			B: 0,
+func TestRequiredStruct(t *testing.T) {
+	v := validator.New(validator.WithRequiredStructEnabled())
+
+	tests := []struct {
+		b       bar
+		wantErr bool
+	}{
+		{
+			b:       bar{},
+			wantErr: true,
 		},
-	}))
-	// Output:
-	// structonly 校验了什么呢？难道是要自定义校验函数？
-}
+		{
+			b: bar{
+				Foo: Foo{
+					A: "a",
+				},
+			},
+			wantErr: true,
+		},
+		{
+			b: bar{
+				F: Foo{
+					A: "a",
+					B: 0,
+				},
+			},
+			wantErr: true,
+		},
+		{
+			b: bar{
+				Foo: Foo{
+					A: "a",
+				},
+				F: Foo{
+					A: "a",
+					B: 0,
+				},
+			},
+			wantErr: false,
+		},
+	}
 
-func Example_validate_struct_3() {
-	printError(validate.Struct(&bar{}))
-	// Output:
-	// structonly 校验了什么呢？
+	for test := range slices.Values(tests) {
+		err := v.Struct(test.b)
+		if (err != nil) != test.wantErr {
+			t.Errorf("validateStruct() error = %v, wantErr %v", err, test.wantErr)
+		}
+	}
 }
 
 type req struct {
@@ -117,7 +152,10 @@ func Example_dive_into_slice() {
 	}
 	printError(validate.Struct(cs1))
 	printError(validate.Struct(cs2))
+
 	// Output:
+	// Key: 'cats.C[0].Age' Error:Field validation for 'Age' failed on the 'gte' tag
+	// Key: 'cats.C[1].Name' Error:Field validation for 'Name' failed on the 'required' tag
 }
 
 type required_if_And_oneof struct {
