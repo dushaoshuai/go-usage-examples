@@ -1,4 +1,4 @@
-package ristretto
+package example
 
 import (
 	"github.com/dgraph-io/ristretto/v2"
