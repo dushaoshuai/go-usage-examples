@@ -32,9 +32,7 @@ func main() {
 		})
 		if err != nil {
 			slog.Error(err.Error())
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(err.Error()))
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
