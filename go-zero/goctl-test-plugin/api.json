@@ -1,0 +1,225 @@
+{
+  "Api": {
+    "Info": {
+      "Title": "api title",
+      "Desc": "api desc",
+      "Version": "api version",
+      "Author": "api author",
+      "Email": "api email",
+      "Properties": {
+        "author": "api author",
+        "desc": "api desc",
+        "email": "api email",
+        "title": "api title",
+        "version": "api version"
+      }
+    },
+    "Syntax": {
+      "Version": "",
+      "Doc": null,
+      "Comment": null
+    },
+    "Imports": null,
+    "Types": [
+      {
+        "RawName": "LoginReq",
+        "Members": [
+          {
+            "Name": "Username",
+            "Type": {
+              "RawName": "string"
+            },
+            "Tag": "`json:\"username\"`",
+            "Comment": "",
+            "Docs": [],
+            "IsInline": false
+          },
+          {
+            "Name": "Password",
+            "Type": {
+              "RawName": "string"
+            },
+            "Tag": "`json:\"password\"`",
+            "Comment": "",
+            "Docs": [],
+            "IsInline": false
+          }
+        ],
+        "Docs": [
+          "// 登录请求"
+        ]
+      },
+      {
+        "RawName": "RegisterReq",
+        "Members": [
+          {
+            "Name": "Username",
+            "Type": {
+              "RawName": "string"
+            },
+            "Tag": "`json:\"username\"`",
+            "Comment": "// 用户名",
+            "Docs": [],
+            "IsInline": false
+          },
+          {
+            "Name": "Password",
+            "Type": {
+              "RawName": "string"
+            },
+            "Tag": "`json:\"password\"`",
+            "Comment": "// 密码",
+            "Docs": [],
+            "IsInline": false
+          },
+          {
+            "Name": "Mobile",
+            "Type": {
+              "RawName": "string"
+            },
+            "Tag": "`json:\"mobile\"`",
+            "Comment": "// 电话",
+            "Docs": [],
+            "IsInline": false
+          }
+        ],
+        "Docs": [
+          "// 注册请求"
+        ]
+      }
+    ],
+    "Service": {
+      "Name": "user-api",
+      "Groups": [
+        {
+          "Annotation": {
+            "Properties": {
+              "atServerCustomKey": "atServerCustomValue",
+              "group": "user",
+              "jwt": "Auth",
+              "middleware": "AuthInterceptor",
+              "prefix": "/api/v1/user",
+              "timeout": "3s"
+            }
+          },
+          "Routes": [
+            {
+              "AtServerAnnotation": {
+                "Properties": null
+              },
+              "Method": "post",
+              "Path": "/login",
+              "RequestType": {
+                "RawName": "LoginReq",
+                "Members": [
+                  {
+                    "Name": "Username",
+                    "Type": {
+                      "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "",
+                    "Docs": [],
+                    "IsInline": false
+                  },
+                  {
+                    "Name": "Password",
+                    "Type": {
+                      "RawName": "string"
+                    },
+                    "Tag": "`json:\"password\"`",
+                    "Comment": "",
+                    "Docs": [],
+                    "IsInline": false
+                  }
+                ],
+                "Docs": [
+                  "// 登录请求"
+                ]
+              },
+              "ResponseType": null,
+              "Docs": null,
+              "Handler": "login",
+              "AtDoc": {
+                "Properties": {
+                  "summary": "登录"
+                },
+                "Text": ""
+              },
+              "HandlerDoc": [],
+              "HandlerComment": [],
+              "Doc": [],
+              "Comment": []
+            },
+            {
+              "AtServerAnnotation": {
+                "Properties": null
+              },
+              "Method": "post",
+              "Path": "/register",
+              "RequestType": {
+                "RawName": "RegisterReq",
+                "Members": [
+                  {
+                    "Name": "Username",
+                    "Type": {
+                      "RawName": "string"
+                    },
+                    "Tag": "`json:\"username\"`",
+                    "Comment": "// 用户名",
+                    "Docs": [],
+                    "IsInline": false
+                  },
+                  {
+                    "Name": "Password",
+                    "Type": {
+                      "RawName": "string"
+                    },
+                    "Tag": "`json:\"password\"`",
+                    "Comment": "// 密码",
+                    "Docs": [],
+                    "IsInline": false
+                  },
+                  {
+                    "Name": "Mobile",
+                    "Type": {
+                      "RawName": "string"
+                    },
+                    "Tag": "`json:\"mobile\"`",
+                    "Comment": "// 电话",
+                    "Docs": [],
+                    "IsInline": false
+                  }
+                ],
+                "Docs": [
+                  "// 注册请求"
+                ]
+              },
+              "ResponseType": null,
+              "Docs": null,
+              "Handler": "register",
+              "AtDoc": {
+                "Properties": {
+                  "atDocCustomKey": "atDocCustomValue",
+                  "summary": "注册"
+                },
+                "Text": ""
+              },
+              "HandlerDoc": [
+                "// 注册 handler 注释"
+              ],
+              "HandlerComment": [],
+              "Doc": [
+                "// doc 注释"
+              ],
+              "Comment": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ApiFilePath": "/tmp/go-usage-examples/go-zero/goctl-test-plugin/api/api.api",
+  "Style": "go_zero",
+  "Dir": "/tmp/go-usage-examples/go-zero/goctl-test-plugin"
+}
