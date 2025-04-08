@@ -1,0 +1,58 @@
+// API 文件的第一行注释
+// API 文件的第二行注释
+// API 文件的第三行注释
+
+// syntax 注释
+syntax = "v1"
+
+// info 注释
+info(
+	title: "api title"
+	desc: "api desc"
+	author: "api author"
+	email: "api email"
+	version: "api version"
+)
+
+type (
+	// 注册请求
+	RegisterReq {
+		Username string `json:"username"` // 用户名
+		Password string `json:"password"` // 密码
+		Mobile string `json:"mobile"` // 电话
+	}
+
+	// 登录请求
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+)
+
+// server 注释
+@server (
+	jwt: Auth
+	prefix: /api/v1/user
+	group: user
+	middleware: AuthInterceptor
+	timeout: 3s
+	atServerCustomKey: atServerCustomValue
+)
+// service 注释
+service user-api {
+	// doc 注释
+	@doc(
+		summary: "注册"
+		atDocCustomKey: "atDocCustomValue"
+	)
+	// 注册 handler 注释
+	@handler register
+	// 注册 API 注释
+	post /register (RegisterReq)
+
+	@doc(
+		summary: "登录"
+	)
+	@handler login
+	post /login (LoginReq)
+}
