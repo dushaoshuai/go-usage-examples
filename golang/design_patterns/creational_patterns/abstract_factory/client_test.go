@@ -4,28 +4,46 @@ import (
 	abstractfactory "github.com/dushaoshuai/go-usage-examples/golang/design_patterns/creational_patterns/abstract_factory"
 )
 
+const (
+	ArtDeco   = "ArtDeco"
+	Victorian = "Victorian"
+	Modern    = "Modern"
+)
+
+type config struct {
+	style string
+}
+
+type App struct {
+	factory abstractfactory.FurnitureFactory
+}
+
+func newApp(factory abstractfactory.FurnitureFactory) *App {
+	return &App{
+		factory: factory,
+	}
+}
+
+func (app *App) createChair() abstractfactory.Chair {
+	return app.factory.CreateChair()
+}
+
 func Example_client() {
-	arcDecoFactory := abstractfactory.GetFurnitureFactory(abstractfactory.ArtDeco)
-	arcDecoChair := arcDecoFactory.CreateChair()
-	arcDecoCoffeeTable := arcDecoFactory.CreateCoffeeTable()
-	arcDecoSofa := arcDecoFactory.CreateSofa()
-	_ = arcDecoChair
-	_ = arcDecoCoffeeTable
-	_ = arcDecoSofa
+	c := config{
+		style: Modern,
+	}
 
-	victorianFactory := abstractfactory.GetFurnitureFactory(abstractfactory.Victorian)
-	victorianChair := victorianFactory.CreateChair()
-	victorianCoffeeTable := victorianFactory.CreateCoffeeTable()
-	victorianSofa := victorianFactory.CreateSofa()
-	_ = victorianChair
-	_ = victorianCoffeeTable
-	_ = victorianSofa
+	var factory abstractfactory.FurnitureFactory
+	switch c.style {
+	case ArtDeco:
+		factory = abstractfactory.NewArtDecoFactory()
+	case Victorian:
+		factory = abstractfactory.NewVictorianFactory()
+	case Modern:
+		factory = abstractfactory.NewModernFactory()
+	}
 
-	modernFactory := abstractfactory.GetFurnitureFactory(abstractfactory.Modern)
-	modernChair := modernFactory.CreateChair()
-	modernCoffeeTable := modernFactory.CreateCoffeeTable()
-	modernSofa := modernFactory.CreateSofa()
-	_ = modernChair
-	_ = modernCoffeeTable
-	_ = modernSofa
+	app := newApp(factory)
+	chair := app.createChair()
+	chair.IsChair()
 }
