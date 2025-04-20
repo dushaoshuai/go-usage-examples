@@ -36,6 +36,7 @@ require (
 	github.com/xhd2015/xgo/runtime v1.0.52
 	github.com/xuri/excelize/v2 v2.8.0
 	github.com/zeromicro/go-zero v1.8.2
+	github.com/zeromicro/go-zero/tools/goctl v1.8.2
 	go.etcd.io/etcd/client/v3 v3.5.19
 	go.mongodb.org/mongo-driver v1.17.3
 	go.uber.org/goleak v1.3.0
@@ -136,7 +137,6 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
 	github.com/zeromicro/antlr v0.0.1 // indirect
-	github.com/zeromicro/go-zero/tools/goctl v1.8.2 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.19 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.19 // indirect
 	go.opentelemetry.io/otel v1.35.0 // indirect
@@ -160,3 +160,5 @@ require (
 	modernc.org/memory v1.9.1 // indirect
 	modernc.org/sqlite v1.37.0 // indirect
 )
+
+tool golang.org/x/tools/cmd/stringer
