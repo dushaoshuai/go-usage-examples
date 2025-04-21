@@ -1,6 +1,6 @@
 package painkiller
 
-//go:generate go tool golang.org/x/tools/cmd/stringer -type=Pill,Weekday -output=gen_string.go -linecomment
+//go:generate go run golang.org/x/tools/cmd/stringer@v0.32.0 -type=Pill,Weekday -output=gen_string.go -linecomment
 
 type Pill int
 
