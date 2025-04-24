@@ -24,7 +24,8 @@ func NewQueryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryLogic 
 }
 
 func (l *QueryLogic) Query(req *types.QueryReq) (resp *types.QueryResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.QueryResp{
+		Id:   11,
+		Name: "kitty",
+	}, nil
 }
