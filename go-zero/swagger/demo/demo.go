@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log/slog"
 
 	"github.com/dushaoshuai/go-usage-examples/go-zero/swagger/demo/internal/config"
 	"github.com/dushaoshuai/go-usage-examples/go-zero/swagger/demo/internal/handler"
@@ -25,6 +26,9 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
+	handler.RegisterSwaggerHandlers(server, ctx)
+
+	slog.Info("routes", slog.Any("routes", server.Routes()))
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
