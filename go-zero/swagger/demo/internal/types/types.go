@@ -3,10 +3,147 @@
 
 package types
 
-type Request struct {
-	Name string `path:"name,options=you|me"`
+type ComplexJsonLevel1 struct {
+	Integer       int                `json:"integer,example=1"`
+	Number        float64            `json:"number,example=1.1"`
+	Boolean       bool               `json:"boolean,options=true|false,example=true"`
+	String        string             `json:"string,example=some text"`
+	Object        ComplexJsonLevel2  `json:"object"`
+	PointerObject *ComplexJsonLevel2 `json:"pointerObject"`
 }
 
-type Response struct {
-	Message string `json:"message"`
+type ComplexJsonLevel2 struct {
+	Integer int     `json:"integer,example=1"`
+	Number  float64 `json:"number,example=1.1"`
+	Boolean bool    `json:"boolean,options=true|false,example=true"`
+	String  string  `json:"string,example=some text"`
+}
+
+type ComplexJsonReq struct {
+	Integer                 int                                      `json:"integer,example=1"`
+	Number                  float64                                  `json:"number,example=1.1"`
+	Boolean                 bool                                     `json:"boolean,options=true|false,example=true"`
+	String                  string                                   `json:"string,example=some text"`
+	ArrayInteger            []int                                    `json:"arrayInteger"`
+	ArrayNumber             []float64                                `json:"arrayNumber"`
+	ArrayBoolean            []bool                                   `json:"arrayBoolean"`
+	ArrayString             []string                                 `json:"arrayString"`
+	ArrayArrayInteger       [][]int                                  `json:"arrayArrayInteger"`
+	ArrayArrayNumber        [][]float64                              `json:"arrayArrayNumber"`
+	ArrayArrayBoolean       [][]bool                                 `json:"arrayArrayBoolean"`
+	ArrayArrayString        [][]string                               `json:"arrayArrayString"`
+	MapInteger              map[string]int                           `json:"mapInteger"`
+	MapNumber               map[string]float64                       `json:"mapNumber"`
+	MapBoolean              map[string]bool                          `json:"mapBoolean"`
+	MapString               map[string]string                        `json:"mapString"`
+	MapArrayInteger         map[string][]int                         `json:"mapArrayInteger"`
+	MapArrayNumber          map[string][]float64                     `json:"mapArrayNumber"`
+	MapArrayBoolean         map[string][]bool                        `json:"mapArrayBoolean"`
+	MapArrayString          map[string][]string                      `json:"mapArrayString"`
+	MapMapInteger           map[string]map[string]int                `json:"mapMapInteger"`
+	MapMapNumber            map[string]map[string]float64            `json:"mapMapNumber"`
+	MapMapBoolean           map[string]map[string]bool               `json:"mapMapBoolean"`
+	MapMapString            map[string]map[string]string             `json:"mapMapString"`
+	MapMapObject            map[string]map[string]ComplexJsonLevel1  `json:"mapMapObject"`
+	MapMapPointerObject     map[string]map[string]*ComplexJsonLevel1 `json:"mapMapPointerObject"`
+	Object                  ComplexJsonLevel1                        `json:"object"`
+	PointerObject           *ComplexJsonLevel1                       `json:"pointerObject"`
+	ArrayObject             []ComplexJsonLevel1                      `json:"arrayObject"`
+	ArrayPointerObject      []*ComplexJsonLevel1                     `json:"arrayPointerObject"`
+	MapObject               map[string]ComplexJsonLevel1             `json:"mapObject"`
+	MapPointerObject        map[string]*ComplexJsonLevel1            `json:"mapPointerObject"`
+	ArrayArrayObject        [][]ComplexJsonLevel1                    `json:"arrayArrayObject"`
+	ArrayArrayPointerObject [][]*ComplexJsonLevel1                   `json:"arrayArrayPointerObject"`
+	ArrayMapObject          []map[string]ComplexJsonLevel1           `json:"arrayMapObject"`
+	ArrayMapPointerObject   []map[string]*ComplexJsonLevel1          `json:"arrayMapPointerObject"`
+	MapArrayObject          map[string][]ComplexJsonLevel1           `json:"mapArrayObject"`
+	MapArrayPointerObject   map[string][]*ComplexJsonLevel1          `json:"mapArrayPointerObject"`
+}
+
+type ComplexJsonResp struct {
+	Integer                 int                                      `json:"integer,example=1"`
+	Number                  float64                                  `json:"number,example=1.1"`
+	Boolean                 bool                                     `json:"boolean,options=true|false,example=true"`
+	String                  string                                   `json:"string,example=some text"`
+	ArrayInteger            []int                                    `json:"arrayInteger"`
+	ArrayNumber             []float64                                `json:"arrayNumber"`
+	ArrayBoolean            []bool                                   `json:"arrayBoolean"`
+	ArrayString             []string                                 `json:"arrayString"`
+	ArrayArrayInteger       [][]int                                  `json:"arrayArrayInteger"`
+	ArrayArrayNumber        [][]float64                              `json:"arrayArrayNumber"`
+	ArrayArrayBoolean       [][]bool                                 `json:"arrayArrayBoolean"`
+	ArrayArrayString        [][]string                               `json:"arrayArrayString"`
+	MapInteger              map[string]int                           `json:"mapInteger"`
+	MapNumber               map[string]float64                       `json:"mapNumber"`
+	MapBoolean              map[string]bool                          `json:"mapBoolean"`
+	MapString               map[string]string                        `json:"mapString"`
+	MapArrayInteger         map[string][]int                         `json:"mapArrayInteger"`
+	MapArrayNumber          map[string][]float64                     `json:"mapArrayNumber"`
+	MapArrayBoolean         map[string][]bool                        `json:"mapArrayBoolean"`
+	MapArrayString          map[string][]string                      `json:"mapArrayString"`
+	MapMapInteger           map[string]map[string]int                `json:"mapMapInteger"`
+	MapMapNumber            map[string]map[string]float64            `json:"mapMapNumber"`
+	MapMapBoolean           map[string]map[string]bool               `json:"mapMapBoolean"`
+	MapMapString            map[string]map[string]string             `json:"mapMapString"`
+	MapMapObject            map[string]map[string]ComplexJsonLevel1  `json:"mapMapObject"`
+	MapMapPointerObject     map[string]map[string]*ComplexJsonLevel1 `json:"mapMapPointerObject"`
+	Object                  ComplexJsonLevel1                        `json:"object"`
+	PointerObject           *ComplexJsonLevel1                       `json:"pointerObject"`
+	ArrayObject             []ComplexJsonLevel1                      `json:"arrayObject"`
+	ArrayPointerObject      []*ComplexJsonLevel1                     `json:"arrayPointerObject"`
+	MapObject               map[string]ComplexJsonLevel1             `json:"mapObject"`
+	MapPointerObject        map[string]*ComplexJsonLevel1            `json:"mapPointerObject"`
+	ArrayArrayObject        [][]ComplexJsonLevel1                    `json:"arrayArrayObject"`
+	ArrayArrayPointerObject [][]*ComplexJsonLevel1                   `json:"arrayArrayPointerObject"`
+	ArrayMapObject          []map[string]ComplexJsonLevel1           `json:"arrayMapObject"`
+	ArrayMapPointerObject   []map[string]*ComplexJsonLevel1          `json:"arrayMapPointerObject"`
+	MapArrayObject          map[string][]ComplexJsonLevel1           `json:"mapArrayObject"`
+	MapArrayPointerObject   map[string][]*ComplexJsonLevel1          `json:"mapArrayPointerObject"`
+}
+
+type FormReq struct {
+	Id   int    `form:"id,range=[1:10000],example=10"`
+	Name string `form:"name,example=keson.an"`
+}
+
+type FormResp struct {
+	Id   int    `json:"id,example=10"`
+	Name string `json:"name,example=keson.an"`
+}
+
+type JsonReq struct {
+	Id       int    `json:"id,range=[1:10000],example=10"`
+	Name     string `json:"name,example=keson.an"`
+	Avatar   string `json:"avatar,optional"`
+	Language string `json:"language,options=golang|java|python|typescript|rust"`
+	Gender   string `json:"gender,default=male,options=male|female,example=male"`
+}
+
+type JsonResp struct {
+	Id       int    `json:"id"`
+	Name     string `json:"name"`
+	Avatar   string `json:"avatar"`
+	Language string `json:"language"`
+	Gender   string `json:"gender"`
+}
+
+type PathQueryReq struct {
+	Id   int    `path:"id,range=[1:10000],example=10"`
+	Name string `form:"name,example=keson.an"`
+}
+
+type PathQueryResp struct {
+	Id   int    `json:"id,example=10"`
+	Name string `json:"name,example=keson.an"`
+}
+
+type QueryReq struct {
+	Id     int    `form:"id,range=[1:10000],example=10"`
+	Name   string `form:"name,example=keson.an"`
+	Avatar string `form:"avatar,optional,example=https://example.com/avatar.png"`
+}
+
+type QueryResp struct {
+	Id   int    `json:"id,example=10"`
+	Name string `json:"name,example=keson.an"`
 }

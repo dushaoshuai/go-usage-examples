@@ -16,8 +16,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: DemoHandler(serverCtx),
+				Path:    "/query",
+				Handler: queryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/query/:id",
+				Handler: queryPathHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/form",
+				Handler: formHandler(serverCtx),
+			},
+		},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/json/complex",
+				Handler: jsonComplexHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/json/simple",
+				Handler: jsonSimpleHandler(serverCtx),
 			},
 		},
 	)

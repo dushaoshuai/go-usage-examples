@@ -3,7 +3,6 @@ package handler
 import (
 	"embed"
 	"io/fs"
-	"log/slog"
 	"net/http"
 	pathpkg "path"
 	"path/filepath"
@@ -19,7 +18,6 @@ var swaggerFS embed.FS
 
 func RegisterSwaggerHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	walkDirFunc := func(path string, d fs.DirEntry, err error) error {
-		slog.Info(path)
 		if err != nil {
 			return err
 		}
