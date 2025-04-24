@@ -1,0 +1,3180 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "演示 api 生成 swagger 文件的 api 完整写法",
+    "title": "演示 API",
+    "termsOfService": "https://github.com/zeromicro/go-zero",
+    "contact": {
+      "name": "keson.an",
+      "url": "https://github.com/zeromicro/go-zero",
+      "email": "example@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/zeromicro/go-zero"
+    },
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/form": {
+      "post": {
+        "description": "form 接口",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "form 表单 api 演示"
+        ],
+        "parameters": [
+          {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "example": 10,
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "example": "keson.an",
+            "name": "name",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "keson.an"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/json/complex": {
+      "post": {
+        "description": "复杂的 json 请求体接口",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "post json api 演示"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "integer",
+                "number",
+                "boolean",
+                "string",
+                "arrayInteger",
+                "arrayNumber",
+                "arrayBoolean",
+                "arrayString",
+                "arrayArrayInteger",
+                "arrayArrayNumber",
+                "arrayArrayBoolean",
+                "arrayArrayString",
+                "mapInteger",
+                "mapNumber",
+                "mapBoolean",
+                "mapString",
+                "mapArrayInteger",
+                "mapArrayNumber",
+                "mapArrayBoolean",
+                "mapArrayString",
+                "mapMapInteger",
+                "mapMapNumber",
+                "mapMapBoolean",
+                "mapMapString",
+                "mapMapObject",
+                "mapMapPointerObject",
+                "object",
+                "pointerObject",
+                "arrayObject",
+                "arrayPointerObject",
+                "mapObject",
+                "mapPointerObject",
+                "arrayArrayObject",
+                "arrayArrayPointerObject",
+                "arrayMapObject",
+                "arrayMapPointerObject",
+                "mapArrayObject",
+                "mapArrayPointerObject"
+              ],
+              "properties": {
+                "arrayArrayBoolean": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "arrayArrayInteger": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "arrayArrayNumber": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "arrayArrayObject": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "arrayArrayPointerObject": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "arrayArrayString": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "arrayBoolean": {
+                  "type": "array",
+                  "items": {
+                    "type": "boolean"
+                  }
+                },
+                "arrayInteger": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "arrayMapObject": {
+                  "type": "array"
+                },
+                "arrayMapPointerObject": {
+                  "type": "array"
+                },
+                "arrayNumber": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "arrayObject": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "integer",
+                      "number",
+                      "boolean",
+                      "string",
+                      "object",
+                      "pointerObject"
+                    ],
+                    "properties": {
+                      "boolean": {
+                        "type": "boolean",
+                        "enum": [
+                          "true",
+                          "false"
+                        ],
+                        "example": true
+                      },
+                      "integer": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "number": {
+                        "type": "number",
+                        "example": 1.1
+                      },
+                      "object": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "pointerObject": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "string": {
+                        "type": "string",
+                        "example": "some text"
+                      }
+                    }
+                  }
+                },
+                "arrayPointerObject": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "integer",
+                      "number",
+                      "boolean",
+                      "string",
+                      "object",
+                      "pointerObject"
+                    ],
+                    "properties": {
+                      "boolean": {
+                        "type": "boolean",
+                        "enum": [
+                          "true",
+                          "false"
+                        ],
+                        "example": true
+                      },
+                      "integer": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "number": {
+                        "type": "number",
+                        "example": 1.1
+                      },
+                      "object": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "pointerObject": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "string": {
+                        "type": "string",
+                        "example": "some text"
+                      }
+                    }
+                  }
+                },
+                "arrayString": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "boolean": {
+                  "type": "boolean",
+                  "enum": [
+                    "true",
+                    "false"
+                  ],
+                  "example": true
+                },
+                "integer": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "mapArrayBoolean": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "mapArrayInteger": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "mapArrayNumber": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "mapArrayObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mapArrayPointerObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mapArrayString": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "mapBoolean": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                },
+                "mapInteger": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer"
+                  }
+                },
+                "mapMapBoolean": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "mapMapInteger": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "mapMapNumber": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "mapMapObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mapMapPointerObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mapMapString": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "mapNumber": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  }
+                },
+                "mapObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "required": [
+                      "integer",
+                      "number",
+                      "boolean",
+                      "string",
+                      "object",
+                      "pointerObject"
+                    ],
+                    "properties": {
+                      "boolean": {
+                        "type": "boolean",
+                        "enum": [
+                          "true",
+                          "false"
+                        ],
+                        "example": true
+                      },
+                      "integer": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "number": {
+                        "type": "number",
+                        "example": 1.1
+                      },
+                      "object": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "pointerObject": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "string": {
+                        "type": "string",
+                        "example": "some text"
+                      }
+                    }
+                  }
+                },
+                "mapPointerObject": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "required": [
+                      "integer",
+                      "number",
+                      "boolean",
+                      "string",
+                      "object",
+                      "pointerObject"
+                    ],
+                    "properties": {
+                      "boolean": {
+                        "type": "boolean",
+                        "enum": [
+                          "true",
+                          "false"
+                        ],
+                        "example": true
+                      },
+                      "integer": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "number": {
+                        "type": "number",
+                        "example": 1.1
+                      },
+                      "object": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "pointerObject": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      },
+                      "string": {
+                        "type": "string",
+                        "example": "some text"
+                      }
+                    }
+                  }
+                },
+                "mapString": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "number": {
+                  "type": "number",
+                  "example": 1.1
+                },
+                "object": {
+                  "type": "object",
+                  "required": [
+                    "integer",
+                    "number",
+                    "boolean",
+                    "string",
+                    "object",
+                    "pointerObject"
+                  ],
+                  "properties": {
+                    "boolean": {
+                      "type": "boolean",
+                      "enum": [
+                        "true",
+                        "false"
+                      ],
+                      "example": true
+                    },
+                    "integer": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "number": {
+                      "type": "number",
+                      "example": 1.1
+                    },
+                    "object": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "pointerObject": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "string": {
+                      "type": "string",
+                      "example": "some text"
+                    }
+                  }
+                },
+                "pointerObject": {
+                  "type": "object",
+                  "required": [
+                    "integer",
+                    "number",
+                    "boolean",
+                    "string",
+                    "object",
+                    "pointerObject"
+                  ],
+                  "properties": {
+                    "boolean": {
+                      "type": "boolean",
+                      "enum": [
+                        "true",
+                        "false"
+                      ],
+                      "example": true
+                    },
+                    "integer": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "number": {
+                      "type": "number",
+                      "example": 1.1
+                    },
+                    "object": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "pointerObject": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "string": {
+                      "type": "string",
+                      "example": "some text"
+                    }
+                  }
+                },
+                "string": {
+                  "type": "string",
+                  "example": "some text"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "arrayArrayBoolean": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "arrayArrayInteger": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "arrayArrayNumber": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "arrayArrayObject": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "arrayArrayPointerObject": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "arrayArrayString": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "arrayBoolean": {
+                      "type": "array",
+                      "items": {
+                        "type": "boolean"
+                      }
+                    },
+                    "arrayInteger": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "arrayMapObject": {
+                      "type": "array"
+                    },
+                    "arrayMapPointerObject": {
+                      "type": "array"
+                    },
+                    "arrayNumber": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "arrayObject": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string",
+                          "object",
+                          "pointerObject"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "object": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "pointerObject": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      }
+                    },
+                    "arrayPointerObject": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string",
+                          "object",
+                          "pointerObject"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "object": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "pointerObject": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      }
+                    },
+                    "arrayString": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "boolean": {
+                      "type": "boolean",
+                      "enum": [
+                        "true",
+                        "false"
+                      ],
+                      "example": true
+                    },
+                    "integer": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "mapArrayBoolean": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "mapArrayInteger": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "mapArrayNumber": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "mapArrayObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "mapArrayPointerObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "mapArrayString": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "mapBoolean": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "boolean"
+                      }
+                    },
+                    "mapInteger": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "integer"
+                      }
+                    },
+                    "mapMapBoolean": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "mapMapInteger": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "mapMapNumber": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "mapMapObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "mapMapPointerObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string",
+                            "object",
+                            "pointerObject"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "object": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "pointerObject": {
+                              "type": "object",
+                              "required": [
+                                "integer",
+                                "number",
+                                "boolean",
+                                "string"
+                              ],
+                              "properties": {
+                                "boolean": {
+                                  "type": "boolean",
+                                  "enum": [
+                                    "true",
+                                    "false"
+                                  ],
+                                  "example": true
+                                },
+                                "integer": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "number": {
+                                  "type": "number",
+                                  "example": 1.1
+                                },
+                                "string": {
+                                  "type": "string",
+                                  "example": "some text"
+                                }
+                              }
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "mapMapString": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "mapNumber": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "number"
+                      }
+                    },
+                    "mapObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string",
+                          "object",
+                          "pointerObject"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "object": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "pointerObject": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      }
+                    },
+                    "mapPointerObject": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "integer",
+                          "number",
+                          "boolean",
+                          "string",
+                          "object",
+                          "pointerObject"
+                        ],
+                        "properties": {
+                          "boolean": {
+                            "type": "boolean",
+                            "enum": [
+                              "true",
+                              "false"
+                            ],
+                            "example": true
+                          },
+                          "integer": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "number": {
+                            "type": "number",
+                            "example": 1.1
+                          },
+                          "object": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "pointerObject": {
+                            "type": "object",
+                            "required": [
+                              "integer",
+                              "number",
+                              "boolean",
+                              "string"
+                            ],
+                            "properties": {
+                              "boolean": {
+                                "type": "boolean",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ],
+                                "example": true
+                              },
+                              "integer": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "number": {
+                                "type": "number",
+                                "example": 1.1
+                              },
+                              "string": {
+                                "type": "string",
+                                "example": "some text"
+                              }
+                            }
+                          },
+                          "string": {
+                            "type": "string",
+                            "example": "some text"
+                          }
+                        }
+                      }
+                    },
+                    "mapString": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "number": {
+                      "type": "number",
+                      "example": 1.1
+                    },
+                    "object": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "pointerObject": {
+                      "type": "object",
+                      "required": [
+                        "integer",
+                        "number",
+                        "boolean",
+                        "string",
+                        "object",
+                        "pointerObject"
+                      ],
+                      "properties": {
+                        "boolean": {
+                          "type": "boolean",
+                          "enum": [
+                            "true",
+                            "false"
+                          ],
+                          "example": true
+                        },
+                        "integer": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "number": {
+                          "type": "number",
+                          "example": 1.1
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "pointerObject": {
+                          "type": "object",
+                          "required": [
+                            "integer",
+                            "number",
+                            "boolean",
+                            "string"
+                          ],
+                          "properties": {
+                            "boolean": {
+                              "type": "boolean",
+                              "enum": [
+                                "true",
+                                "false"
+                              ],
+                              "example": true
+                            },
+                            "integer": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "number": {
+                              "type": "number",
+                              "example": 1.1
+                            },
+                            "string": {
+                              "type": "string",
+                              "example": "some text"
+                            }
+                          }
+                        },
+                        "string": {
+                          "type": "string",
+                          "example": "some text"
+                        }
+                      }
+                    },
+                    "string": {
+                      "type": "string",
+                      "example": "some text"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/json/simple": {
+      "post": {
+        "description": "简单的 json 请求体接口",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "post json api 演示"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "language",
+                "gender"
+              ],
+              "properties": {
+                "avatar": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "string",
+                  "default": "male",
+                  "enum": [
+                    "male",
+                    "female"
+                  ],
+                  "example": "male"
+                },
+                "id": {
+                  "type": "integer",
+                  "maximum": 10000,
+                  "minimum": 1,
+                  "example": 10
+                },
+                "language": {
+                  "type": "string",
+                  "enum": [
+                    "golang",
+                    "java",
+                    "python",
+                    "typescript",
+                    "rust"
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "example": "keson.an"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "gender": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "language": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query": {
+      "get": {
+        "description": "query 接口",
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "query 演示"
+        ],
+        "parameters": [
+          {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "example": 10,
+            "name": "id",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "example": "keson.an",
+            "name": "name",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "example": "https://example.com/avatar.png",
+            "name": "avatar",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "keson.an"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/query/{id}": {
+      "get": {
+        "description": "query path 中包含 id 字段接口",
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "query 演示"
+        ],
+        "parameters": [
+          {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "example": 10,
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "example": "keson.an",
+            "name": "name",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "1001-未登录\u003cbr\u003e1002-无权限操作",
+                  "type": "integer",
+                  "example": 0
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "keson.an"
+                    }
+                  }
+                },
+                "msg": {
+                  "description": "business message",
+                  "type": "string",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-date": "2025-04-24 23:12:22",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.3"
+}
