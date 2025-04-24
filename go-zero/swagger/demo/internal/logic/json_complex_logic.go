@@ -24,7 +24,11 @@ func NewJsonComplexLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JsonC
 }
 
 func (l *JsonComplexLogic) JsonComplex(req *types.ComplexJsonReq) (resp *types.ComplexJsonResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.ComplexJsonResp{
+		Integer:      1,
+		Number:       1,
+		Boolean:      true,
+		String:       "kitty",
+		ArrayInteger: []int{1, 2, 3},
+	}, nil
 }

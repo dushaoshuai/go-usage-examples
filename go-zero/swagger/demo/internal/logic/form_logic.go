@@ -24,7 +24,8 @@ func NewFormLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FormLogic {
 }
 
 func (l *FormLogic) Form(req *types.FormReq) (resp *types.FormResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.FormResp{
+		Id:   11,
+		Name: "kitty",
+	}, nil
 }

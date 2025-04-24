@@ -24,7 +24,11 @@ func NewJsonSimpleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *JsonSi
 }
 
 func (l *JsonSimpleLogic) JsonSimple(req *types.JsonReq) (resp *types.JsonResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.JsonResp{
+		Id:       11,
+		Name:     "kitty",
+		Avatar:   "avatar kitty",
+		Language: "language kitty",
+		Gender:   "male",
+	}, nil
 }

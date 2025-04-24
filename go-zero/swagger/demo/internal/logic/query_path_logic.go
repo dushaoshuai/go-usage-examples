@@ -24,7 +24,8 @@ func NewQueryPathLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryPa
 }
 
 func (l *QueryPathLogic) QueryPath(req *types.PathQueryReq) (resp *types.PathQueryResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.PathQueryResp{
+		Id:   11,
+		Name: "kitty",
+	}, nil
 }
