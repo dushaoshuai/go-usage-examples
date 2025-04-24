@@ -24,7 +24,7 @@
     },
     "version": "v1"
   },
-  "host": "example.com",
+  "host": "127.0.0.1",
   "basePath": "/v1",
   "paths": {
     "/form": {
@@ -3172,7 +3172,7 @@
       }
     }
   },
-  "x-date": "2025-04-24 21:23:16",
+  "x-date": "2025-04-24 21:29:03",
   "x-description": "This is a goctl generated swagger file.",
   "x-github": "https://github.com/zeromicro/go-zero",
   "x-go-zero-doc": "https://go-zero.dev/",
