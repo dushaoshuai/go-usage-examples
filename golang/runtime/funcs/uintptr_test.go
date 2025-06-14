@@ -1,9 +1,11 @@
-package funcs_test
+package funcs
 
 import (
 	"fmt"
+	"path/filepath"
 	"reflect"
 	"runtime"
+	"strings"
 )
 
 func f() {}
@@ -19,10 +21,14 @@ func Example_uintptr() {
 	rf := runtime.FuncForPC(pc)
 	fmt.Println(rf.Name())
 	fmt.Println(rf.Entry() == pc)
-	fmt.Println(rf.FileLine(pc))
+
+	file, line := rf.FileLine(pc)
+	fileSplits := strings.Split(file, "/")
+	file = `/` + filepath.Join(fileSplits[len(fileSplits)-5:]...)
+	fmt.Println(file, line)
 
 	// Output:
-	// github.com/dushaoshuai/go-usage-examples/golang/runtime/Func_test.f
+	// github.com/dushaoshuai/go-usage-examples/golang/runtime/funcs.f
 	// true
-	// /Users/ingtube/Documents/dev/shaouai/go-usage-examples/golang/runtime/Func/uintptr_test.go 9
+	// /go-usage-examples/golang/runtime/funcs/uintptr_test.go 11
 }

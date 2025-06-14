@@ -14,7 +14,7 @@ func GetFuncName(f any) string {
 
 	pc := uintptr(rv.UnsafePointer())
 	fullName := runtime.FuncForPC(pc).Name()
-	subStrings := strings.SplitAfter(fullName, ".")
+	subStrings := strings.Split(fullName, ".")
 	if l := len(subStrings); l >= 1 {
 		return subStrings[l-1]
 	}
@@ -34,7 +34,7 @@ func GetCallerName() string {
 	}
 
 	fullName := fn.Name()
-	subStrings := strings.SplitAfter(fullName, ".")
+	subStrings := strings.Split(fullName, ".")
 	if l := len(subStrings); l >= 1 {
 		return subStrings[l-1]
 	}
@@ -55,7 +55,7 @@ func GetCallerNameSkip(skip int) string {
 	}
 
 	fullName := fn.Name()
-	subStrings := strings.SplitAfter(fullName, ".")
+	subStrings := strings.Split(fullName, ".")
 	if l := len(subStrings); l >= 1 {
 		return subStrings[l-1]
 	}
