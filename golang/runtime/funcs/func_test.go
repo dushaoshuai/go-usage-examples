@@ -1,6 +1,9 @@
 package funcs
 
 import (
+	"fmt"
+	"reflect"
+	"runtime"
 	"testing"
 	"time"
 
@@ -30,6 +33,27 @@ func TestGetFuncName(t *testing.T) {
 			}
 		})
 	}
+}
+
+type structMethods struct{}
+
+func (structMethods) Method1() {}
+func (structMethods) Method2() {}
+
+func Example_get_methods() {
+	var sm structMethods
+
+	rv1 := reflect.ValueOf(sm.Method1)
+	pc1 := runtime.FuncForPC(uintptr(rv1.UnsafePointer()))
+	fmt.Println(pc1.Name())
+
+	rv2 := reflect.ValueOf(sm.Method2)
+	pc2 := runtime.FuncForPC(uintptr(rv2.UnsafePointer()))
+	fmt.Println(pc2.Name())
+
+	// Output:
+	// github.com/dushaoshuai/go-usage-examples/golang/runtime/funcs.structMethods.Method1-fm
+	// github.com/dushaoshuai/go-usage-examples/golang/runtime/funcs.structMethods.Method2-fm
 }
 
 func testFunc1() string {
