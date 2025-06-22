@@ -6,7 +6,7 @@ require (
 	github.com/InfluxCommunity/influxdb3-go/v2 v2.6.0
 	github.com/agiledragon/gomonkey/v2 v2.12.0
 	github.com/apache/arrow/go/v17 v17.0.0
-	github.com/deckarep/golang-set/v2 v2.7.0
+	github.com/deckarep/golang-set/v2 v2.8.0
 	github.com/dgraph-io/ristretto/v2 v2.2.0
 	github.com/dushaoshuai/goloop v0.1.2
 	github.com/gin-gonic/gin v1.10.0
