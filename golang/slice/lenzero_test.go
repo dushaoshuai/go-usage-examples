@@ -1,17 +1,24 @@
 package slice_test
 
-import (
-	"fmt"
-)
-
 func Example_zero_length() {
 	zs := make([]int, 0)
-	fmt.Println(zs, len(zs), cap(zs))
+	printlnln("zs := make([]int, 0)")
+	fmtSlice("zs", zs)
 
 	zs = append(zs, 18)
-	fmt.Println(zs, len(zs), cap(zs))
+	printlnln("zs = append(zs, 18)")
+	fmtSlice("zs", zs)
 
 	// Output:
-	// [] 0 0
-	// [18] 1 1
+	// zs := make([]int, 0)
+	//
+	// zs: []
+	// len(zs): 0
+	// cap(zs): 0
+	//
+	// zs = append(zs, 18)
+	//
+	// zs: [18]
+	// len(zs): 1
+	// cap(zs): 1
 }
