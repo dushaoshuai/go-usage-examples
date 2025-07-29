@@ -1,8 +1,6 @@
 .idea/
 .vscode/
 
-*.xlsx
-
 # Serverless devs
 .s
 
