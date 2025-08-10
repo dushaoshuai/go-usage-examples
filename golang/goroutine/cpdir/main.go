@@ -10,6 +10,8 @@ import (
 	"sync"
 )
 
+//go:generate go run ./main.go -src ./testdata/src -dst ./testdata/dst
+
 var (
 	src = flag.String("src", "", "source directory")
 	dst = flag.String("dst", "", "destination directory")
@@ -38,7 +40,7 @@ func main() {
 
 	var (
 		fileChan = make(chan file, 20)
-		wg       sync.WaitGroup
+		wg       sync.WaitGroup // 用 errorgroup ? 出错了立即结束，而不是还继续复制？
 	)
 	for i := 0; i < 48; i++ {
 		wg.Add(1)
@@ -65,7 +67,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 				if d.IsDir() {
-					return fs.SkipDir
+					return fs.SkipDir // 出错了立即结束？
 				}
 				return nil
 			}
@@ -74,7 +76,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 				if d.IsDir() {
-					return fs.SkipDir
+					return fs.SkipDir // 出错了立即结束?
 				}
 				return nil
 			}
@@ -130,7 +132,7 @@ func walkDirFunc(path string, d fs.DirEntry, fileChan chan<- file) error {
 	} else {
 		fileChan <- file{
 			fullPath:    path,
-			perm:        fileInfo.Mode().Perm(),
+			perm:        fileInfo.Mode().Perm(), // 复制 Unix permission bits 看起来不错
 			dstFullPath: dstFullPath,
 		}
 	}
