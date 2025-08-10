@@ -103,4 +103,6 @@ func Example_run_out_of_memory() {
 			make(chan string) <- "test run out of memory"
 		}()
 	}
+
+	// Output:
 }
