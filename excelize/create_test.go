@@ -3,18 +3,21 @@ package excelize_test
 import (
 	"time"
 
+	"github.com/samber/lo"
 	"github.com/xuri/excelize/v2"
 )
 
 func Example_create_document() {
 	f := excelize.NewFile()
+	defer f.Close()
 
 	// create a new worksheet
 	sheet2Name := "Sheet2"
-	sheet2Index := f.NewSheet(sheet2Name)
+	sheet2Index, err := f.NewSheet(sheet2Name)
+	lo.Must0(err)
 
 	// set value of a cell
-	err := f.SetCellValue(sheet2Name, "C1", time.Now())
+	err = f.SetCellValue(sheet2Name, "C1", time.Now())
 	if err != nil {
 		panic(err)
 	}
@@ -27,10 +30,7 @@ func Example_create_document() {
 	f.SetActiveSheet(sheet2Index)
 
 	// save the spreadsheet by the given path
-	err = f.SaveAs("create_document.xlsx")
-	if err != nil {
-		panic(err)
-	}
+	lo.Must0(f.SaveAs("testdata/create_document.xlsx"))
 
 	// Output:
 }

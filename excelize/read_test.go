@@ -8,7 +8,7 @@ import (
 )
 
 func Example_read_document() {
-	f, err := excelize.OpenFile("mtcars.xlsx")
+	f, err := excelize.OpenFile("testdata/mtcars.xlsx")
 	if err != nil {
 		panic(err)
 	}
