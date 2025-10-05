@@ -43,8 +43,21 @@ func Example_conversions_must_be_parenthesized() {
 	// func() int
 }
 
-// Converting a signed or unsigned integer value to a string type yields a string containing the UTF-8 representation
-// of the integer. Values outside the range of valid Unicode code points are converted to "\uFFFD".
+// Finally, for historical reasons, an integer value may be converted to a string type.
+// This form of conversion yields a string containing the (possibly multi-byte) UTF-8 representation of the Unicode code point with the given integer value.
+// Values outside the range of valid Unicode code points are converted to "\uFFFD".
+//
+// string('a')          // "a"
+// string(65)           // "A"
+// string('\xf8')       // "\u00f8" == "ø" == "\xc3\xb8"
+// string(-1)           // "\ufffd" == "\xef\xbf\xbd"
+//
+// type myString string
+// myString('\u65e5')   // "\u65e5" == "日" == "\xe6\x97\xa5"
+//
+// Note: This form of conversion may eventually be removed from the language.
+// The go vet tool flags certain integer-to-string conversions as potential errors.
+// Library functions such as utf8.AppendRune or utf8.EncodeRune should be used instead.
 func Example_integer_to_string() {
 	// conversion from untyped int to string yields a string of one rune,
 	// not a string of digits (did you mean fmt.Sprint(x)?)
