@@ -96,7 +96,7 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 	// A13	SharedString13 in A13		13 in A13
 	// A14	SharedString14 in A14		14 in A14
 	// A15	Unset		00:00:15		0.00017361112
-	// A16	Unset		10/7/25 17:43	45937.7385276667
+	// A16	Unset		10/8/25 17:40	45938.7364057145
 	// A17	Bool		TRUE			1
 	// A18	Bool		FALSE			0
 	// A19	Bool		TRUE			1
@@ -106,4 +106,5 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 	// A23	Unset		23				23
 	// A24	Unset		24.17323		24.17323
 	// A25	SharedString25 in A25		25 in A25
+	// A26	Formula		6
 }
