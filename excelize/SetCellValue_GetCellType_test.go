@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"text/tabwriter"
 	"time"
@@ -44,12 +45,22 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 	require.NoError(t, file.SetCellInt("Sheet1", "A22", 22))
 	require.NoError(t, file.SetCellUint("Sheet1", "A23", 23))
 	require.NoError(t, file.SetCellFloat("Sheet1", "A24", 24.17323, 6, 64))
-	require.NoError(t, file.SetCellStr("Sheet1", "A25", "25 in A25")) // SharedString
+	require.NoError(t, file.SetCellStr("Sheet1", "A25", "25 in A25"))          // SharedString
+	require.NoError(t, file.SetCellFormula("Sheet1", "A26", "=SUM(A1,A2,A3)")) // Formula (normal formula)
+
+	require.NoError(t, file.SetSheetDimension("Sheet1", "A1:A26"))
 
 	tabwriter := tabwriter.NewWriter(os.Stdout, 0, 4, 0, '\t', 0)
 	defer tabwriter.Flush()
 
-	for r := range 25 {
+	dimension, err := file.GetSheetDimension("Sheet1")
+	require.NoError(t, err)
+
+	// A1:A27 -> A27 -> 27
+	_, maxRows, err := excelize.SplitCellName(strings.Split(dimension, ":")[1])
+	require.NoError(t, err)
+
+	for r := range maxRows {
 		cellName, err := excelize.JoinCellName("A", r+1)
 		require.NoError(t, err)
 
@@ -61,6 +72,10 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 
 		rawCellValue, err := file.GetCellValue("Sheet1", cellName, excelize.Options{RawCellValue: true})
 		require.NoError(t, err)
+
+		if cellType == excelize.CellTypeFormula {
+			cellValue, err = file.CalcCellValue("Sheet1", cellName)
+		}
 
 		fmt.Fprintf(tabwriter, "%s\t%v\t%s\t%s\t\n", cellName, CellType(cellType).String(), cellValue, rawCellValue)
 	}
