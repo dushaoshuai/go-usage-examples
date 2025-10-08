@@ -50,8 +50,9 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 
 	require.NoError(t, file.SetSheetDimension("Sheet1", "A1:A26"))
 
-	tabwriter := tabwriter.NewWriter(os.Stdout, 0, 4, 0, '\t', 0)
+	tabwriter := tabwriter.NewWriter(os.Stdout, 0, 4, 1, '\t', 0)
 	defer tabwriter.Flush()
+	fmt.Fprintf(tabwriter, "%s\t%v\t%s\t%s\t\n", "cellName", "cellType", "cellValue", "rawCellValue")
 
 	dimension, err := file.GetSheetDimension("Sheet1")
 	require.NoError(t, err)
@@ -81,30 +82,31 @@ func TestSetCellValue_GetCellType(t *testing.T) {
 	}
 
 	// Output:
-	// A1	Unset		1				1
-	// A2	Unset		2				2
-	// A3	Unset		3				3
-	// A4	Unset		4				4
-	// A5	Unset		5				5
-	// A6	Unset		6				6
-	// A7	Unset		7				7
-	// A8	Unset		8				8
-	// A9	Unset		9				9
-	// A10	Unset		10				10
-	// A11	Unset		11.17323		11.17323
-	// A12	Unset		12.17323		12.17323
-	// A13	SharedString13 in A13		13 in A13
-	// A14	SharedString14 in A14		14 in A14
-	// A15	Unset		00:00:15		0.00017361112
-	// A16	Unset		10/8/25 17:40	45938.7364057145
-	// A17	Bool		TRUE			1
-	// A18	Bool		FALSE			0
-	// A19	Bool		TRUE			1
-	// A20	Bool		FALSE			0
-	// A21	InlineString21 in A21		21 in A21
-	// A22	Unset		22				22
-	// A23	Unset		23				23
-	// A24	Unset		24.17323		24.17323
-	// A25	SharedString25 in A25		25 in A25
-	// A26	Formula		6
+	// cellName	cellType		cellValue		rawCellValue
+	// A1			Unset			1				1
+	// A2			Unset			2				2
+	// A3			Unset			3				3
+	// A4			Unset			4				4
+	// A5			Unset			5				5
+	// A6			Unset			6				6
+	// A7			Unset			7				7
+	// A8			Unset			8				8
+	// A9			Unset			9				9
+	// A10			Unset			10				10
+	// A11			Unset			11.17323		11.17323
+	// A12			Unset			12.17323		12.17323
+	// A13			SharedString	13 in A13		13 in A13
+	// A14			SharedString	14 in A14		14 in A14
+	// A15			Unset			00:00:15		0.00017361112
+	// A16			Unset			10/8/25 17:44	45938.7395213382
+	// A17			Bool			TRUE			1
+	// A18			Bool			FALSE			0
+	// A19			Bool			TRUE			1
+	// A20			Bool			FALSE			0
+	// A21			InlineString	21 in A21		21 in A21
+	// A22			Unset			22				22
+	// A23			Unset			23				23
+	// A24			Unset			24.17323		24.17323
+	// A25			SharedString	25 in A25		25 in A25
+	// A26			Formula			6
 }
