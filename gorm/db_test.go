@@ -1,4 +1,4 @@
-package gorm_learn
+package gorm
 
 import (
 	"context"

@@ -7,7 +7,7 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/dushaoshuai/go-usage-examples/gorm_learn"
+	"github.com/dushaoshuai/go-usage-examples/gorm"
 )
 
 type notString string
@@ -21,7 +21,7 @@ const (
 )
 
 func Test_not_a_string_type(t *testing.T) {
-	db := gorm_learn.SQLiteInMemoryDB(context.Background()).
+	db := gorm.SQLiteInMemoryDB(context.Background()).
 		Session(&gorm.Session{DryRun: true})
 
 	var val map[string]any
