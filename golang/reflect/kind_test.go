@@ -22,3 +22,31 @@ func ExampleKind() {
 	// 42
 	// unhandled kind: func
 }
+
+func ExampleKind_string() {
+	var strVal = "hello"
+	var myStrVal myString = "hello"
+	var bytesVal = []byte("hello")
+	var myBytesVal = myBytes("hello")
+	var runesVal = []rune("hello")
+	var myRunesVal = myRunes("hello")
+	var intVal = 65
+
+	f := func(v any) {
+		if rv := reflect.ValueOf(v); rv.Kind() == reflect.String {
+			fmt.Printf("type: %v, value: %v\n", rv.Type().Name(), rv.Interface())
+		}
+	}
+
+	f(strVal)
+	f(myStrVal)
+	f(bytesVal)
+	f(myBytesVal)
+	f(runesVal)
+	f(myRunesVal)
+	f(intVal)
+
+	// Output:
+	// type: string, value: hello
+	// type: myString, value: hello
+}
