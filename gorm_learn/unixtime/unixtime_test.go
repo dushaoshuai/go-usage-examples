@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dushaoshuai/go-usage-examples/gorm"
+	"github.com/dushaoshuai/go-usage-examples/gorm_learn"
 )
 
 type Ints struct {
@@ -27,7 +27,7 @@ type Uints struct {
 }
 
 func Test_unixtime(t *testing.T) {
-	db := gorm.PostgreSQLDB(context.Background())
+	db := gorm_learn.PostgreSQLDB(context.Background())
 
 	if err := db.Migrator().AutoMigrate(&Ints{}, &Uints{}); err != nil {
 		t.Fatal(err)

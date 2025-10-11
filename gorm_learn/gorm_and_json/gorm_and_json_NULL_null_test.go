@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/dushaoshuai/go-usage-examples/gorm"
+	"github.com/dushaoshuai/go-usage-examples/gorm_learn"
 )
 
 // 测试目的：
@@ -15,7 +15,7 @@ func Example_gorm_and_json_NULL_null() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	db := gorm.DefaultGormDB(ctx)
+	db := gorm_learn.DefaultGormDB(ctx)
 
 	var testData jsonTest
 	err := db.Model(&jsonTest{}).
@@ -26,7 +26,7 @@ func Example_gorm_and_json_NULL_null() {
 		panic(err)
 	}
 
-	gorm.FmtStruct(testData)
+	gorm_learn.FmtStruct(testData)
 	// Output:
 	// struct info:
 	//
