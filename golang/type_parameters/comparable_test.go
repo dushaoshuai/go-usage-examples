@@ -16,7 +16,7 @@ func MapKeys[K comparable, V any](m map[K]V) []K {
 	return s
 }
 
-func ExampleComparable() {
+func Example_t_Comparable() {
 	keys := MapKeys(map[string]int{
 		"a": 10,
 		"b": 11,
