@@ -13,8 +13,8 @@ func Example_type_definitions() {
 		stringList []myString
 	)
 
-	var f1 float64 = 23
-	var f2 myFloat64 = f1 // cannot use f1 (variable of type float64) as myFloat64 value in variable declaration
+	// var f1 float64 = 23
+	// var f2 myFloat64 = f1 // cannot use f1 (variable of type float64) as myFloat64 value in variable declaration
 
 	// Output:
 }
@@ -50,8 +50,8 @@ func Example_no_inherit() {
 	var t table = "user"
 	fmt.Println(t.tableName())
 
-	var m model = "error"
-	fmt.Println(m.tableName()) // m.tableName undefined (type model has no field or method tableName)
+	// var m model = "error"
+	// fmt.Println(m.tableName()) // m.tableName undefined (type model has no field or method tableName)
 
 	// Output:
 }
